@@ -8,7 +8,7 @@ namespace ResturangenGrupp1.Restaurant
 {
     interface ITable
     {
-        
+        List<Food> foodAtTable { get; set; }
         bool Quality { get; set; }
         bool Empty { get; set; }
         bool Cleaned { get; set; }
@@ -21,6 +21,7 @@ namespace ResturangenGrupp1.Restaurant
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
         public bool GetsHelp { get; set; }
+        public List<Food> foodAtTable { get; set; }
 
         public bool RandomQuality()
         {
@@ -36,11 +37,15 @@ namespace ResturangenGrupp1.Restaurant
         public TableForTwo()
         {
             string[] tableSize = new string[2];
+            Empty = true;
+            Cleaned = true;
+            GetsHelp = false;            
             Quality = RandomQuality();
         }
     }
     class TableForFour : ITable
-    {        
+    {
+        public List<Food> foodAtTable { get; set; }
         public bool Quality { get; set; }
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
@@ -59,6 +64,9 @@ namespace ResturangenGrupp1.Restaurant
         public TableForFour()
         {
             string[] tableSize = new string[4];
+            Empty = true;
+            Cleaned = true;
+            GetsHelp = false;
             Quality = RandomQuality();
         }
     }
