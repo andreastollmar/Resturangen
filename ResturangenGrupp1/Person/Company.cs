@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ResturangenGrupp1.GUI;
+using ResturangenGrupp1.Restaurant;
 
 namespace ResturangenGrupp1.Person
 {
@@ -20,6 +22,7 @@ namespace ResturangenGrupp1.Person
         {
             Random random = new Random();
             return random.Next(1, 5);
+            GenerateObjects.CreatePeople();
         }
 
         // Constructor
