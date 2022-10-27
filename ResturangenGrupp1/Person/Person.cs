@@ -41,12 +41,15 @@ namespace ResturangenGrupp1.Person
         private int RandomCash()
         {
             Random random = new Random();
-            int cash = random.Next(100, 1000);
+            int cash = random.Next(100, 500);
             return cash;
         }
         private void Eating()
         {
-
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                AtTable = true;
+            }
         }
 
         // Constructor
@@ -65,12 +68,16 @@ namespace ResturangenGrupp1.Person
     {
         // Properties
         private bool Busy { get; set; }
-        //public List<string> Order { get; set; }
+        public List<string> Order { get; set; }
 
         // Methods
         private void Cleaning()
         {
-
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                Busy = true;
+            }
+            Busy = false;
         }
 
         // Constructor
@@ -80,7 +87,7 @@ namespace ResturangenGrupp1.Person
             TimeActivity = 3;
             Busy = false;
             Competence = RandomCompetence();
-            //Order = ;
+            //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
         }
 
     }
@@ -93,7 +100,11 @@ namespace ResturangenGrupp1.Person
         // Methods
         private void Cooking()
         {
-
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                Busy = true;
+            }
+            Busy = false;
         }
         
         // Constructor
