@@ -12,7 +12,7 @@ namespace ResturangenGrupp1.Person
         internal int Competence { get; set; }
         internal int TimeActivity { get; set; }
 
-        public int RandomCompetence()
+        private protected int RandomCompetence()
         {
             Random rnd = new Random();
             return rnd.Next(1, 6);
@@ -28,56 +28,86 @@ namespace ResturangenGrupp1.Person
 
     internal class Guest : Person
     {
-        private int Satisfaction { get; set; }
-        private bool Eating { get; set; }
+        // Properties
+        internal int Satisfaction { get; set; }
+        internal int Cash { get; set; }
+        internal bool AtTable { get; set; }
 
-        private bool NutAllergy { get; set; }
-        private bool LactoseAllergy { get; set; }
-        private bool GlutenAllergy { get; set; }
+        internal bool NutAllergy { get; set; }
+        internal bool LactoseAllergy { get; set; }
+        internal bool GlutenAllergy { get; set; }
 
-        private void AtTable()
+        // Methods
+        private int RandomCash()
         {
-
+            Random random = new Random();
+            int cash = random.Next(100, 500);
+            return cash;
+        }
+        private void Eating()
+        {
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                AtTable = true;
+            }
         }
 
+        // Constructor
         public Guest(): base()
         {
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            NutAllergy = false;
-            LactoseAllergy = false;
-            GlutenAllergy = false;
+            Cash = RandomCash();
+            NutAllergy = Allergies.IsAllergic();
+            LactoseAllergy = Allergies.IsAllergic();
+            GlutenAllergy = Allergies.IsAllergic();
         }
     }
 
     internal class Waiter : Person
     {
+        // Properties
         private bool Busy { get; set; }
+        public List<string> Order { get; set; }
 
+        // Methods
         private void Cleaning()
         {
-
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                Busy = true;
+            }
+            Busy = false;
         }
 
+        // Constructor
         public Waiter(): base()
         {
             Name = Names.NameGenerator();
             TimeActivity = 3;
             Busy = false;
             Competence = RandomCompetence();
+            //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
         }
 
     }
 
     internal class Chef : Person
     {
+        // Properties
         private bool Busy { get; set; }
 
+        // Methods
         private void Cooking()
         {
-
+            for (int i = TimeActivity; i < 1; i--)
+            {
+                Busy = true;
+            }
+            Busy = false;
         }
-
+        
+        // Constructor
         public Chef(): base()
         {
             Name = Names.NameGenerator();

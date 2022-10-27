@@ -8,7 +8,7 @@ namespace ResturangenGrupp1.Person
 {
     internal class Allergies
     {
-        public bool IsAllergic()
+        public static bool IsAllergic()
         {
             bool allergic = false;
             Random rnd = new Random();

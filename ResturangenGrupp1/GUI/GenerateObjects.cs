@@ -9,8 +9,11 @@ using ResturangenGrupp1.Restaurant;
 
 namespace ResturangenGrupp1.GUI
 {
-    internal class GUI
+    internal class GenerateObjects
     {
-        //metoder för att rita ut "Spelet" och kanske även hantera spelet här ifrån?
+        public static List<TableForFour> _tablesForFour = new List<TableForFour>();
+        public static List<TableForTwo> _tablesForTwo = new List<TableForTwo>();
+        //Metoder för att genera alla object
+
     }
 }
