@@ -52,12 +52,12 @@ namespace ResturangenGrupp1.Restaurant
         public bool GetsHelp { get; set; }
         public bool RandomQuality()
         {
-            bool goodQuality = false;
+            bool goodQuality = true;
             Random rnd = new Random();
             int randomQuality = rnd.Next(0, 100);
             if (randomQuality >= 60)
             {
-                goodQuality = true;
+                goodQuality = false;
             }
             return goodQuality;
         }

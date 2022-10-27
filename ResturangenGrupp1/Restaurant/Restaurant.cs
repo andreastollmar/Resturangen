@@ -18,14 +18,14 @@ namespace ResturangenGrupp1.Restaurant
         {
             bool tableFree = false;
 
-            foreach (TableForFour table in GUI.GenerateObjects._tablesForFour)
+            foreach (TableForFour table in GenerateObjects._tablesForFour)
             {
                 if (table.Empty)
                 {
                     tableFree = true;
                 }
             }
-            foreach (TableForTwo table in GUI.GenerateObjects._tablesForTwo)
+            foreach (TableForTwo table in GenerateObjects._tablesForTwo)
             {
                 if(table.Empty)
                 {
@@ -52,9 +52,9 @@ namespace ResturangenGrupp1.Restaurant
         private int CheckTableForFour()
         {
             int indexValue = 0;            
-            for (int i = 0; i < GUI.GenerateObjects._tablesForFour.Count; i++)
+            for (int i = 0; i < GenerateObjects._tablesForFour.Count; i++)
             {
-                if (GUI.GenerateObjects._tablesForFour[i].Empty)
+                if (GenerateObjects._tablesForFour[i].Empty)
                 {
                     indexValue = i;                    
                 }
@@ -68,9 +68,9 @@ namespace ResturangenGrupp1.Restaurant
         private int CheckTableForTwo()
         {
             int indexValue = 0;
-            for (int i = 0; i < GUI.GenerateObjects._tablesForTwo.Count; i++)
+            for (int i = 0; i < GenerateObjects._tablesForTwo.Count; i++)
             {
-                if (GUI.GenerateObjects._tablesForTwo[i].Empty)
+                if (GenerateObjects._tablesForTwo[i].Empty)
                 {
                     indexValue = i;
                 }
