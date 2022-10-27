@@ -16,11 +16,12 @@ namespace ResturangenGrupp1.GUI
         public static List<Guest> _guests = new List<Guest>();
         public static List<Chef> _chefs = new List<Chef>();
         public static List<Waiter> _waiters = new List<Waiter>();
+        public static List<Meet> _foods = new List<Meet>();
         //Metoder för att genera alla object
 
         public static void CreatePeople()
         {
-            for (int i = 0; i < 80; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Guest guest = new Guest();
                 _guests.Add(guest);
@@ -42,6 +43,25 @@ namespace ResturangenGrupp1.GUI
                 Chef chef = new Chef();
                 _chefs.Add(new Chef());
             }            
+        }
+        public static void CreateFood()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Meet.Kebab kebab = new Meet.Kebab();
+                _foods.Add(kebab);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Meet.Steak steak = new Meet.Steak();
+                _foods.Add(steak);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Meet.Beef beef = new Meet.Beef();
+                _foods.Add(beef);
+            }
+
         }
 
     }

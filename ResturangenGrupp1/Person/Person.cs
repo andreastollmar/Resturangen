@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ResturangenGrupp1.GUI;
+using ResturangenGrupp1.Kitchen;
+using ResturangenGrupp1.Restaurant;
 
 namespace ResturangenGrupp1.Person
 {
@@ -32,7 +35,7 @@ namespace ResturangenGrupp1.Person
         internal int Satisfaction { get; set; }
         internal int Cash { get; set; }
         internal bool AtTable { get; set; }
-
+        internal List<Food> preferedFood { get; set; }
         internal bool NutAllergy { get; set; }
         internal bool LactoseAllergy { get; set; }
         internal bool GlutenAllergy { get; set; }
@@ -51,6 +54,14 @@ namespace ResturangenGrupp1.Person
                 AtTable = true;
             }
         }
+        //private int AddFood()
+        //{
+        //    Random rnd = new Random();
+        //    int randomFood = rnd.Next(0, 50);
+
+        //    return randomFood;
+        //}
+
 
         // Constructor
         public Guest(): base()
@@ -61,6 +72,9 @@ namespace ResturangenGrupp1.Person
             NutAllergy = Allergies.IsAllergic();
             LactoseAllergy = Allergies.IsAllergic();
             GlutenAllergy = Allergies.IsAllergic();
+            //List<Meet> preferedFood = new List<Meet>();
+            //int randomFood = AddFood();
+            //preferedFood.Add(GenerateObjects._foods[randomFood]);
         }
     }
 
