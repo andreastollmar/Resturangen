@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ResturangenGrupp1.Restaurant;
+using ResturangenGrupp1.Person;
+
 
 
 namespace ResturangenGrupp1
@@ -12,7 +14,7 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            
+      
         }
     }
 }
