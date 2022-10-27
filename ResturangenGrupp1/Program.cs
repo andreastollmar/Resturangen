@@ -14,7 +14,8 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-      
+            Guest guest = new Guest();
+            Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken");
         }
     }
 }
