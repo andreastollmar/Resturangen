@@ -14,6 +14,8 @@ namespace ResturangenGrupp1.GUI
         public static List<TableForFour> _tablesForFour = new List<TableForFour>();
         public static List<TableForTwo> _tablesForTwo = new List<TableForTwo>();
         public static List<Guest> _guests = new List<Guest>();
+        public static List<Chef> _chefs = new List<Chef>();
+        public static List<Waiter> _waiters = new List<Waiter>();
         //Metoder för att genera alla object
 
         public static void CreatePeople()
@@ -25,8 +27,21 @@ namespace ResturangenGrupp1.GUI
             }
         }
 
-        public GenerateObjects()
+        public static void CreateWaiters()
         {
+            for (int i = 0; i < 3; i++)
+            {
+                Waiter waiter = new Waiter();
+                _waiters.Add(waiter);
+            }
+        }
+        public static void CreateChefs()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Chef chef = new Chef();
+                _chefs.Add(new Chef());
+            }            
         }
 
     }
