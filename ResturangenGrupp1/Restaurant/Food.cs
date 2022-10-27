@@ -23,6 +23,7 @@ namespace ResturangenGrupp1.Restaurant
         internal class Tuna : Fich
         {
              bool consitns;
+           
         }
 
         internal class Scallop : Fich
