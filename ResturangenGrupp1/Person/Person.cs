@@ -29,13 +29,13 @@ namespace ResturangenGrupp1.Person
     internal class Guest : Person
     {
         private int Satisfaction { get; set; }
-        private bool Eating { get; set; }
+        private bool AtTable { get; set; }
 
         private bool NutAllergy { get; set; }
         private bool LactoseAllergy { get; set; }
         private bool GlutenAllergy { get; set; }
 
-        private void AtTable()
+        private void Eating()
         {
 
         }
