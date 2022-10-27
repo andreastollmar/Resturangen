@@ -13,10 +13,10 @@ namespace ResturangenGrupp1.GUI
     {
         public static List<TableForFour> _tablesForFour = new List<TableForFour>();
         public static List<TableForTwo> _tablesForTwo = new List<TableForTwo>();
-        public static List<Person.Guest> _guests = new List<Guest>();
+        public static List<Guest> _guests = new List<Guest>();
         //Metoder för att genera alla object
 
-        public void CreatePeople()
+        public static void CreatePeople()
         {
             for (int i = 0; i < 80; i++)
             {
@@ -25,6 +25,9 @@ namespace ResturangenGrupp1.GUI
             }
         }
 
+        public GenerateObjects()
+        {
+        }
 
     }
 }
