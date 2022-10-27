@@ -10,79 +10,104 @@ namespace ResturangenGrupp1.Restaurant
     {
         public string Name { get; set; }
         public int Price { get; set; }
+        public bool Constins { get; set; }
 
+        public Food()
+        {
 
+        }
     }
 
     class Fich : Food
     {
-        //public string nameFood1 = "Tuna";
-        //public string nameFood2 = "Scallop";
-        //public string nameFood3 = "Moules frites";
-
         internal class Tuna : Fich
         {
-             bool consitns;
-           
+            public Tuna()
+            {
+                Name = "Tuna";
+                Price = 110;            
+            }
         }
 
         internal class Scallop : Fich
-        {
-             bool consitns;
+        {    
+            public Scallop()
+            {
+                Name = "Scallop";
+                Price = 99;
+               
+            }
         }
 
         internal class Moules : Fich
-        {
-             bool consitns;
+        {       
+             public Moules()
+             {
+                Name = "Moules";
+                Price = 120;
+             }
         }
 
     }
 
     class Meet : Food
-    {
-
-        //public string nameFood1 = "Kebab";
-        //public string nameFood2 = "Sirloin steak";
-        //public string nameFood3 = "Beef plank";
+    { 
         internal class Kebab : Meet
-        {
-             bool consitns;
+        {    
+          public Kebab()
+            {
+                Name = "Kebab";
+                Price = 110;
+            }
         }
 
         internal class Steak : Meet
-        {
-             bool consitns;
+        {        
+            public Steak()
+            {
+                Name = "Steak";
+                Price = 160;
+                
+            }
         }
 
         internal class Beef : Meet
         {
-             bool consitns;
+            public Beef()
+            {
+                Name = "Beef";
+                Price = 180;
+            }
         }
-
-
     }
 
     class Vegetarian : Food
     {
-  
-        //public string nameFood1 = "Risotto";
-        //public string nameFood2 = "Falafel";
-        //public string nameFood3 = "Haloumi ";
-
-
         internal class Risotto : Vegetarian
-        {
-             bool consitns;
+        {  
+            public Risotto()
+            {
+                Name = "Risotto";
+                Price = 160;
+            }
         }
 
         internal class Falafel : Vegetarian
-        {
-             bool consitns;
+        { 
+            public Falafel()
+            {
+                Name = "Falafel";
+                Price = 99;
+            }
         }
 
         internal class Haloumi : Vegetarian
         {
-             bool consitns;
+            public Haloumi()
+            {
+                Name = "Haloumi";
+                Price = 120;
+            }
         }
     }
 }
