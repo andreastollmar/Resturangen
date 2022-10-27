@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ResturangenGrupp1
+namespace ResturangenGrupp1.Kitchen
 {
-    internal class Food
+    internal class Kitchen
     {
     }
 }
