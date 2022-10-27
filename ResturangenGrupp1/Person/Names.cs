@@ -10,7 +10,7 @@ namespace ResturangenGrupp1.Person
     {
 
 
-        public string NameGenerator()
+        public static string NameGenerator()
         {
             string[] names = {"Andersson", "Larsson", "Svensson", "Pettersson",
                 "Stark", "Soldat", "Bernadotte", "Trump", "Karlsson", "Fridolin", "Löfven", "Eriksson", "Isak", "Ibrahimovic", "Forsberg",
