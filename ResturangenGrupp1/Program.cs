@@ -15,10 +15,9 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
             Console.WriteLine("Hello, World!");
             Console.WriteLine("testar min branch");
-=======
+
             //Guest guest = new Guest();
             //Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken.");
             //Chef chef = new Chef();
@@ -44,8 +43,6 @@ namespace ResturangenGrupp1
                 Console.WriteLine($"Servitör/Servitrice {waiter.Name} med {waiter.Competence} servicenivå");
             }
 
-
->>>>>>> main
         }
     }
 }
