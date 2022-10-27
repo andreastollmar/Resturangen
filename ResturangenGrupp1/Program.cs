@@ -17,6 +17,8 @@ namespace ResturangenGrupp1
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine("testar min branch");
+            Company.CreateCompany();
+            Console.WriteLine();
 
             //Guest guest = new Guest();
             //Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken.");

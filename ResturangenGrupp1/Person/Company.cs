@@ -18,11 +18,31 @@ namespace ResturangenGrupp1.Person
 
         //Methods
 
-        private protected int RandomSize()
+        private protected static int RandomSize()
         {
             Random random = new Random();
             return random.Next(1, 5);
+        }
+
+        public static void CreateCompany()
+        {
+            List<Guest> companies = new List<Guest>();
             GenerateObjects.CreatePeople();
+
+
+                int companySize = RandomSize();
+
+                for (int i = 0; i < companySize; i++)
+                {
+                    companies.Add(GenerateObjects._guests[i]);
+                }
+
+                foreach (Guest company in companies)
+                {
+                    Console.WriteLine(company.Name);
+                }
+
+ 
         }
 
         // Constructor
