@@ -15,7 +15,9 @@ namespace ResturangenGrupp1
         static void Main(string[] args)
         {
             Guest guest = new Guest();
-            Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken");
+            Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken.");
+            Chef chef = new Chef();
+            Console.WriteLine($"Kocken {chef.Name} har {chef.Competence} i kompetens");
         }
     }
 }
