@@ -44,9 +44,9 @@ namespace ResturangenGrupp1.Person
         {
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            NutAllergy = false;
-            LactoseAllergy = false;
-            GlutenAllergy = false;
+            NutAllergy = Allergies.IsAllergic();
+            LactoseAllergy = Allergies.IsAllergic();
+            GlutenAllergy = Allergies.IsAllergic();
         }
     }
 
