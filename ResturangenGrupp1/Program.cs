@@ -15,7 +15,6 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
             Console.WriteLine("Hello, World!");
             Console.WriteLine("testar min branch");
             GenerateObjects.CreatePeople();
@@ -30,10 +29,8 @@ namespace ResturangenGrupp1
             //Console.WriteLine($"Servitöeren {waiter.Name} har {waiter.Competence} i ServiceNivå");
             //TableForFour table = new TableForFour();
             //Console.WriteLine($"bordets kvalité {table.Quality}");
-            GenerateObjects.CreateFood();
-=======
-            
->>>>>>> main
+            //GenerateObjects.CreateFood();
+
             GenerateObjects.CreatePeople();
             GenerateObjects.CreateChefs();
             GenerateObjects.CreateWaiters();

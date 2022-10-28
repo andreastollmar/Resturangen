@@ -30,14 +30,15 @@ namespace ResturangenGrupp1.Person
         {
             List<List<Guest>> companies = new List<List<Guest>>();
 
-            int companySize = RandomSize();
 
             for (int j = 0; j < GenerateObjects._guests.Count; j++)
             {
+                int companySize = RandomSize();
 
                 for (int i = 0; i < companySize; i++)
                 {
                     companies.Add(new List<Guest>() { GenerateObjects._guests[i] });
+                    GenerateObjects._guests.RemoveAt(i);
                 }
 
                 Console.WriteLine("**********");
