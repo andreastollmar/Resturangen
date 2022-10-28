@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ResturangenGrupp1.Restaurant.Fich;
-using static ResturangenGrupp1.Restaurant.Meet;
+using static ResturangenGrupp1.Restaurant.Fish;
+using static ResturangenGrupp1.Restaurant.Meat;
 using static ResturangenGrupp1.Restaurant.Vegetarian;
 
 namespace ResturangenGrupp1.Kitchen
@@ -20,7 +20,7 @@ namespace ResturangenGrupp1.Kitchen
 
                 foreach (Food food in meny)
                 {
-                    if(food is Meet)
+                    if(food is Meat)
                     {
                         if (food is Kebab)
                         {
@@ -37,7 +37,7 @@ namespace ResturangenGrupp1.Kitchen
                     }
 
                 
-                    if (food is Fich)
+                    if (food is Fish)
                     {
                         if(food is Scallop)
                         {
