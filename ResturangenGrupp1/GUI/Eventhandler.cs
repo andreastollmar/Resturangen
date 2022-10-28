@@ -17,13 +17,23 @@ namespace ResturangenGrupp1.GUI
         {
             for (int i = _events.Count; i >= 0; i--)
             {
-                Console.WriteLine(_events[i]);
+                if (i > 5)
+                {
+                    _events.RemoveAt(0);
+                    Console.WriteLine(_events[i]);
+                }
+                else
+                {
+                    Console.WriteLine(_events[i]);
+                }
             }
         }
 
-        public void AddEvent(string happening)
+        public void AddEvent(Guest guest, string happening)
         {
-            _events.Add(happening);
+            //Lista med company för att få ut maträtter? Foorloopa etc?
+            string events = guest.Name + " har " + happening;
+            _events.Add(events);
         }
         public void ShowGuestList()
         {

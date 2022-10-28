@@ -22,7 +22,7 @@ namespace ResturangenGrupp1.Person
         {
             Random random = new Random();
             return random.Next(1, 5);
-            GenerateObjects.CreatePeople();
+            //GenerateObjects.CreatePeople();
         }
 
         // Constructor

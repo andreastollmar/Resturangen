@@ -15,16 +15,19 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            
-            GenerateObjects.CreatePeople();
-            GenerateObjects.CreateChefs();
-            GenerateObjects.CreateWaiters();
-            Meat.Kebab kebab = new Meat.Kebab();
 
+            GenerateObjects.CreateObjects();
+
+            foreach (TableForFour table in GenerateObjects._tablesForFour)
+            {
+                Console.WriteLine("Kvalité bra = " + table.Quality);
+            }
             
             foreach (Guest guest in GenerateObjects._guests)
             {
                 Console.WriteLine(guest.preferedFood[0].Name);
+                Console.WriteLine(guest.Cash);
+                Console.WriteLine(guest.NutAllergy);
             }
             
 
