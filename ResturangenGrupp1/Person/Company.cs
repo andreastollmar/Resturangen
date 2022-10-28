@@ -16,6 +16,8 @@ namespace ResturangenGrupp1.Person
         private List<Guest> CompanyList { get; set; }
 
 
+
+
         //Methods
 
         private protected static int RandomSize()
@@ -26,23 +28,30 @@ namespace ResturangenGrupp1.Person
 
         public static void CreateCompany()
         {
-            List<Guest> companies = new List<Guest>();
-            GenerateObjects.CreatePeople();
+            List<List<Guest>> companies = new List<List<Guest>>();
 
+            int companySize = RandomSize();
 
-                int companySize = RandomSize();
+            for (int j = 0; j < GenerateObjects._guests.Count; j++)
+            {
 
                 for (int i = 0; i < companySize; i++)
                 {
-                    companies.Add(GenerateObjects._guests[i]);
+                    companies.Add(new List<Guest>() { GenerateObjects._guests[i] });
                 }
 
-                foreach (Guest company in companies)
+                Console.WriteLine("**********");
+
+                foreach (var company in companies)
                 {
-                    Console.WriteLine(company.Name);
+                    foreach (var guest in company)
+                    {
+                        Console.WriteLine(guest.Name);
+                    }
                 }
 
- 
+            }
+
         }
 
         // Constructor

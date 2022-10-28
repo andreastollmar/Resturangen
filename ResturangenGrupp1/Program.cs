@@ -17,6 +17,7 @@ namespace ResturangenGrupp1
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine("testar min branch");
+            GenerateObjects.CreatePeople();
             Company.CreateCompany();
             Console.WriteLine();
 
