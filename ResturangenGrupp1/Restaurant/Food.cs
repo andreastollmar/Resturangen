@@ -13,7 +13,89 @@ namespace ResturangenGrupp1.Restaurant
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public bool Constins { get; set; }
+
+        public void AddFoodToGuest(Guest guest)
+        {
+            Random rnd = new Random();
+            bool tryAgain = true;
+            while (tryAgain)
+            {
+                int randomDish = rnd.Next(1, 10);
+
+                switch (randomDish)
+                {
+                    case 1:
+                        Meat.Beef meat = new Meat.Beef();
+                        if (guest.NutAllergy)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            guest.preferedFood.Add(meat);
+                            tryAgain = false;
+                            break;
+                        }
+                    case 2:
+                        Fish.Scallop scallop = new Fish.Scallop();
+                        guest.preferedFood.Add(scallop);
+                        tryAgain = false;
+                        break;
+                    case 3:
+                        Vegetarian.Haloumi haloumi = new Vegetarian.Haloumi();
+                        if (guest.LactoseAllergy)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            guest.preferedFood.Add(haloumi);
+                            tryAgain = false;
+                            break;
+                        }
+                    case 4:
+                        Meat.Kebab kebab = new Meat.Kebab();
+                        guest.preferedFood.Add(kebab);
+                        tryAgain = false;
+                        break;
+                    case 5:
+                        Fish.Tuna tuna = new Fish.Tuna();
+                        guest.preferedFood.Add(tuna);
+                        tryAgain = false;
+                        break;
+                    case 6:
+                        Vegetarian.Falafel falafel = new Vegetarian.Falafel();
+                        if (guest.GlutenAllergy)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            guest.preferedFood.Add(falafel);
+                            tryAgain = false;
+                            break;
+                        }
+                    case 7:
+                        Meat.Steak steak = new Meat.Steak();
+                        guest.preferedFood.Add(steak);
+                        tryAgain = false;
+                        break;
+                    case 8:
+                        Fish.Moules moules = new Fish.Moules();
+                        guest.preferedFood.Add(moules);
+                        tryAgain = false;
+                        break;
+                    case 9:
+                        Vegetarian.Risotto risotto = new Vegetarian.Risotto();
+                        guest.preferedFood.Add(risotto);
+                        tryAgain = false;
+                        break;
+                }
+            }
+            
+
+
+        }
 
         public Food()
         {
@@ -21,9 +103,9 @@ namespace ResturangenGrupp1.Restaurant
         }
     }
 
-    class Fich : Food
+    class Fish : Food
     {
-        internal class Tuna : Fich
+        internal class Tuna : Fish
         {
             public Tuna()
             {
@@ -32,17 +114,16 @@ namespace ResturangenGrupp1.Restaurant
             }
         }
 
-        internal class Scallop : Fich
+        internal class Scallop : Fish
         {    
             public Scallop()
             {
                 Name = "Scallop";
-                Price = 99;
-               
+                Price = 99;               
             }
         }
 
-        internal class Moules : Fich
+        internal class Moules : Fish
         {       
              public Moules()
              {
@@ -53,9 +134,9 @@ namespace ResturangenGrupp1.Restaurant
 
     }
 
-    class Meet : Food
+    class Meat : Food
     { 
-        internal class Kebab : Meet
+        internal class Kebab : Meat
         {    
           public Kebab()
             {
@@ -64,7 +145,7 @@ namespace ResturangenGrupp1.Restaurant
             }
         }
 
-        internal class Steak : Meet
+        internal class Steak : Meat
         {        
             public Steak()
             {
@@ -74,7 +155,7 @@ namespace ResturangenGrupp1.Restaurant
             }
         }
 
-        internal class Beef : Meet
+        internal class Beef : Meat
         {
             public Beef()
             {

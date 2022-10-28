@@ -15,6 +15,7 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             Console.WriteLine("Hello, World!");
             Console.WriteLine("testar min branch");
             GenerateObjects.CreatePeople();
@@ -30,21 +31,20 @@ namespace ResturangenGrupp1
             //TableForFour table = new TableForFour();
             //Console.WriteLine($"bordets kvalité {table.Quality}");
             GenerateObjects.CreateFood();
+=======
+            
+>>>>>>> main
             GenerateObjects.CreatePeople();
             GenerateObjects.CreateChefs();
             GenerateObjects.CreateWaiters();
+            Meat.Kebab kebab = new Meat.Kebab();
+
+            
             foreach (Guest guest in GenerateObjects._guests)
             {
-                Console.WriteLine($"Gästen {guest.Name} med maten ");
+                Console.WriteLine(guest.preferedFood[0].Name);
             }
-            foreach (Chef chef in GenerateObjects._chefs)
-            {
-                Console.WriteLine($"kocken {chef.Name} med {chef.Competence} kompetens");
-            }
-            foreach (Waiter waiter in GenerateObjects._waiters)
-            {
-                Console.WriteLine($"Servitör/Servitrice {waiter.Name} med {waiter.Competence} servicenivå");
-            }
+            
 
         }
     }
