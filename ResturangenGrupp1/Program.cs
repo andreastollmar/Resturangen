@@ -34,6 +34,8 @@ namespace ResturangenGrupp1
             GenerateObjects.CreatePeople();
             GenerateObjects.CreateChefs();
             GenerateObjects.CreateWaiters();
+            Company.CreateCompany();
+            Console.WriteLine();
             Meat.Kebab kebab = new Meat.Kebab();
 
             

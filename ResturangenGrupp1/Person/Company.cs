@@ -28,23 +28,31 @@ namespace ResturangenGrupp1.Person
 
         public static void CreateCompany()
         {
-            List<List<Guest>> companies = new List<List<Guest>>();
+            List<List<Guest>> companies = new List<List<Guest>>(); 
+            int companySize = RandomSize();
 
+            int amountOfCompanies = 80 / companySize;
 
-            for (int j = 0; j < GenerateObjects._guests.Count; j++)
+            for (int j = 0; j < 1; j++)
             {
-                int companySize = RandomSize();
 
-                for (int i = 0; i < companySize; i++)
+                for (int i = 0; i < amountOfCompanies; i++)
                 {
-                    companies.Add(new List<Guest>() { GenerateObjects._guests[i] });
-                    GenerateObjects._guests.RemoveAt(i);
+                    for (int k = 0; k < companySize; k++)
+                    {
+                        companies.Add(new List<Guest>() { GenerateObjects._guests[k] });
+                        GenerateObjects._guests.RemoveAt(k);
+
+                    }
                 }
 
-                Console.WriteLine("**********");
+               
+
 
                 foreach (var company in companies)
                 {
+                    Console.WriteLine("**********");
+
                     foreach (var guest in company)
                     {
                         Console.WriteLine(guest.Name);
