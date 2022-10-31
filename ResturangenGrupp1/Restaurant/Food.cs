@@ -26,16 +26,8 @@ namespace ResturangenGrupp1.Restaurant
                 {
                     case 1:
                         Meat.Beef meat = new Meat.Beef();
-                        if (guest.NutAllergy)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            guest.preferedFood.Add(meat);
-                            tryAgain = false;
-                            break;
-                        }
+                        guest.preferedFood.Add(meat);
+                        break;                        
                     case 2:
                         Fish.Scallop scallop = new Fish.Scallop();
                         guest.preferedFood.Add(scallop);
@@ -43,16 +35,8 @@ namespace ResturangenGrupp1.Restaurant
                         break;
                     case 3:
                         Vegetarian.Haloumi haloumi = new Vegetarian.Haloumi();
-                        if (guest.LactoseAllergy)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            guest.preferedFood.Add(haloumi);
-                            tryAgain = false;
-                            break;
-                        }
+                        guest.preferedFood.Add(haloumi);
+                        break;                        
                     case 4:
                         Meat.Kebab kebab = new Meat.Kebab();
                         guest.preferedFood.Add(kebab);
@@ -65,16 +49,8 @@ namespace ResturangenGrupp1.Restaurant
                         break;
                     case 6:
                         Vegetarian.Falafel falafel = new Vegetarian.Falafel();
-                        if (guest.GlutenAllergy)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            guest.preferedFood.Add(falafel);
-                            tryAgain = false;
-                            break;
-                        }
+                        guest.preferedFood.Add(falafel);
+                        break;                        
                     case 7:
                         Meat.Steak steak = new Meat.Steak();
                         guest.preferedFood.Add(steak);
