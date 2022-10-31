@@ -35,10 +35,7 @@ namespace ResturangenGrupp1.Person
         internal int Satisfaction { get; set; }
         internal int Cash { get; set; }
         internal bool AtTable { get; set; }
-        internal List<Food> preferedFood = new List<Food>();
-        internal bool NutAllergy { get; set; }
-        internal bool LactoseAllergy { get; set; }
-        internal bool GlutenAllergy { get; set; }
+        internal List<Food> preferedFood = new List<Food>();        
 
         // Methods
         private int RandomCash()
@@ -65,10 +62,7 @@ namespace ResturangenGrupp1.Person
         {            
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            Cash = RandomCash();
-            NutAllergy = Allergies.IsAllergic();
-            LactoseAllergy = Allergies.IsAllergic();
-            GlutenAllergy = Allergies.IsAllergic();
+            Cash = RandomCash();          
         }
     }
 
