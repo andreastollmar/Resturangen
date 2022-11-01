@@ -15,17 +15,15 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
+            //GUI.GUI gui = new GUI.GUI();
+            //gui.StartResturant();
+            GenerateObjects.CreateObjects();
+            Company company = new Company();
+            Company.CreateCompany();
             
-            GenerateObjects.CreatePeople();
-            GenerateObjects.CreateChefs();
-            GenerateObjects.CreateWaiters();
-            Meat.Kebab kebab = new Meat.Kebab();
 
+                       
             
-            foreach (Guest guest in GenerateObjects._guests)
-            {
-                Console.WriteLine(guest.preferedFood[0].Name);
-            }
             
 
 

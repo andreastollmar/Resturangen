@@ -69,8 +69,9 @@ namespace ResturangenGrupp1.Person
     internal class Waiter : Person
     {
         // Properties
-        private bool Busy { get; set; }
+        public bool Busy { get; set; }
         public List<string> Order { get; set; }
+        public List<Guest> guests = new List<Guest>();
 
         // Methods
         private void Cleaning()
@@ -81,6 +82,25 @@ namespace ResturangenGrupp1.Person
             }
             Busy = false;
         }
+        public bool FindFreeTable()
+        {
+            bool freeTable = false;
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if (GenerateObjects._tables[i].Empty)
+                { 
+                    freeTable = true;
+                }
+            }
+            return freeTable;
+        }
+        public void TakeOrderFromTable(ITable table)
+        {
+            foreach (Food food in table.FoodAtTable)
+            {
+                Order.Add(food.Name);
+            }
+        }
 
         // Constructor
         public Waiter(): base()
@@ -88,7 +108,7 @@ namespace ResturangenGrupp1.Person
             Name = Names.NameGenerator();
             TimeActivity = 3;
             Busy = false;
-            Competence = RandomCompetence();
+            Competence = RandomCompetence();            
             //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
         }
 
