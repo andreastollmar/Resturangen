@@ -16,7 +16,8 @@ namespace ResturangenGrupp1.GUI
             GenerateObjects.CreateObjects();
             while (true)
             {
-                
+
+
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
@@ -99,53 +100,75 @@ namespace ResturangenGrupp1.GUI
 
         }
 
-        public static void DrawResturant()
+
+        public static void DrawRestaurant()
         {
-            foreach (ITable tables in GenerateObjects._tables)
+            Console.CursorVisible = false;
+
+            string[] table = new string[4];
+            table[0] = "          ";
+            table[1] = "          ";
+            table[2] = "          ";
+            table[3] = "          ";
+
+
+            string[] resturangList = new string[43];
+            for (int i = 0; i < resturangList.Length; i++)
             {
-                switch (tables.TableNumber)
-                {
-                    case 0:
-                        //if (String.IsNullOrEmpty(tables.TableNames[0]))
-                        //{
-                            //for(int i = 0; i < tables.TableNames.Length; i++)
-                            //{
-                            //    tables.TableNames[i] = "Empty";
-                            //}
-                        //}
-                        Draw("Table 1", 2, 5, tables.TableNames);
-                        break;
-                    case 1:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 2:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 3:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 4:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 5:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 6:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 7:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 8:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                    case 9:
-                        Draw("Table 2", 2, 5, tables.TableNames);
-                        break;
-                }
+                resturangList[i] = "                                                            ";
+
             }
+            rststsdft
+            string[] waitingGuests = new string[10];
+            for (int i = 0; i < waitingGuests.Length; i++)
+            {
+                waitingGuests[i] = "                    ";
+            }
+
+            string[] events = new string[31];
+            for (int i = 0; i < events.Length; i++)
+            {
+                events[i] = "                    ";
+            }
+
+            string[] kitchen = new string[2];
+            kitchen[0] = "          ";
+            kitchen[1] = "          ";
+
+            string[] door = new string[2];
+            door[0] = "          ";
+            door[1] = "          ";
+
+            string[] sink = new string[2];
+            sink[0] = "          ";
+            sink[1] = "          ";
+
+
+
+            Window.Draw("Resturang", 1, 1, resturangList);
+            Window.Draw("Kitchen", 25, 2, kitchen);
+            Window.Draw("Door", 47, 2, door);
+            Window.Draw("Sink", 5, 2, sink);
+
+            Window.Draw("Table 1 ", 5, 10, table);
+            Window.Draw("Table 2 ", 5, 17, table);
+            Window.Draw("Table 3 ", 5, 24, table);
+            Window.Draw("Table 4 ", 5, 31, table);
+            Window.Draw("Table 5 ", 5, 38, table);
+
+            Window.Draw("Table 6 ", 45, 10, table);
+            Window.Draw("Table 7 ", 45, 17, table);
+            Window.Draw("Table 8 ", 45, 24, table);
+            Window.Draw("Table 9 ", 45, 31, table);
+            Window.Draw("Table 10", 45, 38, table);
+
+            Window.Draw("Guests waiting", 66, 1, waitingGuests);
+            Window.Draw("Events", 66, 13, events);
+
+
 
 
         }
     }
+
 }

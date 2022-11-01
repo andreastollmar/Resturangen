@@ -21,6 +21,7 @@ namespace ResturangenGrupp1
             Company company = new Company();
             Company.CreateCompany();
 
+
             Console.WriteLine(Company._companies[0][0].Name);
             for (int i = 0; i < Company._companies[0].Count; i++)
             {
@@ -34,6 +35,7 @@ namespace ResturangenGrupp1
                        
             
             
+
 
 
         }
