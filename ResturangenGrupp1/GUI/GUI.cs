@@ -114,7 +114,7 @@ namespace ResturangenGrupp1.GUI
                 resturangList[i] = "                                                            ";
 
             }
-
+            rststsdft
             string[] waitingGuests = new string[10];
             for (int i = 0; i < waitingGuests.Length; i++)
             {
