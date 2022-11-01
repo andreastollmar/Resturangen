@@ -11,14 +11,12 @@ namespace ResturangenGrupp1.Restaurant
     {
         List<Food> FoodAtTable { get; set; }
         Guest[] TableSize { get; set; }
-        string[] TableNames { get; set; }
         bool Quality { get; set; }
         bool Empty { get; set; }
         int TableNumber { get; set; }
         bool Cleaned { get; set; }
         bool GetsHelp { get; set; }
         bool RandomQuality();
-        void TransferNames();
     }
     class TableForTwo : ITable
     {        
@@ -26,7 +24,7 @@ namespace ResturangenGrupp1.Restaurant
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
         public int TableNumber { get; set; }
-        public string[] TableNames { get; set; }
+
         public bool GetsHelp { get; set; }
         public List<Food> FoodAtTable { get; set; }
         public Guest[] TableSize { get; set; }
@@ -41,27 +39,18 @@ namespace ResturangenGrupp1.Restaurant
             }
             return goodQuality;
         }
-        public void TransferNames(Guest[] guests)
-        {
-            for (int i = 0; i < guests.Length; i++)
-            {
-                TableNames[i] = guests[i].Name;
-            }
-        }
         public TableForTwo()
         {            
             Empty = true;
             Cleaned = true;
             GetsHelp = false;            
             Quality = RandomQuality();
-            string[] TableNames = new string[2];
             Guest[] tablesize = new Guest[2];
             List<Food> FoodAtTable = new List<Food>();
         }
     }
     class TableForFour : ITable
     {
-        public string[] TableNames { get; set; }
         public List<Food> FoodAtTable { get; set; }
         public bool Quality { get; set; }
         public bool Empty { get; set; }
