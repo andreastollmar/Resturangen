@@ -16,6 +16,8 @@ namespace ResturangenGrupp1.GUI
             GenerateObjects.CreateObjects();
             while (true)
             {
+
+
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
@@ -97,6 +99,8 @@ namespace ResturangenGrupp1.GUI
             Console.Write('└' + new String('─', width + 2) + '┘');
 
         }
+
+
         public static void DrawRestaurant()
         {
             Console.CursorVisible = false;
@@ -160,6 +164,7 @@ namespace ResturangenGrupp1.GUI
 
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Window.Draw("Events", 66, 13, events);
+
 
 
 
