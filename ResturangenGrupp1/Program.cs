@@ -20,8 +20,8 @@ namespace ResturangenGrupp1
             GenerateObjects.CreateObjects();
             Company company = new Company();
             Company.CreateCompany();
-            
 
+            Console.WriteLine(Company._companies[0][0].Name);
                        
             
             
