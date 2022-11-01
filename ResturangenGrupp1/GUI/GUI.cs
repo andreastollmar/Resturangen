@@ -16,45 +16,11 @@ namespace ResturangenGrupp1.GUI
             GenerateObjects.CreateObjects();
             while (true)
             {
+                Window.DrawRestaurant();
 
 
-                for (int i = 0; i < GenerateObjects._waiters.Count; i++)
-                {
-                    if (!GenerateObjects._waiters[i].Busy)
-                    {
-                        for (int j = 0; j < GenerateObjects._tables.Count; j++)
-                        {
-                            if (GenerateObjects._tables[j].Empty)
-                            {
-                                if (GenerateObjects._tables[j] is TableForFour)
-                                {
-                                    GenerateObjects._tables[j].Empty = false;
-                                    Random rnd = new Random();
-                                    int companySize = rnd.Next(3, 5);
-                                    //Gå till dörren writeout
-                                    for (int k = 0; k < companySize; k++)
-                                    {
-                                        GenerateObjects._waiters[i].guests.Add(GenerateObjects._guests[k]);
-                                        GenerateObjects._guests.RemoveAt(k);
-                                    }
-                                }
-                                else if (GenerateObjects._tables[j] is TableForTwo)
-                                {
-                                    GenerateObjects._tables[j].Empty = false;
-                                    Random rnd = new Random();
-                                    int companySize = rnd.Next(1, 3);
-                                    for (int k = 0; k < companySize; k++)
-                                    {
-                                        GenerateObjects._waiters[i].guests.Add(GenerateObjects._guests[k]);
-                                        GenerateObjects._guests.RemoveAt(k);
-                                    }
-                                }
-                                //gå till bord index[j] i _tables
 
-                            }
-                        }
-                    }
-                }
+                
             }
         }
     }

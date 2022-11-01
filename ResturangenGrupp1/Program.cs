@@ -21,20 +21,20 @@ namespace ResturangenGrupp1
             Company company = new Company();
             Company.CreateCompany();
 
-
+            
             Console.WriteLine(Company._companies[0][0].Name);
             for (int i = 0; i < Company._companies[0].Count; i++)
             {
                 GenerateObjects._tables[0].TableSize[i] = Company._companies[0][i];
             }
             GenerateObjects._tables[0].TransferNames(GenerateObjects._tables[0].TableSize);
-            
+
             Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
             Console.WriteLine();
-            GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
-                       
-            
-            
+            //GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
+
+            GUI.Window.DrawRestaurant();
+
 
 
 
