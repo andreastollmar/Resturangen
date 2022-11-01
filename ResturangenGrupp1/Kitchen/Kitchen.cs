@@ -24,15 +24,15 @@ namespace ResturangenGrupp1.Kitchen
                     {
                         if (food is Kebab)
                         {
-                            Console.WriteLine($"Koken lagar {((Kebab)food).Name} som kostar {((Kebab)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Kebab)food).Name} ");
                         }
                         if (food is Steak)
                         {
-                            Console.WriteLine($"Koken lagar {((Steak)food).Name} som kostar {((Steak)food).Price} i {i}  secounder");
+                            Console.WriteLine($"Koken lagar {((Steak)food).Name} ");
                         }
                         else if (food is Beef)
                         {
-                            Console.WriteLine($"Koken lagar {((Beef)food).Name} som kostar {((Beef)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Beef)food).Name} ");
                         }
                     }
 
@@ -41,15 +41,15 @@ namespace ResturangenGrupp1.Kitchen
                     {
                         if(food is Scallop)
                         {
-                            Console.WriteLine($"Koken lagar {((Scallop)food).Name} som kostar {((Scallop)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Scallop)food).Name} ");
                         }
                         if(food is Tuna)
                         {
-                            Console.WriteLine($"Koken lagar {((Tuna)food).Name} som kostar {((Tuna)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Tuna)food).Name} ");
                         }
                         else if(food is Moules)
                         {
-                            Console.WriteLine($"Koken lagar {((Moules)food).Name} som kostar {((Moules)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Moules)food).Name} ");
                         }
                     }
 
@@ -57,15 +57,15 @@ namespace ResturangenGrupp1.Kitchen
                     {
                         if(food is Risotto)
                         {
-                            Console.WriteLine($"Koken lagar {((Risotto)food).Name} som kostar {((Risotto)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Risotto)food).Name} ");
                         }
                         if(food is Falafel)
                         {
-                            Console.WriteLine($"Koken lagar {((Falafel)food).Name} som kostar {((Falafel)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Falafel)food).Name} ");
                         }
                         else if(food is Haloumi)
                         {
-                            Console.WriteLine($"Koken lagar {((Haloumi)food).Name} som kostar {((Haloumi)food).Price} i {i} secounder");
+                            Console.WriteLine($"Koken lagar {((Haloumi)food).Name} ");
                         }
                     }
                 }

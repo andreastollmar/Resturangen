@@ -102,6 +102,12 @@ namespace ResturangenGrupp1.Person
             }
         }
 
+        public void GoToTheDoor(Waiter waiter)
+        {
+            Console.SetCursorPosition(47,5);
+            Console.Write(waiter.Name);
+        }
+
         // Constructor
         public Waiter(): base()
         {
