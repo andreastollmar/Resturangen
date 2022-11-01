@@ -15,35 +15,17 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Console.WriteLine("testar min branch");
-            GenerateObjects.CreatePeople();
+            //GUI.GUI gui = new GUI.GUI();
+            //gui.StartResturant();
+            GenerateObjects.CreateObjects();
+            Company company = new Company();
             Company.CreateCompany();
-            Console.WriteLine();
 
-            //Guest guest = new Guest();
-            //Console.WriteLine($"En gäst som heter {guest.Name}, har {guest.Cash} kronor i plånboken.");
-            //Chef chef = new Chef();
-            //Console.WriteLine($"Kocken {chef.Name} har {chef.Competence} i kompetens");
-            //Waiter waiter = new Waiter();
-            //Console.WriteLine($"Servitöeren {waiter.Name} har {waiter.Competence} i ServiceNivå");
-            //TableForFour table = new TableForFour();
-            //Console.WriteLine($"bordets kvalité {table.Quality}");
-            //GenerateObjects.CreateFood();
-
-            GenerateObjects.CreatePeople();
-            GenerateObjects.CreateChefs();
-            GenerateObjects.CreateWaiters();
-            Company.CreateCompany();
-            Console.WriteLine();
-            Meat.Kebab kebab = new Meat.Kebab();
-
+            Console.WriteLine(Company._companies[0][0].Name);
+                       
             
-            foreach (Guest guest in GenerateObjects._guests)
-            {
-                Console.WriteLine(guest.preferedFood[0].Name);
-            }
             
+
 
         }
     }

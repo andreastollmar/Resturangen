@@ -10,11 +10,12 @@ namespace ResturangenGrupp1.Person
 {
     internal class Company
     {
+        
         // Properties
         private int CompanySize { get; set; }
         private int CompanyCash { get; set; }
-        private List<Guest> CompanyList { get; set; }
-
+        public static List<Guest> CompanyList = new List<Guest>();
+        public static List<List<Guest>> _companies = new List<List<Guest>>();
 
 
 
@@ -28,37 +29,35 @@ namespace ResturangenGrupp1.Person
 
         public static void CreateCompany()
         {
-            List<List<Guest>> companies = new List<List<Guest>>(); 
-            int companySize = RandomSize();
-
-            int amountOfCompanies = 80 / companySize;
-
-            for (int j = 0; j < 1; j++)
+            
+            for (int j = 0; j < GenerateObjects._guests.Count; j++)
             {
-
-                for (int i = 0; i < amountOfCompanies; i++)
+                int companySize = RandomSize();
+                if (companySize > GenerateObjects._guests.Count)
                 {
+                    companySize = GenerateObjects._guests.Count;
                     for (int k = 0; k < companySize; k++)
                     {
-                        companies.Add(new List<Guest>() { GenerateObjects._guests[k] });
-                        GenerateObjects._guests.RemoveAt(k);
-
+                        CompanyList.Add(GenerateObjects._guests[k]);
                     }
+                    GenerateObjects._guests.Clear();
                 }
-
-               
-
-
-                foreach (var company in companies)
-                {
-                    Console.WriteLine("**********");
-
-                    foreach (var guest in company)
+                else 
+                {                    
+                    for (int i = 0; i < companySize; i++)
                     {
-                        Console.WriteLine(guest.Name);
+                        if (i >= GenerateObjects._guests.Count)
+                        {
+                            companySize = GenerateObjects._guests.Count;
+                            i = 0;
+                        }
+                        CompanyList.Add(GenerateObjects._guests[i]);
+                        GenerateObjects._guests.RemoveAt(i);
                     }
-                }
-
+                }                
+                _companies.Add(new List<Guest> (CompanyList) );
+                CompanyList.Clear();
+                j = 0;
             }
 
         }

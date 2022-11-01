@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResturangenGrupp1.Person;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,27 @@ namespace ResturangenGrupp1.Restaurant
 {
     interface ITable
     {
-        List<Food> foodAtTable { get; set; }
+        List<Food> FoodAtTable { get; set; }
+        Guest[] TableSize { get; set; }
+        string[] TableNames { get; set; }
         bool Quality { get; set; }
         bool Empty { get; set; }
+        int TableNumber { get; set; }
         bool Cleaned { get; set; }
         bool GetsHelp { get; set; }
         bool RandomQuality();
+        void TransferNames();
     }
     class TableForTwo : ITable
     {        
         public bool Quality { get; set; }
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
+        public int TableNumber { get; set; }
+        public string[] TableNames { get; set; }
         public bool GetsHelp { get; set; }
-        public List<Food> foodAtTable { get; set; }
-
+        public List<Food> FoodAtTable { get; set; }
+        public Guest[] TableSize { get; set; }
         public bool RandomQuality()
         {
             bool goodQuality = false;
@@ -34,22 +41,34 @@ namespace ResturangenGrupp1.Restaurant
             }
             return goodQuality;
         }
-        public TableForTwo()
+        public void TransferNames(Guest[] guests)
         {
-            string[] tableSize = new string[2];
+            for (int i = 0; i < guests.Length; i++)
+            {
+                TableNames[i] = guests[i].Name;
+            }
+        }
+        public TableForTwo()
+        {            
             Empty = true;
             Cleaned = true;
             GetsHelp = false;            
             Quality = RandomQuality();
+            string[] TableNames = new string[2];
+            Guest[] tablesize = new Guest[2];
+            List<Food> FoodAtTable = new List<Food>();
         }
     }
     class TableForFour : ITable
     {
-        public List<Food> foodAtTable { get; set; }
+        public string[] TableNames { get; set; }
+        public List<Food> FoodAtTable { get; set; }
         public bool Quality { get; set; }
         public bool Empty { get; set; }
+        public int TableNumber { get; set; }
         public bool Cleaned { get; set; }
         public bool GetsHelp { get; set; }
+        public Guest[] TableSize { get; set; }
         public bool RandomQuality()
         {
             bool goodQuality = true;
@@ -63,11 +82,12 @@ namespace ResturangenGrupp1.Restaurant
         }
         public TableForFour()
         {
-            string[] tableSize = new string[4];
+            Guest[] tablesize = new Guest[4]; 
             Empty = true;
             Cleaned = true;
             GetsHelp = false;
             Quality = RandomQuality();
+            List<Food> FoodAtTable = new List<Food>();
         }
     }
 
