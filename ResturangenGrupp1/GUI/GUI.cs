@@ -16,22 +16,7 @@ namespace ResturangenGrupp1.GUI
             GenerateObjects.CreateObjects();
             while (true)
             {
-                foreach (ITable tables in GenerateObjects._tables)
-                {
-                    switch (tables.TableNumber)
-                    {
-                        case 0:
-                            if (tables.TableSize == null)
-                            {
-                                (tables.TableSize[0]).Name = "Empty";
-                            }
-                            else if (tables.TableSize[1] == null)
-                            {
-                                
-                            }
-                            tables.TableSize
-                    }
-                }
+                
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
@@ -111,6 +96,55 @@ namespace ResturangenGrupp1.GUI
             }
             Console.SetCursorPosition(fromLeft, fromTop + maxRows + 2);
             Console.Write('└' + new String('─', width + 2) + '┘');
+
+        }
+
+        public static void DrawResturant()
+        {
+            foreach (ITable tables in GenerateObjects._tables)
+            {
+                switch (tables.TableNumber)
+                {
+                    case 0:
+                        //if (String.IsNullOrEmpty(tables.TableNames[0]))
+                        //{
+                            //for(int i = 0; i < tables.TableNames.Length; i++)
+                            //{
+                            //    tables.TableNames[i] = "Empty";
+                            //}
+                        //}
+                        Draw("Table 1", 2, 5, tables.TableNames);
+                        break;
+                    case 1:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 2:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 3:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 4:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 5:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 6:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 7:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 8:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                    case 9:
+                        Draw("Table 2", 2, 5, tables.TableNames);
+                        break;
+                }
+            }
+
 
         }
     }
