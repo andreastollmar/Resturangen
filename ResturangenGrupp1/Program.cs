@@ -15,8 +15,11 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            GUI.GUI gui = new GUI.GUI();
-            gui.StartResturant();
+            //GUI.GUI gui = new GUI.GUI();
+            //gui.StartResturant();
+            GenerateObjects.CreateObjects();
+            Company company = new Company();
+            Company.CreateCompany();
             
 
                        

@@ -22,7 +22,7 @@ namespace ResturangenGrupp1.GUI
         private static void CreatePeople()
         {
             Food food = new Food();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 80; i++)
             {
                 Guest guest = new Guest();
                 food.AddFoodToGuest(guest);
