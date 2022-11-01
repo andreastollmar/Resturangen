@@ -28,7 +28,7 @@ namespace ResturangenGrupp1.Restaurant
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
         public int TableNumber { get; set; }
-        string[] TableNames { get; set; }
+        public string[] TableNames { get; set; }
         public bool GetsHelp { get; set; }
         public List<Food> FoodAtTable { get; set; }
         public Guest[] TableSize { get; set; }
@@ -42,6 +42,20 @@ namespace ResturangenGrupp1.Restaurant
                 goodQuality = true;
             }
             return goodQuality;
+        }
+        public void TransferNames(Guest[] guests)
+        {
+            for (int i = 0; i < guests.Length; i++)
+            {
+                if (guests[i] == null)
+                {
+                    TableNames[i] = "Empty";
+                }
+                else
+                {
+                    TableNames[i] = guests[i].Name;
+                }
+            }
         }
         public TableForTwo()
         {            
