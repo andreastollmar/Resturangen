@@ -15,20 +15,12 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-
-            GenerateObjects.CreateObjects();
-
-            foreach (TableForFour table in GenerateObjects._tablesForFour)
-            {
-                Console.WriteLine("Kvalité bra = " + table.Quality);
-            }
+            GUI.GUI gui = new GUI.GUI();
+            gui.StartResturant();
             
-            foreach (Guest guest in GenerateObjects._guests)
-            {
-                Console.WriteLine(guest.preferedFood[0].Name);
-                Console.WriteLine(guest.Cash);
-                Console.WriteLine(guest.NutAllergy);
-            }
+
+                       
+            
             
 
 

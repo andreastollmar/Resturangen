@@ -10,11 +10,12 @@ namespace ResturangenGrupp1.Person
 {
     internal class Company
     {
+        public static List<Company> _companies = new List<Company>();
         // Properties
         private int CompanySize { get; set; }
         private int CompanyCash { get; set; }
         private List<Guest> CompanyList { get; set; }
-
+        private List<Company> CompanyList { get; set; }
 
 
 
