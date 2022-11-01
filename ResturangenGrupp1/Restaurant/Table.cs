@@ -49,7 +49,7 @@ namespace ResturangenGrupp1.Restaurant
             {
                 if (guests[i] == null)
                 {
-                    TableNames[i] = "Empty";
+                    TableNames[i] = " ";
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace ResturangenGrupp1.Restaurant
             {
                 if (guests[i] == null)
                 {
-                    TableNames[i] = "Empty";
+                    TableNames[i] = " ";
                 }
                 else 
                 {
