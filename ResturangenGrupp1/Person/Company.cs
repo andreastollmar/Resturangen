@@ -10,12 +10,12 @@ namespace ResturangenGrupp1.Person
 {
     internal class Company
     {
-        public static List<Company> _companies = new List<Company>();
+        
         // Properties
         private int CompanySize { get; set; }
         private int CompanyCash { get; set; }
         public static List<Guest> CompanyList = new List<Guest>();
-        public static List<List<Guest>> companies = new List<List<Guest>>();
+        public static List<List<Guest>> _companies = new List<List<Guest>>();
 
 
 
@@ -55,7 +55,7 @@ namespace ResturangenGrupp1.Person
                         GenerateObjects._guests.RemoveAt(i);
                     }
                 }                
-                companies.Add(new List<Guest> (CompanyList) );
+                _companies.Add(new List<Guest> (CompanyList) );
                 CompanyList.Clear();
                 j = 0;
             }
