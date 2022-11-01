@@ -11,6 +11,7 @@ namespace ResturangenGrupp1.Restaurant
     {
         List<Food> FoodAtTable { get; set; }
         Guest[] TableSize { get; set; }
+        string[] TableNames { get; set; }
         bool Quality { get; set; }
         bool Empty { get; set; }
         int TableNumber { get; set; }
@@ -27,7 +28,7 @@ namespace ResturangenGrupp1.Restaurant
         public bool Empty { get; set; }
         public bool Cleaned { get; set; }
         public int TableNumber { get; set; }
-
+        string[] TableNames { get; set; }
         public bool GetsHelp { get; set; }
         public List<Food> FoodAtTable { get; set; }
         public Guest[] TableSize { get; set; }
@@ -50,15 +51,14 @@ namespace ResturangenGrupp1.Restaurant
             Quality = RandomQuality();
             TableNames = new string[2];
             TableSize = new Guest[2];
-            FoodAtTable = new List<Food>();
-            Guest[] tablesize = new Guest[2];
-            List<Food> FoodAtTable = new List<Food>();
+            FoodAtTable = new List<Food>();            
 
         }
     }
     class TableForFour : ITable
     {
         public List<Food> FoodAtTable { get; set; }
+        public string[] TableNames { get; set; }
         public bool Quality { get; set; }
         public bool Empty { get; set; }
         public int TableNumber { get; set; }
