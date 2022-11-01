@@ -16,22 +16,6 @@ namespace ResturangenGrupp1.GUI
             GenerateObjects.CreateObjects();
             while (true)
             {
-                foreach (ITable tables in GenerateObjects._tables)
-                {
-                    switch (tables.TableNumber)
-                    {
-                        case 0:
-                            if (tables.TableSize == null)
-                            {
-                                (tables.TableSize[0]).Name = "Empty";
-                            }
-                            else if (tables.TableSize[1] == null)
-                            {
-                                
-                            }
-                            tables.TableSize
-                    }
-                }
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
