@@ -20,11 +20,15 @@ namespace ResturangenGrupp1
             GenerateObjects.CreateObjects();
             Company company = new Company();
             Company.CreateCompany();
-            
 
-                       
-            
-            
+            GUI.Window.DrawRestaurant();
+            Console.SetCursorPosition(22, 12);
+            Console.Write(GenerateObjects._waiters[0].Name);
+
+            Console.ReadKey();
+
+
+
 
 
         }
