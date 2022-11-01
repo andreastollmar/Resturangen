@@ -114,4 +114,38 @@ namespace ResturangenGrupp1.GUI
 
         }
     }
+    public static void DrawRestaurant()
+    {
+        Console.CursorVisible = false;
+
+        //string[] table = new string[4];
+        //table[0] = "          ";
+        //table[1] = "          ";
+        //table[2] = "          ";
+        //table[3] = "          ";
+
+        foreach (ITable table in GenerateObjects._tables)
+        {
+
+        }
+
+        string[] resturangList = new string[50];
+
+        for (int i = 0; i < resturangList.Length; i++)
+        {
+            resturangList[i] = "                                                                    ";
+
+        }
+
+
+
+
+        Window.Draw("Resturang", 1, 1, resturangList);
+
+        Window.Draw("Table 1", 5, 2, table);
+        Window.Draw("Table 2", 35, 2, table);
+        Window.Draw("Table 3", 5, 10, table);
+        Window.Draw("Table 4", 35, 10, table);
+        Console.ReadKey();
+    }
 }
