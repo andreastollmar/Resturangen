@@ -149,7 +149,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Door", 47, 2, door);
             Window.Draw("Sink", 5, 2, sink);
 
-            Window.Draw("Table 1 ", 5, 10, table);
+            Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
             Window.Draw("Table 2 ", 5, 17, table);
             Window.Draw("Table 3 ", 5, 24, table);
             Window.Draw("Table 4 ", 5, 31, table);
@@ -162,6 +162,8 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 10", 45, 38, table);
 
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
+            Console.SetCursorPosition(68, 2);
+            Console.WriteLine(Company._companies[0][0].Name + " + " + (Company._companies[0].Count - 1));
             Window.Draw("Events", 66, 13, events);
 
 

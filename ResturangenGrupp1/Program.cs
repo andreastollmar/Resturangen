@@ -32,9 +32,9 @@ namespace ResturangenGrupp1
             Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
             Console.WriteLine();
             GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
-                       
-            
-            
+
+
+            GUI.Window.DrawRestaurant();
 
 
 
