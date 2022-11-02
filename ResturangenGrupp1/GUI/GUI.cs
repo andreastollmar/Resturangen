@@ -15,24 +15,37 @@ namespace ResturangenGrupp1.GUI
         {
             GenerateObjects.CreateObjects();
             Company.CreateCompany();
+            Window.DrawRestaurant();
             while (true)
             {
-                Window.DrawRestaurant();
-
+                
+                Console.ReadKey();
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);
-                        //break forloop;
+                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);                        
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].AtDoor = false;
+                        //lägg gästerna på bordets gästlista
+                        //cleara waiters gästlista
+                        //Ta order från gästarna
+                        // sätta bool ordertaken till true
                     }
-                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen)
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
-
+                        //Gå till köket
+                        //Bool at kitchen true;
+                    }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
+                    {
+                        //Lämna över matbeställning till Queue listan
+                        //sätta bool busy till false
+                        //Sätta order taken till false
+                        //cleara waiters lista med order
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
@@ -159,17 +172,17 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Door", 47, 2, door);
             Window.Draw("Sink", 5, 2, sink);
 
-            Window.Draw("Table 1 ", 5, 10, table);
-            Window.Draw("Table 2 ", 5, 17, table);
-            Window.Draw("Table 3 ", 5, 24, table);
-            Window.Draw("Table 4 ", 5, 31, table);
-            Window.Draw("Table 5 ", 5, 38, table);
+            Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
+            Window.Draw("Table 2 ", 5, 17, GenerateObjects._tables[1].TableNames);
+            Window.Draw("Table 3 ", 5, 24, GenerateObjects._tables[2].TableNames);
+            Window.Draw("Table 4 ", 5, 31, GenerateObjects._tables[3].TableNames);
+            Window.Draw("Table 5 ", 5, 38, GenerateObjects._tables[4].TableNames);
 
-            Window.Draw("Table 6 ", 45, 10, table);
-            Window.Draw("Table 7 ", 45, 17, table);
-            Window.Draw("Table 8 ", 45, 24, table);
-            Window.Draw("Table 9 ", 45, 31, table);
-            Window.Draw("Table 10", 45, 38, table);
+            Window.Draw("Table 6 ", 45, 10, GenerateObjects._tables[5].TableNames);
+            Window.Draw("Table 7 ", 45, 17, GenerateObjects._tables[6].TableNames);
+            Window.Draw("Table 8 ", 45, 24, GenerateObjects._tables[7].TableNames);
+            Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
+            Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Console.SetCursorPosition(68, 2);

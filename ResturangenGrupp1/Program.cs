@@ -17,11 +17,11 @@ namespace ResturangenGrupp1
         {
             GUI.GUI gui = new GUI.GUI();
             //gui.StartResturant();
-            GenerateObjects.CreateObjects();
+            //GenerateObjects.CreateObjects();
 
             //Company company = new Company();
 
-            Company.CreateCompany();
+            //Company.CreateCompany();
 
 
             //for (int i = 0; i < Company._companies[0].Count; i++)
@@ -35,7 +35,7 @@ namespace ResturangenGrupp1
             ////Console.WriteLine();
             ////GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
 
-            //gui.StartResturant();
+            gui.StartResturant();
             //GUI.Window.DrawRestaurant();
 
 
@@ -43,6 +43,21 @@ namespace ResturangenGrupp1
             //Console.WriteLine();
             //GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
 
+
+
+            //while (true)
+            //{
+            //    GUI.Window.DrawRestaurant();
+            //    GenerateObjects._waiters[0].GoToTheDoor(GenerateObjects._waiters[0]);
+
+                
+
+            //    Company._companies[0][0].GoToTheSink(Company._companies[0][0]);
+            //    GenerateObjects._waiters[0].GoToTheKitchen(GenerateObjects._waiters[0]);
+
+                
+            //    Console.ReadKey();
+            //}
 
             while (true)
             {
@@ -56,6 +71,7 @@ namespace ResturangenGrupp1
 
                 Console.ReadKey();
             }
+
        
 
         }

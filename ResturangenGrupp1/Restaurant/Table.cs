@@ -64,6 +64,8 @@ namespace ResturangenGrupp1.Restaurant
             GetsHelp = false;            
             Quality = RandomQuality();
             TableNames = new string[2];
+            TableNames[0] = " ";
+            TableNames[1] = " ";
             TableSize = new Guest[2];
             FoodAtTable = new List<Food>();            
 
@@ -111,6 +113,10 @@ namespace ResturangenGrupp1.Restaurant
             GetsHelp = false;
             Quality = RandomQuality();
             TableNames = new string[4];
+            TableNames[0] = " ";
+            TableNames[1] = " ";
+            TableNames[2] = " ";
+            TableNames[3] = " ";
             TableSize = new Guest[4];
             FoodAtTable = new List<Food>();
         }
