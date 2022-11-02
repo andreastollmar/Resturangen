@@ -75,8 +75,10 @@ namespace ResturangenGrupp1.Person
         public bool AtDoor { get; set; }
         public bool CleaningTable { get; set; }
         public bool AtKitchen { get; set; }
+
         public bool OrderTaken { get; set; }
         public Hashtable Order = new Hashtable();
+
         public List<Guest> guests = new List<Guest>();
 
         // Methods
@@ -189,19 +191,76 @@ namespace ResturangenGrupp1.Person
 
         }
 
-        public void GoToTheDoor(Waiter waiter)
+        public void GoToTheDoor(Waiter waiter) // Metod för flytta waiter position vid dörren 
         {
             Console.SetCursorPosition(47,5);
             Console.Write(waiter.Name);
         }
 
-        public void GoToTheKitchen(Waiter waiter)
+        public void GoToTheKitchen(Waiter waiter) // Metod för att flytta waiter postion vid köket
         {
             Console.SetCursorPosition(25, 5);
             Console.Write(waiter.Name);
         }
-     
 
+        public void TakeCompanyToTheTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
+        {
+            switch (waiter.Order["TableNumber"])
+            {
+                case 1: 
+                    Console.SetCursorPosition(7, 12);    // bord 1 
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 2:
+                    Console.SetCursorPosition(7, 20);    // bord 2 
+                    Console.Write(waiter.Name);
+                    break ;
+
+                case 3:
+                    Console.SetCursorPosition(7, 26);    // bord 3 
+                    Console.Write(waiter.Name);
+                    break;;
+
+                case 4:
+                    Console.SetCursorPosition(7, 33);    // bord 4 
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 5:
+                    Console.SetCursorPosition(7, 40);    // bord 5
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 6:
+                    Console.SetCursorPosition(7, 8);     // bord 6
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 7:
+                    Console.SetCursorPosition(42, 15);   // bord 7
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 8:
+                    Console.SetCursorPosition(42, 22);   // bord 8
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 9:
+                    Console.SetCursorPosition(42, 28);   // bord 9 
+                    Console.Write(waiter.Name);
+                    break;
+
+                case 10:
+                    Console.SetCursorPosition(42, 35);   // bord 10
+                    Console.Write(waiter.Name);
+                    break;
+
+            }
+        }
+           
+     
         // Constructor
         public Waiter(): base()
         {
