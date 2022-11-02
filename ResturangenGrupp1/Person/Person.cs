@@ -66,6 +66,12 @@ namespace ResturangenGrupp1.Person
             TimeActivity = 20;
             Cash = RandomCash();          
         }
+
+        public void GoToTheSink(Guest guest)
+        {
+            Console.SetCursorPosition(5, 5);
+            Console.Write(guest.Name);
+        }
     }
 
     internal class Waiter : Person
@@ -191,6 +197,12 @@ namespace ResturangenGrupp1.Person
             Console.Write(waiter.Name);
         }
 
+        public void GoToTheKitchen(Waiter waiter)
+        {
+            Console.SetCursorPosition(25, 5);
+            Console.Write(waiter.Name);
+        }
+     
 
         // Constructor
         public Waiter(): base()
@@ -243,6 +255,8 @@ namespace ResturangenGrupp1.Person
             Busy = false;
             Competence = RandomCompetence();
         }
+
+     
     }
 
 }
