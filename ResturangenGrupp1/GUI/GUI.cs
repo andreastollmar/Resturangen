@@ -128,7 +128,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Door", 47, 2, door);
             Window.Draw("Sink", 5, 2, sink);
 
-            Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
+            Window.Draw("Table 1 ", 5, 10, table);
             Window.Draw("Table 2 ", 5, 17, table);
             Window.Draw("Table 3 ", 5, 24, table);
             Window.Draw("Table 4 ", 5, 31, table);
