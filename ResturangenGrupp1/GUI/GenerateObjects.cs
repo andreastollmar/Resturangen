@@ -32,7 +32,7 @@ namespace ResturangenGrupp1.GUI
 
         private static void CreateWaiters()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Waiter waiter = new Waiter();
                 _waiters.Add(waiter);
@@ -48,13 +48,13 @@ namespace ResturangenGrupp1.GUI
         }
         private static void CreateTables()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i < 6; i++)
             {
                 TableForFour table = new TableForFour();
                 table.TableNumber = i;
                 _tables.Add(table);
             }
-            for (int i = 5; i < 10; i++)
+            for (int i = 6; i < 11; i++)
             {
                 TableForTwo table = new TableForTwo();
                 table.TableNumber = i;

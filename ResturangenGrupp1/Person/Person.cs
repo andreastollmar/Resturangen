@@ -36,7 +36,7 @@ namespace ResturangenGrupp1.Person
         // Properties
         internal int Satisfaction { get; set; }
         internal int Cash { get; set; }
-        internal bool AtTable { get; set; }
+        internal bool Eating { get; set; }
         internal List<Food> preferedFood = new List<Food>();        
 
         // Methods
@@ -46,13 +46,7 @@ namespace ResturangenGrupp1.Person
             int cash = random.Next(100, 500);
             return cash;
         }
-        private void Eating()
-        {
-            for (int i = TimeActivity; i < 1; i--)
-            {
-                AtTable = true;
-            }
-        }
+        
         
         public void ShowFood(Guest guest)
         {
@@ -81,7 +75,8 @@ namespace ResturangenGrupp1.Person
         public bool AtDoor { get; set; }
         public bool CleaningTable { get; set; }
         public bool AtKitchen { get; set; }
-        public Hashtable Order { get; set; }
+        public bool OrderTaken { get; set; }
+        public Hashtable Order = new Hashtable();
         public List<Guest> guests = new List<Guest>();
 
         // Methods
@@ -94,6 +89,7 @@ namespace ResturangenGrupp1.Person
                 if (GenerateObjects._tables[i].Empty)
                 { 
                     freeTable = true;
+                    break;
                 }
             }
             return freeTable;
@@ -135,13 +131,14 @@ namespace ResturangenGrupp1.Person
                 AtKitchen = true;
 
             }
-            else if (true) //Table to clean or guests finnished with food
+            else if (true) //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
             {
 
 
             }
 
         }
+        
         public void MatchTableWithGuests(Waiter waiter)
         {
             int indexTable = 10;
@@ -151,6 +148,7 @@ namespace ResturangenGrupp1.Person
                 if (GenerateObjects._tables[i].Empty)
                 {
                     indexTable = i;
+                    waiter.Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
                     break;
                 }
             }
@@ -211,6 +209,8 @@ namespace ResturangenGrupp1.Person
             TimeActivity = 3;
             Busy = false;
             AtDoor = false;
+            OrderTaken = false;
+            AtKitchen = false;
             Competence = RandomCompetence();            
             //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
         }
