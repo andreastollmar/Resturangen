@@ -74,18 +74,12 @@ namespace ResturangenGrupp1.Person
         public bool Busy { get; set; }
         public bool AtDoor { get; set; }
         public bool CleaningTable { get; set; }
+        public bool AtKitchen { get; set; }
         public Hashtable Order { get; set; }
         public List<Guest> guests = new List<Guest>();
 
         // Methods
-        private void Cleaning()
-        {
-            for (int i = TimeActivity; i < 1; i--)
-            {
-                Busy = true;
-            }
-            Busy = false;
-        }
+        
         private bool FindFreeTable()
         {
             bool freeTable = false;
@@ -107,10 +101,20 @@ namespace ResturangenGrupp1.Person
             Order.Add("TableNr", table.TableNumber);
             
         }
+        private bool CheckFoodToServe()
+        {
+            bool orderDone = false;
+            if(Kitchen.Kitchen.OrdersDone.Count > 0)
+            {
+                orderDone = true;
+            }
+            return orderDone;
+        }
         public void Activity(Waiter waiter)
         {
             bool tableToClean;
             bool finnishedGuests;
+            bool foodToServe = CheckFoodToServe();
             bool tableFree = FindFreeTable();
             if (tableFree)
             {
@@ -118,9 +122,12 @@ namespace ResturangenGrupp1.Person
                 Busy = true;
                 GoToTheDoor(waiter);
             }
-            else if (true) //food to serve
+            else if (foodToServe) 
             {
-                
+                //move to kitchen
+                Busy = true;
+                AtKitchen = true;
+
             }
             else if (true) //Table to clean or guests finnished with food
             {
@@ -150,6 +157,16 @@ namespace ResturangenGrupp1.Person
                         indexCompany = i;
                     }
                 }
+                if(indexCompany > 85)
+                {
+                    for(int i = 0; i < Company._companies.Count; i++)
+                    {
+                        if (Company._companies[i].Count < 2)
+                            indexCompany = i;
+                    }
+                }
+                waiter.guests.AddRange(Company._companies[indexCompany]);
+                Company._companies.RemoveAt(indexCompany);
             }
             if (GenerateObjects._tables[indexTable] is TableForTwo)
             {
@@ -160,10 +177,11 @@ namespace ResturangenGrupp1.Person
                         indexCompany = i;
                     }
                 }
+                waiter.guests.AddRange(Company._companies[indexCompany]);
+                Company._companies.RemoveAt(indexCompany);
             }
 
-            waiter.guests.AddRange(Company._companies[indexCompany]);
-            Company._companies.RemoveAt(indexCompany);
+            
 
         }
 

@@ -30,6 +30,10 @@ namespace ResturangenGrupp1.GUI
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
                     }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen)
+                    {
+
+                    }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
                         GenerateObjects._waiters[i].TimeActivity--;
@@ -54,6 +58,7 @@ namespace ResturangenGrupp1.GUI
                         if (GenerateObjects._chefs[i].TimeActivity == 0)
                         {
                             GenerateObjects._chefs[i].OrderDone(GenerateObjects._chefs[i]);
+                            GenerateObjects._chefs[i].TimeActivity = 10;
                         }
                     }
                 }
