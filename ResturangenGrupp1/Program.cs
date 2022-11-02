@@ -17,35 +17,37 @@ namespace ResturangenGrupp1
         {
             GUI.GUI gui = new GUI.GUI();
             //gui.StartResturant();
-            //GenerateObjects.CreateObjects();
+            GenerateObjects.CreateObjects();
             //Company company = new Company();
             Company.CreateCompany();
 
 
-            for (int i = 0; i < Company._companies[0].Count; i++)
-            {
-                GenerateObjects._tables[0].TableSize[i] = Company._companies[0][i];
-            }
-            GenerateObjects._tables[0].TransferNames(GenerateObjects._tables[0].TableSize);
+            //for (int i = 0; i < Company._companies[0].Count; i++)
+            //{
+            //    GenerateObjects._tables[0].TableSize[i] = Company._companies[0][i];
+            //}
+            //GenerateObjects._tables[0].TransferNames(GenerateObjects._tables[0].TableSize);
 
 
-            // Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
-            //Console.WriteLine();
-            //GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
+            //// Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
+            ////Console.WriteLine();
+            ////GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
 
-            gui.StartResturant();
+            //gui.StartResturant();
             //GUI.Window.DrawRestaurant();
 
 
 
-            Console.WriteLine();
-            GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
+            //Console.WriteLine();
+            //GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
 
 
             while (true)
             {
                 GUI.Window.DrawRestaurant();
                 GenerateObjects._waiters[0].GoToTheDoor(GenerateObjects._waiters[0]);
+                Company._companies[0][0].GoToTheSink(Company._companies[0][0]);
+                GenerateObjects._waiters[0].GoToTheKitchen(GenerateObjects._waiters[0]);
                 
                 Console.ReadKey();
             }
