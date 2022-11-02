@@ -121,6 +121,7 @@ namespace ResturangenGrupp1.Person
             else if (true) //Table to clean or guests finnished with food
             {
 
+
             }
 
         }
@@ -161,6 +162,14 @@ namespace ResturangenGrupp1.Person
             Company._companies.RemoveAt(indexCompany);
 
         }
+
+        public void GoToTheDoor(Waiter waiter)
+        {
+            Console.SetCursorPosition(47,5);
+            Console.Write(waiter.Name);
+        }
+
+
         // Constructor
         public Waiter(): base()
         {
