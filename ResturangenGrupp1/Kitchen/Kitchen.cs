@@ -1,6 +1,7 @@
 ﻿using ResturangenGrupp1.Person;
 using ResturangenGrupp1.Restaurant;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ namespace ResturangenGrupp1.Kitchen
 {
     internal class Kitchen
     {
+        public static Queue<Hashtable> OrdersToCook = new Queue<Hashtable>();
+        public static Queue<Hashtable> OrdersDone = new Queue<Hashtable>();
+
         public void CookFood(List<Food> meny, int Time)
         {
             for (int i = 0; i <= Time; i++)

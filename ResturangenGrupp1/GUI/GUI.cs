@@ -23,12 +23,38 @@ namespace ResturangenGrupp1.GUI
                 {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity();
+                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);
                         //break forloop;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
+                    }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
+                    {
+                        GenerateObjects._waiters[i].TimeActivity--;
+                        if (GenerateObjects._waiters[i].TimeActivity == 0)
+                        {
+                            //go to standby
+                            GenerateObjects._waiters[i].TimeActivity = 3;
+                            GenerateObjects._waiters[i].Busy = false;
+                            GenerateObjects._waiters[i].CleaningTable = false;
+                        }
+                    }
+                }
+                for(int i = 0; i < GenerateObjects._chefs.Count; i++)
+                {
+                    if (!GenerateObjects._chefs[i].Busy)
+                    {
+                        GenerateObjects._chefs[i].Activity(GenerateObjects._chefs[i]);
+                    }
+                    else if (GenerateObjects._chefs[i].Busy)
+                    {
+                        GenerateObjects._chefs[i].TimeActivity--;
+                        if (GenerateObjects._chefs[i].TimeActivity == 0)
+                        {
+                            GenerateObjects._chefs[i].OrderDone(GenerateObjects._chefs[i]);
+                        }
                     }
                 }
                 Console.ReadKey();
@@ -128,7 +154,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Door", 47, 2, door);
             Window.Draw("Sink", 5, 2, sink);
 
-            Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
+            Window.Draw("Table 1 ", 5, 10, table);
             Window.Draw("Table 2 ", 5, 17, table);
             Window.Draw("Table 3 ", 5, 24, table);
             Window.Draw("Table 4 ", 5, 31, table);
