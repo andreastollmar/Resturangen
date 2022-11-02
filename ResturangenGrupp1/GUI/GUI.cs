@@ -14,11 +14,24 @@ namespace ResturangenGrupp1.GUI
         public void StartResturant()
         {
             GenerateObjects.CreateObjects();
+            Company.CreateCompany();
             while (true)
             {
                 Window.DrawRestaurant();
 
-
+                for (int i = 0; i < GenerateObjects._waiters.Count; i++)
+                {
+                    if (!GenerateObjects._waiters[i].Busy)
+                    {
+                        GenerateObjects._waiters[i].Activity();
+                        //break forloop;
+                    }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
+                    {
+                        GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
+                    }
+                }
+                Console.ReadKey();
 
                 
             }

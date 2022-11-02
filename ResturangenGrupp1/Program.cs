@@ -15,25 +15,26 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            //GUI.GUI gui = new GUI.GUI();
+            GUI.GUI gui = new GUI.GUI();
             //gui.StartResturant();
-            GenerateObjects.CreateObjects();
-            Company company = new Company();
+            //GenerateObjects.CreateObjects();
+            //Company company = new Company();
             Company.CreateCompany();
 
             
-            Console.WriteLine(Company._companies[0][0].Name);
+            //Console.WriteLine(Company._companies[0][0].Name);
             for (int i = 0; i < Company._companies[0].Count; i++)
             {
                 GenerateObjects._tables[0].TableSize[i] = Company._companies[0][i];
             }
             GenerateObjects._tables[0].TransferNames(GenerateObjects._tables[0].TableSize);
 
-            Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
-            Console.WriteLine();
+            // Console.WriteLine(GenerateObjects._tables[0].TableNames[0]);
+            //Console.WriteLine();
             //GUI.Window.Draw("Table 1", 2, 20, GenerateObjects._tables[0].TableNames);
 
-            GUI.Window.DrawRestaurant();
+            gui.StartResturant();
+            //GUI.Window.DrawRestaurant();
 
 
 
