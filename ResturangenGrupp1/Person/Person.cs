@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ResturangenGrupp1.GUI;
@@ -70,6 +71,7 @@ namespace ResturangenGrupp1.Person
     {
         // Properties
         public bool Busy { get; set; }
+        public bool AtDoor { get; set; }
         public List<string> Order { get; set; }
         public List<Guest> guests = new List<Guest>();
 
@@ -101,6 +103,65 @@ namespace ResturangenGrupp1.Person
                 Order.Add(food.Name);
             }
         }
+        public void Activity()
+        {
+            bool tableToClean;
+            bool finnishedGuests;
+            bool tableFree = FindFreeTable();
+            if (tableFree)
+            {
+                AtDoor = true;
+                Busy = true;
+                //Go to door method
+            }
+            else if (true) //food to serve
+            {
+                
+            }
+            else if (true) //Table to clean or guests finnished with food
+            {
+
+
+            }
+
+        }
+        public void MatchTableWithGuests(Waiter waiter)
+        {
+            int indexTable = 10;
+            int indexCompany = 90;
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if (GenerateObjects._tables[i].Empty)
+                {
+                    indexTable = i;
+                    break;
+                }
+            }
+            if (GenerateObjects._tables[indexTable] is TableForFour)
+            {
+                for (int i = 0; i < Company._companies.Count; i++)
+                {
+                    if (Company._companies[i].Count > 2)
+                    {
+                        indexCompany = i;
+                    }
+                }
+            }
+            if (GenerateObjects._tables[indexTable] is TableForTwo)
+            {
+                for (int i = 0; i < Company._companies.Count; i++)
+                {
+                    if (Company._companies[i].Count <= 2)
+                    {
+                        indexCompany = i;
+                    }
+                }
+            }
+
+            waiter.guests.AddRange(Company._companies[indexCompany]);
+            Company._companies.RemoveAt(indexCompany);
+
+        }
 
         public void GoToTheDoor(Waiter waiter)
         {
@@ -108,12 +169,14 @@ namespace ResturangenGrupp1.Person
             Console.Write(waiter.Name);
         }
 
+
         // Constructor
         public Waiter(): base()
         {
             Name = Names.NameGenerator();
             TimeActivity = 3;
             Busy = false;
+            AtDoor = false;
             Competence = RandomCompetence();            
             //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
         }
