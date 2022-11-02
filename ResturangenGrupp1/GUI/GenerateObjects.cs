@@ -19,7 +19,7 @@ namespace ResturangenGrupp1.GUI
         public static List<Waiter> _waiters = new List<Waiter>();        
         //Metoder för att genera alla object
 
-        private static void CreatePeople()
+        private static void CreatePeople() // Metod för att hämta in gästerna
         {
             Food food = new Food();
             for (int i = 0; i < 80; i++)
@@ -30,7 +30,7 @@ namespace ResturangenGrupp1.GUI
             }
         }
 
-        private static void CreateWaiters()
+        private static void CreateWaiters()  // Metod för att hämta in servitörer
         {
             for (int i = 0; i < 3; i++)
             {
@@ -38,7 +38,7 @@ namespace ResturangenGrupp1.GUI
                 _waiters.Add(waiter);
             }
         }
-        private static void CreateChefs()
+        private static void CreateChefs() // Metod för att hämta in kokerna
         {
             for (int i = 0; i < 5; i++)
             {
@@ -46,15 +46,15 @@ namespace ResturangenGrupp1.GUI
                 _chefs.Add(new Chef());
             }            
         }
-        private static void CreateTables()
+        private static void CreateTables() // Metod för att hämta in alla bord 
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i < 6; i++)
             {
                 TableForFour table = new TableForFour();
                 table.TableNumber = i;
                 _tables.Add(table);
             }
-            for (int i = 5; i < 10; i++)
+            for (int i = 6; i < 11; i++)
             {
                 TableForTwo table = new TableForTwo();
                 table.TableNumber = i;
