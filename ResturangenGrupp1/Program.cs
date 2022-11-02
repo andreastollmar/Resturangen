@@ -18,7 +18,9 @@ namespace ResturangenGrupp1
             GUI.GUI gui = new GUI.GUI();
             //gui.StartResturant();
             GenerateObjects.CreateObjects();
+
             //Company company = new Company();
+
             Company.CreateCompany();
 
 
@@ -46,8 +48,12 @@ namespace ResturangenGrupp1
             {
                 GUI.Window.DrawRestaurant();
                 GenerateObjects._waiters[0].GoToTheDoor(GenerateObjects._waiters[0]);
+
+                Company._
+
                 Company._companies[0][0].GoToTheSink(Company._companies[0][0]);
                 GenerateObjects._waiters[0].GoToTheKitchen(GenerateObjects._waiters[0]);
+
                 
                 Console.ReadKey();
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -78,19 +79,14 @@ namespace ResturangenGrupp1.Person
         // Properties
         public bool Busy { get; set; }
         public bool AtDoor { get; set; }
-        public List<string> Order { get; set; }
+        public bool CleaningTable { get; set; }
+        public bool AtKitchen { get; set; }
+        public Hashtable Order { get; set; }
         public List<Guest> guests = new List<Guest>();
 
         // Methods
-        private void Cleaning()
-        {
-            for (int i = TimeActivity; i < 1; i--)
-            {
-                Busy = true;
-            }
-            Busy = false;
-        }
-        public bool FindFreeTable()
+        
+        private bool FindFreeTable()
         {
             bool freeTable = false;
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
@@ -104,25 +100,40 @@ namespace ResturangenGrupp1.Person
         }
         public void TakeOrderFromTable(ITable table)
         {
-            foreach (Food food in table.FoodAtTable)
+            for(int i = 0; i < table.FoodAtTable.Count; i++)
             {
-                Order.Add(food.Name);
+                Order.Add("Food" + i, table.FoodAtTable[i].Name);
             }
+            Order.Add("TableNr", table.TableNumber);
+            
         }
-        public void Activity()
+        private bool CheckFoodToServe()
+        {
+            bool orderDone = false;
+            if(Kitchen.Kitchen.OrdersDone.Count > 0)
+            {
+                orderDone = true;
+            }
+            return orderDone;
+        }
+        public void Activity(Waiter waiter)
         {
             bool tableToClean;
             bool finnishedGuests;
+            bool foodToServe = CheckFoodToServe();
             bool tableFree = FindFreeTable();
             if (tableFree)
             {
                 AtDoor = true;
                 Busy = true;
-                //Go to door method
+                GoToTheDoor(waiter);
             }
-            else if (true) //food to serve
+            else if (foodToServe) 
             {
-                
+                //move to kitchen
+                Busy = true;
+                AtKitchen = true;
+
             }
             else if (true) //Table to clean or guests finnished with food
             {
@@ -152,6 +163,16 @@ namespace ResturangenGrupp1.Person
                         indexCompany = i;
                     }
                 }
+                if(indexCompany > 85)
+                {
+                    for(int i = 0; i < Company._companies.Count; i++)
+                    {
+                        if (Company._companies[i].Count < 2)
+                            indexCompany = i;
+                    }
+                }
+                waiter.guests.AddRange(Company._companies[indexCompany]);
+                Company._companies.RemoveAt(indexCompany);
             }
             if (GenerateObjects._tables[indexTable] is TableForTwo)
             {
@@ -162,10 +183,11 @@ namespace ResturangenGrupp1.Person
                         indexCompany = i;
                     }
                 }
+                waiter.guests.AddRange(Company._companies[indexCompany]);
+                Company._companies.RemoveAt(indexCompany);
             }
 
-            waiter.guests.AddRange(Company._companies[indexCompany]);
-            Company._companies.RemoveAt(indexCompany);
+            
 
         }
 
@@ -198,18 +220,33 @@ namespace ResturangenGrupp1.Person
     internal class Chef : Person
     {
         // Properties
-        private bool Busy { get; set; }
-
+        public bool Busy { get; set; }
+        public Hashtable CookOrders { get; set; }
         // Methods
-        private void Cooking()
-        {
-            for (int i = TimeActivity; i < 1; i--)
+        public void Activity(Chef chef)
+        {            
+            bool ordersToCook = CheckOrders();
+            if(ordersToCook)
             {
-                Busy = true;
+                chef.CookOrders.Add("Order", Kitchen.Kitchen.OrdersToCook.Dequeue());
+                chef.Busy = true;
             }
-            Busy = false;
         }
-        
+        public void OrderDone(Chef chef)
+        {
+            Kitchen.Kitchen.OrdersDone.Enqueue(chef.CookOrders);
+            chef.CookOrders.Clear();
+            chef.Busy = false;
+        }
+        private bool CheckOrders()
+        {
+            bool ordersToCook = false;
+            if (Kitchen.Kitchen.OrdersToCook.Count > 0)
+            {
+                ordersToCook = true;
+            }
+            return ordersToCook;
+        }
         // Constructor
         public Chef(): base()
         {

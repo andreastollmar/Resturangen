@@ -23,12 +23,43 @@ namespace ResturangenGrupp1.GUI
                 {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity();
+                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);
                         //break forloop;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
+                    }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen)
+                    {
+
+                    }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
+                    {
+                        GenerateObjects._waiters[i].TimeActivity--;
+                        if (GenerateObjects._waiters[i].TimeActivity == 0)
+                        {
+                            //go to standby
+                            GenerateObjects._waiters[i].TimeActivity = 3;
+                            GenerateObjects._waiters[i].Busy = false;
+                            GenerateObjects._waiters[i].CleaningTable = false;
+                        }
+                    }
+                }
+                for(int i = 0; i < GenerateObjects._chefs.Count; i++)
+                {
+                    if (!GenerateObjects._chefs[i].Busy)
+                    {
+                        GenerateObjects._chefs[i].Activity(GenerateObjects._chefs[i]);
+                    }
+                    else if (GenerateObjects._chefs[i].Busy)
+                    {
+                        GenerateObjects._chefs[i].TimeActivity--;
+                        if (GenerateObjects._chefs[i].TimeActivity == 0)
+                        {
+                            GenerateObjects._chefs[i].OrderDone(GenerateObjects._chefs[i]);
+                            GenerateObjects._chefs[i].TimeActivity = 10;
+                        }
                     }
                 }
                 Console.ReadKey();
