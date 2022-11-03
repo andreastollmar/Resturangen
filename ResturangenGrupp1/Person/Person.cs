@@ -16,6 +16,7 @@ namespace ResturangenGrupp1.Person
         internal string Name { get; set; }
         internal int Competence { get; set; }
         internal int TimeActivity { get; set; }
+        
 
         private protected int RandomCompetence()
         {
@@ -36,8 +37,9 @@ namespace ResturangenGrupp1.Person
         // Properties
         internal int Satisfaction { get; set; }
         internal int Cash { get; set; }
+        internal bool FinnishedWithFood { get; set; }
         internal bool Eating { get; set; }
-        internal List<Food> preferedFood = new List<Food>();        
+        internal List<Food> PreferedFood = new List<Food>();        
 
         // Methods
         private int RandomCash()
@@ -50,7 +52,7 @@ namespace ResturangenGrupp1.Person
         
         public void ShowFood(Guest guest)
         {
-            Console.WriteLine(guest.preferedFood[0].Name);
+            Console.WriteLine(guest.PreferedFood[0].Name);
         }
 
         // Constructor
@@ -58,7 +60,9 @@ namespace ResturangenGrupp1.Person
         {            
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            Cash = RandomCash();          
+            Cash = RandomCash();
+            Eating = false;
+            PreferedFood = new List<Food>();
         }
 
         public void GoToTheSink(Guest guest)
@@ -75,6 +79,7 @@ namespace ResturangenGrupp1.Person
         public bool AtDoor { get; set; }
         public bool CleaningTable { get; set; }
         public bool AtKitchen { get; set; }
+        public bool HelpingTable { get; set; }
 
         public bool OrderTaken { get; set; }
         public Hashtable Order = new Hashtable();
@@ -98,11 +103,19 @@ namespace ResturangenGrupp1.Person
         }
         public void TakeOrderFromTable(ITable table)
         {
+            for (int j = 0; j < table.TableSize.Length; j++)
+            {
+                if (table.TableSize[j] != null)
+                {
+                    table.FoodAtTable.AddRange(table.TableSize[j].PreferedFood);
+                }
+            }   
+
             for(int i = 0; i < table.FoodAtTable.Count; i++)
             {
-                Order.Add("Food" + i, table.FoodAtTable[i].Name);
+                Order.Add(i , table.FoodAtTable[i].Name);
             }
-            Order.Add("TableNr", table.TableNumber);
+            Order.Add("TableNumber",  table.TableNumber);
             
         }
         private bool CheckFoodToServe()
@@ -114,10 +127,23 @@ namespace ResturangenGrupp1.Person
             }
             return orderDone;
         }
-        public void Activity(Waiter waiter)
+        private bool CheckFinnishedWithFood(Waiter waiter)
         {
-            bool tableToClean;
-            bool finnishedGuests;
+            bool finnishedWithFood = false;
+            for(int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if (GenerateObjects._tables[i].FinnishedWithFood && !GenerateObjects._tables[i].GetsHelp)
+                {                    
+                    finnishedWithFood = true;
+                    waiter.Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
+                    GenerateObjects._tables[i].GetsHelp = true;
+                }
+            }
+            return finnishedWithFood;
+        }
+        public void Activity(Waiter waiter)
+        {            
+            bool finnishedGuests = CheckFinnishedWithFood(waiter);
             bool foodToServe = CheckFoodToServe();
             bool tableFree = FindFreeTable();
             if (tableFree)
@@ -128,14 +154,17 @@ namespace ResturangenGrupp1.Person
             }
             else if (foodToServe) 
             {
-                //move to kitchen
+                waiter.GoToTheKitchen(waiter);
                 Busy = true;
                 AtKitchen = true;
 
             }
-            else if (true) //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
+            else if (finnishedGuests) 
             {
-
+                TakeCompanyToTheTable(waiter);
+                waiter.HelpingTable = true;
+                waiter.Busy = true;
+                //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
 
             }
 
@@ -158,9 +187,10 @@ namespace ResturangenGrupp1.Person
             {
                 for (int i = 0; i < Company._companies.Count; i++)
                 {
-                    if (Company._companies[i].Count > 2)
+                    if (Company._companies[i].Count > 2 && Company._companies[i].Count < 5)
                     {
                         indexCompany = i;
+                        break;
                     }
                 }
                 if(indexCompany > 85)
@@ -168,7 +198,10 @@ namespace ResturangenGrupp1.Person
                     for(int i = 0; i < Company._companies.Count; i++)
                     {
                         if (Company._companies[i].Count < 2)
+                        {
                             indexCompany = i;
+                            break;
+                        }
                     }
                 }
                 waiter.guests.AddRange(Company._companies[indexCompany]);
@@ -181,6 +214,7 @@ namespace ResturangenGrupp1.Person
                     if (Company._companies[i].Count <= 2)
                     {
                         indexCompany = i;
+                        break;
                     }
                 }
                 waiter.guests.AddRange(Company._companies[indexCompany]);
@@ -193,7 +227,8 @@ namespace ResturangenGrupp1.Person
 
         public void LeaveOrderToKitchen(Waiter waiter) 
         {
-            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order); 
+            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order);
+            waiter.Busy = false;
         }
 
         public void GoToTheDoor(Waiter waiter) // Metod för flytta waiter position vid dörren 
@@ -208,57 +243,78 @@ namespace ResturangenGrupp1.Person
             Console.Write(waiter.Name);
         }
 
+        public void PutCompanyAtTable(Waiter waiter)
+        {
+            int TableNumber = (int)waiter.Order["TableNumber"];
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if(GenerateObjects._tables[i].TableNumber == TableNumber)
+                {
+                    for(int j =0; j < waiter.guests.Count; j++)
+                    {
+                        GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
+                    }
+                    waiter.guests.Clear();
+                    GenerateObjects._tables[i].Empty = false;
+                    GenerateObjects._tables[i].TransferNames(GenerateObjects._tables[i].TableSize);
+                    waiter.Order.Clear();
+                    waiter.TakeOrderFromTable(GenerateObjects._tables[i]);
+                }
+            }
+        }
+              
+
         public void TakeCompanyToTheTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
         {
             switch (waiter.Order["TableNumber"])
             {
                 case 1: 
-                    Console.SetCursorPosition(7, 12);    // bord 1 
+                    Console.SetCursorPosition(20, 12);    // bord 1 
                     Console.Write(waiter.Name);
                     break;
 
                 case 2:
-                    Console.SetCursorPosition(7, 20);    // bord 2 
+                    Console.SetCursorPosition(20, 20);    // bord 2 
                     Console.Write(waiter.Name);
                     break ;
 
                 case 3:
-                    Console.SetCursorPosition(7, 26);    // bord 3 
+                    Console.SetCursorPosition(20, 26);    // bord 3 
                     Console.Write(waiter.Name);
                     break;;
 
                 case 4:
-                    Console.SetCursorPosition(7, 33);    // bord 4 
+                    Console.SetCursorPosition(20, 33);    // bord 4 
                     Console.Write(waiter.Name);
                     break;
 
                 case 5:
-                    Console.SetCursorPosition(7, 40);    // bord 5
+                    Console.SetCursorPosition(20, 40);    // bord 5
                     Console.Write(waiter.Name);
                     break;
 
                 case 6:
-                    Console.SetCursorPosition(7, 8);     // bord 6
+                    Console.SetCursorPosition(40, 12);     // bord 6
                     Console.Write(waiter.Name);
                     break;
 
                 case 7:
-                    Console.SetCursorPosition(42, 15);   // bord 7
+                    Console.SetCursorPosition(40, 20);   // bord 7
                     Console.Write(waiter.Name);
                     break;
 
                 case 8:
-                    Console.SetCursorPosition(42, 22);   // bord 8
+                    Console.SetCursorPosition(40, 26);   // bord 8
                     Console.Write(waiter.Name);
                     break;
 
                 case 9:
-                    Console.SetCursorPosition(42, 28);   // bord 9 
+                    Console.SetCursorPosition(40, 33);   // bord 9 
                     Console.Write(waiter.Name);
                     break;
 
                 case 10:
-                    Console.SetCursorPosition(42, 35);   // bord 10
+                    Console.SetCursorPosition(40, 40);   // bord 10
                     Console.Write(waiter.Name);
                     break;
 
@@ -275,8 +331,8 @@ namespace ResturangenGrupp1.Person
             AtDoor = false;
             OrderTaken = false;
             AtKitchen = false;
-            Competence = RandomCompetence();            
-            //Order = ; Hämta lista från bordet och ta till köket. Ta lista från köket till bordet
+            Competence = RandomCompetence();
+            HelpingTable = false;            
         }
 
     }
@@ -318,6 +374,7 @@ namespace ResturangenGrupp1.Person
             TimeActivity = 10;
             Busy = false;
             Competence = RandomCompetence();
+            CookOrders = new Hashtable();
         }
 
      
