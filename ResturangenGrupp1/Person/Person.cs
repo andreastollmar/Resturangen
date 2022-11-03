@@ -88,6 +88,12 @@ namespace ResturangenGrupp1.Person
 
         // Methods
         
+        public void TakeFoodFromKitchen(Waiter waiter)
+        {
+            //int nr = (int)((Hashtable)hashtable2[1])["Två"];
+
+        }
+
         private bool FindFreeTable()
         {
             bool freeTable = false;

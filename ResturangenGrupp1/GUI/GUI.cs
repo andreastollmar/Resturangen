@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,10 +38,12 @@ namespace ResturangenGrupp1.GUI
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken)
                     {
-                        //Ta in order
-                        //gå till rätt bordsnummer
-                        //lämna maten
-                        //få gäster att äta
+                        GenerateObjects._waiters[i].TakeFoodFromKitchen(GenerateObjects._waiters[i]);             //Ta in order
+                        GenerateObjects._waiters[i].TakeCompanyToTheTable(GenerateObjects._waiters[i]);          //gå till rätt bordsnummer
+                        
+                         //lämna maten
+ 
+                         //GenerateObjects._//få gäster att äta
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
