@@ -191,6 +191,11 @@ namespace ResturangenGrupp1.Person
 
         }
 
+        public void LeaveOrderToKitchen(Waiter waiter) 
+        {
+            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order); 
+        }
+
         public void GoToTheDoor(Waiter waiter) // Metod för flytta waiter position vid dörren 
         {
             Console.SetCursorPosition(47,5);
