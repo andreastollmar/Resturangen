@@ -57,16 +57,19 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].AtKitchen = true;
                     }
-                    //else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
-                    //{
-                    //    //Ta betalt
-                    //    //Skriva ut event
-                    //    //Helping table till false
-                    //    //cleaning table till true
-                        
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
+                    {
+                     
+                        GenerateObjects._waiters[i].TakeCashFromCompany(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].CleaningTable = true;
+                  
+                        //Ta betalt
+                        //Skriva ut event
+                        //Helping table till false
+                        //cleaning table till true
 
-                    //}
-                    
+                    }
+
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
                         GenerateObjects._waiters[i].TimeActivity--;

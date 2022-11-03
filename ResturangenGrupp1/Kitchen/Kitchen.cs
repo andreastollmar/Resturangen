@@ -16,7 +16,16 @@ namespace ResturangenGrupp1.Kitchen
     {
         public static Queue<Hashtable> OrdersToCook = new Queue<Hashtable>();
         public static Queue<Hashtable> OrdersDone = new Queue<Hashtable>();
-        
-        
+
+
+
+        public void GoToTheSink(Guest guest)
+        {
+            Console.SetCursorPosition(5, 5);
+            Console.Write(guest.Name);
+        }
+
+
+
     }
 }
