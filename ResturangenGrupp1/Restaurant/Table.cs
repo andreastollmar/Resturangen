@@ -14,6 +14,7 @@ namespace ResturangenGrupp1.Restaurant
         string[] TableNames { get; set; }
         bool Quality { get; set; }
         bool Empty { get; set; }
+        bool FinnishedWithFood { get; set; }
         int TableNumber { get; set; }
         bool Cleaned { get; set; }
         bool GetsHelp { get; set; }
@@ -26,6 +27,7 @@ namespace ResturangenGrupp1.Restaurant
     {        
         public bool Quality { get; set; }
         public bool Empty { get; set; }
+        public bool FinnishedWithFood { get; set; }
         public bool Cleaned { get; set; }
         public int TableNumber { get; set; }
         public string[] TableNames { get; set; }
@@ -67,7 +69,8 @@ namespace ResturangenGrupp1.Restaurant
             TableNames[0] = " ";
             TableNames[1] = " ";
             TableSize = new Guest[2];
-            FoodAtTable = new List<Food>();            
+            FoodAtTable = new List<Food>();
+            FinnishedWithFood = false;
 
         }
     }
@@ -75,6 +78,7 @@ namespace ResturangenGrupp1.Restaurant
     {
         public List<Food> FoodAtTable { get; set; }
         public string[] TableNames { get; set; }
+        public bool FinnishedWithFood { get; set; }
         public bool Quality { get; set; }
         public bool Empty { get; set; }
         public int TableNumber { get; set; }
@@ -119,6 +123,7 @@ namespace ResturangenGrupp1.Restaurant
             TableNames[3] = " ";
             TableSize = new Guest[4];
             FoodAtTable = new List<Food>();
+            FinnishedWithFood = false;
         }
     }
 

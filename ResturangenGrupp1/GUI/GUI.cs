@@ -15,11 +15,12 @@ namespace ResturangenGrupp1.GUI
         {
             GenerateObjects.CreateObjects();
             Company.CreateCompany();
-            Window.DrawRestaurant();
+            
+
             while (true)
             {
-                
-                Console.ReadKey();
+                Window.DrawRestaurant();
+                //Console.ReadKey();
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
@@ -34,25 +35,48 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].PutCompanyAtTable(GenerateObjects._waiters[i]);        //cleara waiters gästlista
                         GenerateObjects._waiters[i].OrderTaken = true;        // sätta bool ordertaken till true
                     }
-                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken)
                     {
-                        GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
-                        GenerateObjects._waiters[i].AtKitchen = true;
+                        //Ta in order
+                        //gå till rätt bordsnummer
+                        //lämna maten
+                        //få gäster att äta
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
                         GenerateObjects._waiters[i].LeaveOrderToKitchen(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].Busy = false;
                         GenerateObjects._waiters[i].OrderTaken = false;
+                        GenerateObjects._waiters[i].AtDoor = false;
+                        GenerateObjects._waiters[i].AtKitchen = false;
                         GenerateObjects._waiters[i].Order.Clear();
 
                     }
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
+                    {
+                        GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].AtKitchen = true;
+                    }
+                    //else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
+                    //{
+                    //    //Ta betalt
+                    //    //Skriva ut event
+                    //    //Helping table till false
+                    //    //cleaning table till true
+                        
+
+                    //}
+                    
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
                         GenerateObjects._waiters[i].TimeActivity--;
                         if (GenerateObjects._waiters[i].TimeActivity == 0)
                         {
                             //go to standby
+                            //tömma alla listor på waiter
+                            //tömma listor på bord
+                            //Sätta bord till empty
+                            //Sätta specifikt bord till GetsHelp = false;
                             GenerateObjects._waiters[i].TimeActivity = 3;
                             GenerateObjects._waiters[i].Busy = false;
                             GenerateObjects._waiters[i].CleaningTable = false;
@@ -144,7 +168,7 @@ namespace ResturangenGrupp1.GUI
             string[] waitingGuests = new string[10];
             for (int i = 0; i < waitingGuests.Length; i++)
             {
-                waitingGuests[i] = "                    ";
+                waitingGuests[i] = Company._companies[i][0].Name + " + " + (Company._companies[i].Count - 1);                
             }
 
             string[] events = new string[31];

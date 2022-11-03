@@ -26,44 +26,44 @@ namespace ResturangenGrupp1.Restaurant
                 {
                     case 1:
                         Meat.Beef meat = new Meat.Beef();
-                        guest.preferedFood.Add(meat);
+                        guest.PreferedFood.Add(meat);
                         break;                        
                     case 2:
                         Fish.Scallop scallop = new Fish.Scallop();
-                        guest.preferedFood.Add(scallop);
+                        guest.PreferedFood.Add(scallop);
                         tryAgain = false;
                         break;
                     case 3:
                         Vegetarian.Haloumi haloumi = new Vegetarian.Haloumi();
-                        guest.preferedFood.Add(haloumi);
+                        guest.PreferedFood.Add(haloumi);
                         break;                        
                     case 4:
                         Meat.Kebab kebab = new Meat.Kebab();
-                        guest.preferedFood.Add(kebab);
+                        guest.PreferedFood.Add(kebab);
                         tryAgain = false;
                         break;
                     case 5:
                         Fish.Tuna tuna = new Fish.Tuna();
-                        guest.preferedFood.Add(tuna);
+                        guest.PreferedFood.Add(tuna);
                         tryAgain = false;
                         break;
                     case 6:
                         Vegetarian.Falafel falafel = new Vegetarian.Falafel();
-                        guest.preferedFood.Add(falafel);
+                        guest.PreferedFood.Add(falafel);
                         break;                        
                     case 7:
                         Meat.Steak steak = new Meat.Steak();
-                        guest.preferedFood.Add(steak);
+                        guest.PreferedFood.Add(steak);
                         tryAgain = false;
                         break;
                     case 8:
                         Fish.Moules moules = new Fish.Moules();
-                        guest.preferedFood.Add(moules);
+                        guest.PreferedFood.Add(moules);
                         tryAgain = false;
                         break;
                     case 9:
                         Vegetarian.Risotto risotto = new Vegetarian.Risotto();
-                        guest.preferedFood.Add(risotto);
+                        guest.PreferedFood.Add(risotto);
                         tryAgain = false;
                         break;
                 }
