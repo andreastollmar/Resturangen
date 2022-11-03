@@ -37,15 +37,16 @@ namespace ResturangenGrupp1.GUI
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
-                        //Gå till köket
-                        //Bool at kitchen true;
+                        GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
-                        //Lämna över matbeställning till Queue listan
-                        //sätta bool busy till false
-                        //Sätta order taken till false
-                        //cleara waiters lista med order
+                        GenerateObjects._waiters[i].LeaveOrderToKitchen(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].Busy = false;
+                        GenerateObjects._waiters[i].OrderTaken = false;
+                        GenerateObjects._waiters[i].Order.Clear();
+
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
