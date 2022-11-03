@@ -37,15 +37,10 @@ namespace ResturangenGrupp1.GUI
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
                         GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
-                        GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
                         GenerateObjects._waiters[i].LeaveOrderToKitchen(GenerateObjects._waiters[i]);
-                        GenerateObjects._waiters[i].Busy = false;
-                        GenerateObjects._waiters[i].OrderTaken = false;
-                        GenerateObjects._waiters[i].Order.Clear();
-
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {

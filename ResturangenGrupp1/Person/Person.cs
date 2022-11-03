@@ -198,7 +198,10 @@ namespace ResturangenGrupp1.Person
 
         public void LeaveOrderToKitchen(Waiter waiter) 
         {
-            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order); 
+            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order);
+            waiter.Busy = false;
+            waiter.OrderTaken = false;
+            waiter.Order.Clear();
         }
 
         public void GoToTheDoor(Waiter waiter) // Metod för flytta waiter position vid dörren 
@@ -209,6 +212,7 @@ namespace ResturangenGrupp1.Person
 
         public void GoToTheKitchen(Waiter waiter) // Metod för att flytta waiter postion vid köket
         {
+            waiter.AtKitchen = true;
             Console.SetCursorPosition(25, 5);
             Console.Write(waiter.Name);
         }
@@ -220,10 +224,10 @@ namespace ResturangenGrupp1.Person
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    for(int j =0; j < waiter.guests.Count; i++)
-                    {
-                        GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
-                    }
+                    //for(int j =0; j < waiter.guests.Count; i++)
+                    //{
+                    //    GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
+                    //}
                     waiter.guests.Clear();
                     GenerateObjects._tables[i].TransferNames(GenerateObjects._tables[i].TableSize);
                     waiter.TakeOrderFromTable(GenerateObjects._tables[i]);
