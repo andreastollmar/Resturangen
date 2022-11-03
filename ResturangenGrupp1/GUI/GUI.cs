@@ -30,10 +30,9 @@ namespace ResturangenGrupp1.GUI
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].AtDoor = false;
-                        //lägg gästerna på bordets gästlista
-                        //cleara waiters gästlista
-                        //Ta order från gästarna
-                        // sätta bool ordertaken till true
+                        GenerateObjects._waiters[i].TakeCompanyToTheTable(GenerateObjects._waiters[i]);    //lägg gästerna på bordets gästlista
+                        GenerateObjects._waiters[i].PutCompanyAtTable(GenerateObjects._waiters[i]);        //cleara waiters gästlista
+                        GenerateObjects._waiters[i].OrderTaken = true;        // sätta bool ordertaken till true
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
