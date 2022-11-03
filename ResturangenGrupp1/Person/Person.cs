@@ -98,11 +98,16 @@ namespace ResturangenGrupp1.Person
         }
         public void TakeOrderFromTable(ITable table)
         {
+            for (int j = 0; j < table.TableSize.Length; j++)
+            {
+                table.FoodAtTable.AddRange(table.TableSize[j].preferedFood);
+            }   
+
             for(int i = 0; i < table.FoodAtTable.Count; i++)
             {
-                Order.Add("Food" + i, table.FoodAtTable[i].Name);
+                Order.Add(i , table.FoodAtTable[i].Name);
             }
-            Order.Add("TableNr", table.TableNumber);
+            Order.Add("TableNumber",  table.TableNumber);
             
         }
         private bool CheckFoodToServe()
@@ -207,6 +212,25 @@ namespace ResturangenGrupp1.Person
             Console.SetCursorPosition(25, 5);
             Console.Write(waiter.Name);
         }
+
+        public void PutCompanyAtTable(Waiter waiter)
+        {
+            int TableNumber = (int)waiter.Order["TableNumber"];
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if(GenerateObjects._tables[i].TableNumber == TableNumber)
+                {
+                    for(int j =0; j < waiter.guests.Count; i++)
+                    {
+                        GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
+                    }
+                    waiter.guests.Clear();
+                    GenerateObjects._tables[i].TransferNames(GenerateObjects._tables[i].TableSize);
+                    waiter.TakeOrderFromTable(GenerateObjects._tables[i]);
+                }
+            }
+        }
+              
 
         public void TakeCompanyToTheTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
         {
