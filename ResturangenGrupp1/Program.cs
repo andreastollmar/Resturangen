@@ -59,18 +59,18 @@ namespace ResturangenGrupp1
             //    Console.ReadKey();
             //}
 
-            while (true)
-            {
-                GUI.Window.DrawRestaurant();
-                GenerateObjects._waiters[0].GoToTheDoor(GenerateObjects._waiters[0]);
-                Company._companies[0][0].GoToTheSink(Company._companies[0][0]);
-                GenerateObjects._waiters[0].GoToTheKitchen(GenerateObjects._waiters[0]);
+            //while (true)
+            //{
+            //    GUI.Window.DrawRestaurant();
+            //    GenerateObjects._waiters[0].GoToTheDoor(GenerateObjects._waiters[0]);
+            //    Company._companies[0][0].GoToTheSink(Company._companies[0][0]);
+            //    GenerateObjects._waiters[0].GoToTheKitchen(GenerateObjects._waiters[0]);
               
 
 
 
-                Console.ReadKey();
-            }
+            //    Console.ReadKey();
+            //}
 
        
 
