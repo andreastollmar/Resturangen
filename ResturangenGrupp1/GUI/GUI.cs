@@ -24,9 +24,10 @@ namespace ResturangenGrupp1.GUI
             while (true)
             {
                 Window.DrawRestaurant();
-                //Console.ReadKey();
+                
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
-                {
+                {                    
+                    //Console.ReadKey();
                     if (!GenerateObjects._waiters[i].Busy)
                     {
                         GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);                        
@@ -62,10 +63,10 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
-                    {
-                     
+                    {                     
                         GenerateObjects._waiters[i].TakeCashFromCompany(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].CleaningTable = true;
+                        GenerateObjects._waiters[i].HelpingTable = false;
 
                     }
 
@@ -74,14 +75,11 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].TimeActivity--;
                         if (GenerateObjects._waiters[i].TimeActivity == 0)
                         {
+                            GenerateObjects._waiters[i].ResetTable(GenerateObjects._waiters[i]);
                             //go to standby
                             //tömma alla listor på waiter
-                            GenerateObjects._waiters[i].guests.Clear();
-                            
-                            //tömma listor på bord
-                            //Sätta bord till empty
-                            //Sätta specifikt bord till GetsHelp = false;
                             GenerateObjects._waiters[i].Order.Clear();
+                            GenerateObjects._waiters[i].guests.Clear(); 
                             GenerateObjects._waiters[i].TimeActivity = 3;
                             GenerateObjects._waiters[i].Busy = false;
                             GenerateObjects._waiters[i].CleaningTable = false;

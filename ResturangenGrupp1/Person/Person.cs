@@ -49,8 +49,12 @@ namespace ResturangenGrupp1.Person
             int cash = random.Next(200, 1000);
             return cash;
         }
-        
-        
+        public void GoToTheSink(Guest guest)
+        {
+            Console.SetCursorPosition(5, 5);
+            Console.Write(guest.Name);
+        }
+
         public void ShowFood(Guest guest)
         {
             Console.WriteLine(guest.PreferedFood[0].Name);
@@ -76,6 +80,7 @@ namespace ResturangenGrupp1.Person
         public bool CleaningTable { get; set; }
         public bool AtKitchen { get; set; }
         public bool HelpingTable { get; set; }
+        public int SetStandby { get; set; }
 
         public bool OrderTaken { get; set; }
 
@@ -236,7 +241,29 @@ namespace ResturangenGrupp1.Person
             Console.SetCursorPosition(25, 5);
             Console.Write(waiter.Name);
         }
+        public void GoToStandBy(Waiter waiter)
+        {
+            Console.SetCursorPosition(waiter.SetStandby, 7);
+            Console.WriteLine(waiter.Name);
+        }
+        public void ResetTable(Waiter waiter)
+        {
+            int TableNumber = (int)waiter.Order["TableNumber"];
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if (GenerateObjects._tables[i].TableNumber == TableNumber)
+                {
+                    GenerateObjects._tables[i].Cleaned = true;
+                    GenerateObjects._tables[i].Empty = true;
+                    GenerateObjects._tables[i].DinnerServerd = false;
+                    GenerateObjects._tables[i].FinnishedWithFood = false;
+                    GenerateObjects._tables[i].GetsHelp = false;
+                    GenerateObjects._tables[i].FoodAtTable.Clear();                    
+                    
+                }
+            }
 
+        }
         public void TakeCashFromCompany(Waiter waiter) // Metoden till gästen för att kunna betala sin mat
         {     
             int companyCash = 0;
@@ -251,11 +278,13 @@ namespace ResturangenGrupp1.Person
                         companyCash += guest.Cash;
                         foodCost += guest.PreferedFood[0].Price;
 
-                        if (GenerateObjects._guests[i].Cash > guest.PreferedFood[0].Price)
+                        Eventhandler.AddEventGuest(waiter, GenerateObjects._tables[i], companyCash, foodCost);
+                        
+                        for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                         {
-                            companyCash = foodCost;
+                            GenerateObjects._tables[i].TableSize[j] = null;
+                            GenerateObjects._tables[i].TableNames[j] = " ";
                         }
-                     
                     }
                 }                  
             }

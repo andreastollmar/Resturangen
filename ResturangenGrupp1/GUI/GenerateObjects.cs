@@ -35,6 +35,7 @@ namespace ResturangenGrupp1.GUI
             for (int i = 0; i < 1; i++)
             {
                 Waiter waiter = new Waiter();
+                waiter.SetStandby = (i + 1) * 15;
                 _waiters.Add(waiter);
             }
         }

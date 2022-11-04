@@ -15,7 +15,7 @@ namespace ResturangenGrupp1.GUI
         //Metoder med listor där vi visar x - mycket data i GUI:n
        
 
-        public void AddEventGuest(Waiter waiter, ITable table, int companyCash, int foodCost)
+        public static void AddEventGuest(Waiter waiter, ITable table, int companyCash, int foodCost)
         {
             //använda companycash på något vis igen
             _events[0] = table.TableSize[0].Name + " + " + (table.TableSize.Length - 1);            
