@@ -107,11 +107,19 @@ namespace ResturangenGrupp1.GUI
                     {
                         for(int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                         {
-                            GenerateObjects._tables[i].TableSize[j].TimeActivity--;
-                            if(GenerateObjects._tables[i].TableSize[j].TimeActivity == 0)
+                            if (GenerateObjects._tables[i].TableSize[j] == null)
                             {
-                                GenerateObjects._tables[i].FinnishedWithFood = true;                                
+                                continue;
                             }
+                            else
+                            {
+                                GenerateObjects._tables[i].TableSize[j].TimeActivity--;
+                                if (GenerateObjects._tables[i].TableSize[j].TimeActivity == 0)
+                                {
+                                    GenerateObjects._tables[i].FinnishedWithFood = true;
+                                }
+                            }
+                            
                         }
                     }
                 }
