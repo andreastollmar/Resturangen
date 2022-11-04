@@ -35,17 +35,18 @@ namespace ResturangenGrupp1.Person
     internal class Guest : Person
     {
         // Properties
+
         internal int Satisfaction { get; set; }
-        internal int Cash { get; set; }
-        internal bool FinnishedWithFood { get; set; }
-        internal bool Eating { get; set; }
+        internal int Cash { get; set; }       
+        
+
         internal List<Food> PreferedFood = new List<Food>();        
 
         // Methods
-        private int RandomCash()
+        public int RandomCash()
         {
             Random random = new Random();
-            int cash = random.Next(100, 500);
+            int cash = random.Next(200, 1000);
             return cash;
         }
         
@@ -60,16 +61,11 @@ namespace ResturangenGrupp1.Person
         {            
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            Cash = RandomCash();
-            Eating = false;
+            Cash = RandomCash();            
             PreferedFood = new List<Food>();
         }
 
-        public void GoToTheSink(Guest guest)
-        {
-            Console.SetCursorPosition(5, 5);
-            Console.Write(guest.Name);
-        }
+
     }
 
     internal class Waiter : Person
@@ -82,6 +78,7 @@ namespace ResturangenGrupp1.Person
         public bool HelpingTable { get; set; }
 
         public bool OrderTaken { get; set; }
+
         public Hashtable Order = new Hashtable();
 
         public List<Guest> guests = new List<Guest>();
@@ -244,9 +241,6 @@ namespace ResturangenGrupp1.Person
                 waiter.guests.AddRange(Company._companies[indexCompany]);
                 Company._companies.RemoveAt(indexCompany);
             }
-
-            
-
         }
 
         public void LeaveOrderToKitchen(Waiter waiter) 
@@ -267,6 +261,30 @@ namespace ResturangenGrupp1.Person
             Console.Write(waiter.Name);
         }
 
+        public void TakeCashFromCompany(Waiter waiter) // Metoden till gästen för att kunna betala sin mat
+        {     
+            int companyCash = 0;
+            int foodCost = 0;
+            int TableNumber = (int)waiter.Order["TableNumber"];
+            for(int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if(GenerateObjects._tables[i].TableNumber == TableNumber)
+                {
+                    foreach (Guest guest in GenerateObjects._tables[i].TableSize)
+                    {
+                        companyCash += guest.Cash;
+                        foodCost += guest.PreferedFood[0].Price;
+
+                        if (GenerateObjects._guests[i].Cash > guest.PreferedFood[0].Price)
+                        {
+                            companyCash = foodCost;
+                        }
+                     
+                    }
+                }                  
+            }
+        }
+
         public void PutCompanyAtTable(Waiter waiter)
         {
             int TableNumber = (int)waiter.Order["TableNumber"];
@@ -274,9 +292,10 @@ namespace ResturangenGrupp1.Person
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    for(int j =0; j < waiter.guests.Count; j++)
+                    for(int j = 0; j < waiter.guests.Count; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
+                        GenerateObjects._tables[i].TableSize[j].Satisfaction += waiter.Competence;
                     }
                     waiter.guests.Clear();
                     GenerateObjects._tables[i].Empty = false;
@@ -328,6 +347,7 @@ namespace ResturangenGrupp1.Person
                         Console.SetCursorPosition(40, 20);   // bord 7
                         Console.Write(waiter.Name);
                         break;
+
 
                     case 8:
                         Console.SetCursorPosition(40, 26);   // bord 8
