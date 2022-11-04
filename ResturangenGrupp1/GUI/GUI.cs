@@ -13,6 +13,10 @@ namespace ResturangenGrupp1.GUI
     {
         public void StartResturant()
         {
+            for(int i = 0; i < Eventhandler._events.Length; i++)
+            {
+                Eventhandler._events[i] = "                   ";
+            }
             GenerateObjects.CreateObjects();
             Company.CreateCompany();
             
@@ -228,7 +232,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Console.SetCursorPosition(68, 2);
             Console.WriteLine(Company._companies[0][0].Name + " + " + (Company._companies[0].Count - 1));
-            Window.Draw("Events", 66, 13, events);
+            Window.Draw("Events", 66, 13, Eventhandler._events);
 
 
 
