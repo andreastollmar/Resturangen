@@ -13,6 +13,10 @@ namespace ResturangenGrupp1.GUI
     {
         public void StartResturant()
         {
+            for(int i = 0; i < Eventhandler._events.Length; i++)
+            {
+                Eventhandler._events[i] = "                   ";
+            }
             GenerateObjects.CreateObjects();
             Company.CreateCompany();
             
@@ -72,9 +76,12 @@ namespace ResturangenGrupp1.GUI
                         {
                             //go to standby
                             //tömma alla listor på waiter
+                            GenerateObjects._waiters[i].guests.Clear();
+                            
                             //tömma listor på bord
                             //Sätta bord till empty
                             //Sätta specifikt bord till GetsHelp = false;
+                            GenerateObjects._waiters[i].Order.Clear();
                             GenerateObjects._waiters[i].TimeActivity = 3;
                             GenerateObjects._waiters[i].Busy = false;
                             GenerateObjects._waiters[i].CleaningTable = false;
@@ -94,6 +101,20 @@ namespace ResturangenGrupp1.GUI
                         {
                             GenerateObjects._chefs[i].OrderDone(GenerateObjects._chefs[i]);
                             GenerateObjects._chefs[i].TimeActivity = 10;
+                        }
+                    }
+                }
+                for(int i = 0; i < GenerateObjects._tables.Count; i++)
+                {
+                    if (GenerateObjects._tables[i].DinnerServerd)
+                    {
+                        for(int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
+                        {
+                            GenerateObjects._tables[i].TableSize[j].TimeActivity--;
+                            if(GenerateObjects._tables[i].TableSize[j].TimeActivity == 0)
+                            {
+                                GenerateObjects._tables[i].FinnishedWithFood = true;                                
+                            }
                         }
                     }
                 }
@@ -209,7 +230,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Console.SetCursorPosition(68, 2);
             Console.WriteLine(Company._companies[0][0].Name + " + " + (Company._companies[0].Count - 1));
-            Window.Draw("Events", 66, 13, events);
+            Window.Draw("Events", 66, 13, Eventhandler._events);
 
 
 

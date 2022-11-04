@@ -35,12 +35,11 @@ namespace ResturangenGrupp1.Person
     internal class Guest : Person
     {
         // Properties
-        internal int Satisfaction { get; set; } 
-        internal int Cash { get; set; }
 
-        internal bool Buy { get; set; }
-        internal bool FinnishedWithFood { get; set; }
-        internal bool Eating { get; set; }
+        internal int Satisfaction { get; set; }
+        internal int Cash { get; set; }       
+        
+
         internal List<Food> PreferedFood = new List<Food>();        
 
         // Methods
@@ -62,8 +61,7 @@ namespace ResturangenGrupp1.Person
         {            
             Name = Names.NameGenerator();
             TimeActivity = 20;
-            Cash = RandomCash();
-            Eating = false;
+            Cash = RandomCash();            
             PreferedFood = new List<Food>();
         }
 
@@ -273,6 +271,7 @@ namespace ResturangenGrupp1.Person
                     for(int j = 0; j < waiter.guests.Count; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
+                        GenerateObjects._tables[i].TableSize[j].Satisfaction += waiter.Competence;
                     }
                     waiter.guests.Clear();
                     GenerateObjects._tables[i].Empty = false;
