@@ -19,11 +19,7 @@ namespace ResturangenGrupp1.Kitchen
 
 
 
-        public void GoToTheSink(Guest guest)
-        {
-            Console.SetCursorPosition(5, 5);
-            Console.Write(guest.Name);
-        }
+        
 
 
 
