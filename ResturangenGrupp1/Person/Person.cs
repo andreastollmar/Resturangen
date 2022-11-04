@@ -92,8 +92,9 @@ namespace ResturangenGrupp1.Person
         
         public void TakeFoodFromKitchen(Waiter waiter)
         {
-            waiter.Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());
-            int TableNumber = (int)((Hashtable)waiter.Order[1])["TableNumber"];
+            //Om kön är tom va ska vi göra då?
+            waiter.Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());            
+            waiter.Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
             TakeCompanyToTheTable(waiter);
         }
 
@@ -104,10 +105,7 @@ namespace ResturangenGrupp1.Person
             {
                 if (GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    for (int j = 0; j < waiter.guests.Count; j++)
-                    {
-                        GenerateObjects._tables[i].DinnerServerd = true;
-                    }
+                    GenerateObjects._tables[i].DinnerServerd = true;
 
                     waiter.Order.Clear();
                 }
@@ -139,9 +137,9 @@ namespace ResturangenGrupp1.Person
 
             for(int i = 0; i < table.FoodAtTable.Count; i++)
             {
-                Order.Add(i , table.FoodAtTable[i].Name);
+                Order.Add(i , table.FoodAtTable[i]);
             }
-            Order.Add("TableNumber",  table.TableNumber);
+            Kitchen.Kitchen.TableNumbersDone.Enqueue(table.TableNumber);
             
         }
         private bool CheckFoodToServe()

@@ -16,6 +16,7 @@ namespace ResturangenGrupp1.Kitchen
     {
         public static Queue<Hashtable> OrdersToCook = new Queue<Hashtable>();
         public static Queue<Hashtable> OrdersDone = new Queue<Hashtable>();
+        public static Queue TableNumbersDone = new Queue();
 
 
 
