@@ -35,7 +35,7 @@ namespace ResturangenGrupp1.Person
     internal class Guest : Person
     {
         // Properties
-        internal int Satisfaction { get; set; }
+        internal int Satisfaction { get; set; } 
         internal int Cash { get; set; }
 
         internal bool Buy { get; set; }
@@ -252,20 +252,17 @@ namespace ResturangenGrupp1.Person
                     {
                         companyCash += guest.Cash;
                         foodCost += guest.PreferedFood[0].Price;
-                        
-                    }                        
+
+                        if (GenerateObjects._guests[i].Cash > guest.PreferedFood[0].Price)
+                        {
+                            companyCash = foodCost;
+                        }
+                     
+                    }
                 }                  
             }
         }
 
-        public void Satisfaction(Guest guest)
-        {
-            //Competence = RandomCompetence();
-            //if (chef.Competence && waiter.)
-            //{
-
-            //}
-        }
         public void PutCompanyAtTable(Waiter waiter)
         {
             int TableNumber = (int)waiter.Order["TableNumber"];

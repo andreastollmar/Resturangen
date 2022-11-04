@@ -62,11 +62,6 @@ namespace ResturangenGrupp1.GUI
                      
                         GenerateObjects._waiters[i].TakeCashFromCompany(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].CleaningTable = true;
-                  
-                        //Ta betalt
-                        //Skriva ut event
-                        //Helping table till false
-                        //cleaning table till true
 
                     }
 
