@@ -90,8 +90,26 @@ namespace ResturangenGrupp1.Person
         
         public void TakeFoodFromKitchen(Waiter waiter)
         {
-            //int nr = (int)((Hashtable)hashtable2[1])["Två"];
+            waiter.Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());
+            int TableNumber = (int)((Hashtable)waiter.Order[1])["TableNumber"];
+            TakeCompanyToTheTable(waiter);
+        }
 
+        public void PutFoodOnTable(Waiter waiter)
+        {
+            int TableNumber = (int)waiter.Order["TableNumber"];
+            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            {
+                if (GenerateObjects._tables[i].TableNumber == TableNumber)
+                {
+                    for (int j = 0; j < waiter.guests.Count; j++)
+                    {
+                        GenerateObjects._tables[i].DinnerServerd = true;
+                    }
+
+                    waiter.Order.Clear();
+                }
+            }
         }
 
         private bool FindFreeTable()
@@ -272,58 +290,117 @@ namespace ResturangenGrupp1.Person
 
         public void TakeCompanyToTheTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
         {
-            switch (waiter.Order["TableNumber"])
+            if (waiter.Order.Contains("TableNumber"))
             {
-                case 1: 
-                    Console.SetCursorPosition(20, 12);    // bord 1 
-                    Console.Write(waiter.Name);
-                    break;
+                switch (waiter.Order["TableNumber"])
+                {
+                    case 1:
+                        Console.SetCursorPosition(20, 12);    // bord 1 
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 2:
-                    Console.SetCursorPosition(20, 20);    // bord 2 
-                    Console.Write(waiter.Name);
-                    break ;
+                    case 2:
+                        Console.SetCursorPosition(20, 20);    // bord 2 
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 3:
-                    Console.SetCursorPosition(20, 26);    // bord 3 
-                    Console.Write(waiter.Name);
-                    break;;
+                    case 3:
+                        Console.SetCursorPosition(20, 26);    // bord 3 
+                        Console.Write(waiter.Name);
+                        break; ;
 
-                case 4:
-                    Console.SetCursorPosition(20, 33);    // bord 4 
-                    Console.Write(waiter.Name);
-                    break;
+                    case 4:
+                        Console.SetCursorPosition(20, 33);    // bord 4 
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 5:
-                    Console.SetCursorPosition(20, 40);    // bord 5
-                    Console.Write(waiter.Name);
-                    break;
+                    case 5:
+                        Console.SetCursorPosition(20, 40);    // bord 5
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 6:
-                    Console.SetCursorPosition(40, 12);     // bord 6
-                    Console.Write(waiter.Name);
-                    break;
+                    case 6:
+                        Console.SetCursorPosition(40, 12);     // bord 6
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 7:
-                    Console.SetCursorPosition(40, 20);   // bord 7
-                    Console.Write(waiter.Name);
-                    break;
+                    case 7:
+                        Console.SetCursorPosition(40, 20);   // bord 7
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 8:
-                    Console.SetCursorPosition(40, 26);   // bord 8
-                    Console.Write(waiter.Name);
-                    break;
+                    case 8:
+                        Console.SetCursorPosition(40, 26);   // bord 8
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 9:
-                    Console.SetCursorPosition(40, 33);   // bord 9 
-                    Console.Write(waiter.Name);
-                    break;
+                    case 9:
+                        Console.SetCursorPosition(40, 33);   // bord 9 
+                        Console.Write(waiter.Name);
+                        break;
 
-                case 10:
-                    Console.SetCursorPosition(40, 40);   // bord 10
-                    Console.Write(waiter.Name);
-                    break;
+                    case 10:
+                        Console.SetCursorPosition(40, 40);   // bord 10
+                        Console.Write(waiter.Name);
+                        break;
+                }
+            }
+            else 
+            {
+                int TableNumber = (int)((Hashtable)waiter.Order[1])["TableNumber"];
 
+                switch (TableNumber)
+                {
+                    case 1:
+                        Console.SetCursorPosition(20, 12);    // bord 1 
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 2:
+                        Console.SetCursorPosition(20, 20);    // bord 2 
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 3:
+                        Console.SetCursorPosition(20, 26);    // bord 3 
+                        Console.Write(waiter.Name);
+                        break; ;
+
+                    case 4:
+                        Console.SetCursorPosition(20, 33);    // bord 4 
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 5:
+                        Console.SetCursorPosition(20, 40);    // bord 5
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 6:
+                        Console.SetCursorPosition(40, 12);     // bord 6
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 7:
+                        Console.SetCursorPosition(40, 20);   // bord 7
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 8:
+                        Console.SetCursorPosition(40, 26);   // bord 8
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 9:
+                        Console.SetCursorPosition(40, 33);   // bord 9 
+                        Console.Write(waiter.Name);
+                        break;
+
+                    case 10:
+                        Console.SetCursorPosition(40, 40);   // bord 10
+                        Console.Write(waiter.Name);
+                        break;
+                }
             }
         }
            

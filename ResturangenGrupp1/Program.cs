@@ -18,8 +18,9 @@ namespace ResturangenGrupp1
             GUI.GUI gui = new GUI.GUI();
             
 
-            gui.StartResturant();          
+            gui.StartResturant();
 
+           
        
 
         }
