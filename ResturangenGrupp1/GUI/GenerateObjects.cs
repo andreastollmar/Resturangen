@@ -32,11 +32,13 @@ namespace ResturangenGrupp1.GUI
 
         private static void CreateWaiters()  // Metod för att hämta in servitörer
         {
+            int fromLeft = 5;
             for (int i = 0; i < 3; i++)
             {
                 Waiter waiter = new Waiter();
-                waiter.SetStandby = (i + 1) * 15;
+                waiter.SetStandby = fromLeft;
                 _waiters.Add(waiter);
+                fromLeft += 20;
             }
         }
         private static void CreateChefs() // Metod för att hämta in kokerna
