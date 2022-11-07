@@ -341,27 +341,27 @@ namespace ResturangenGrupp1.Person
                 switch (waiter.Order["TableNumber"])
                 {
                     case 1:
-                        Console.SetCursorPosition(20, 12);    // bord 1 
+                        Console.SetCursorPosition(20, 14);    // bord 1 
                         Console.Write(waiter.Name);
                         break;
 
                     case 2:
-                        Console.SetCursorPosition(20, 19);    // bord 2 
+                        Console.SetCursorPosition(20, 21);    // bord 2 
                         Console.Write(waiter.Name);
                         break;
 
                     case 3:
-                        Console.SetCursorPosition(20, 26);    // bord 3 
+                        Console.SetCursorPosition(20, 28);    // bord 3 
                         Console.Write(waiter.Name);
                         break; ;
 
                     case 4:
-                        Console.SetCursorPosition(20, 33);    // bord 4 
+                        Console.SetCursorPosition(20, 35);    // bord 4 
                         Console.Write(waiter.Name);
                         break;
 
                     case 5:
-                        Console.SetCursorPosition(20, 40);    // bord 5
+                        Console.SetCursorPosition(20, 42);    // bord 5
                         Console.Write(waiter.Name);
                         break;
 
@@ -399,27 +399,27 @@ namespace ResturangenGrupp1.Person
                 switch (TableNumber)
                 {
                     case 1:
-                        Console.SetCursorPosition(20, 12);    // bord 1 
+                        Console.SetCursorPosition(20, 14);    // bord 1 
                         Console.Write(waiter.Name);
                         break;
 
                     case 2:
-                        Console.SetCursorPosition(20, 19);    // bord 2 
+                        Console.SetCursorPosition(20, 21);    // bord 2 
                         Console.Write(waiter.Name);
                         break;
 
                     case 3:
-                        Console.SetCursorPosition(20, 26);    // bord 3 
+                        Console.SetCursorPosition(20, 28);    // bord 3 
                         Console.Write(waiter.Name);
                         break; ;
 
                     case 4:
-                        Console.SetCursorPosition(20, 33);    // bord 4 
+                        Console.SetCursorPosition(20, 35);    // bord 4 
                         Console.Write(waiter.Name);
                         break;
 
                     case 5:
-                        Console.SetCursorPosition(20, 40);    // bord 5
+                        Console.SetCursorPosition(20, 42);    // bord 5
                         Console.Write(waiter.Name);
                         break;
 
@@ -455,7 +455,9 @@ namespace ResturangenGrupp1.Person
         // Constructor
         public Waiter(): base()
         {
-            Name = Names.NameGenerator();
+            Random rnd = new Random();
+            bool condition = rnd.NextDouble() > 0.5;
+            Name = condition ? "Servitör " + Names.NameGenerator() : "Servitris " + Names.NameGenerator();
             TimeActivity = 3;
             Busy = false;
             AtDoor = false;
