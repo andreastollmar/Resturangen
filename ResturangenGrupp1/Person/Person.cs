@@ -63,7 +63,7 @@ namespace ResturangenGrupp1.Person
         // Constructor
         public Guest(): base()
         {            
-            Name = Names.NameGenerator();
+            Name = Names.NameGenerator(110);
             TimeActivity = 20;
             Cash = RandomCash();            
             PreferedFood = new List<Food>();
@@ -428,7 +428,7 @@ namespace ResturangenGrupp1.Person
         {
             Random rnd = new Random();
             bool condition = rnd.NextDouble() > 0.5;
-            Name = condition ? "Servitör " + Names.NameGenerator() : "Servitris " + Names.NameGenerator();
+            Name = condition ? "Servitör " + Names.NameGenerator(20) : "Servitris " + Names.NameGenerator(20);
             TimeActivity = 3;
             Busy = false;
             AtDoor = false;
@@ -473,7 +473,7 @@ namespace ResturangenGrupp1.Person
         // Constructor
         public Chef(): base()
         {
-            Name = Names.NameGenerator();
+            Name = Names.NameGenerator(110);
             TimeActivity = 10;
             Busy = false;
             Competence = RandomCompetence();

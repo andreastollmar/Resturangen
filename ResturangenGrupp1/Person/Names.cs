@@ -10,21 +10,21 @@ namespace ResturangenGrupp1.Person
     {
 
 
-        public static string NameGenerator()
+        public static string NameGenerator(int stop)
         {
-            string[] names = {"Andersson", "Larsson", "Svensson", "Pettersson",
-                "Stark", "Soldat", "Bernadotte", "Trump", "Karlsson", "Fridolin", "Löfven", "Eriksson", "Isak", "Ibrahimovic", "Forsberg",
-                "Olsson", "Mosby", "Simpson", "Griffin", "Baggins", "Johanson", "Frid", "Granath", "Grumpycat", "Karen", "C/o Segemyr",
+            string[] names = {"Blum", "Bloom", "Stamp", "Yves", "Bly", "Rangu", "Frid", "Isak", "Kim", "Moyo", "Ali", "Löfven", "Zeon",
+                "Stark", "Soldat", "Ahlm", "Trump", "Gran", "Wang", "Karlsson", "Fridolin",  "Eriksson", "Ibrahimovic", "Forsberg", "Pettersson",
+                "Olsson", "Mosby", "Simpson", "Griffin", "Baggins", "Johanson",  "Granath", "Grumpycat", "Karen", "C/o Segemyr",
                 "Glans", "Gustafsson", "Tengil", "Lönngren", "Berggren", "Josefsson", "Tollmar", "Aadelen", "Stranden", "Stancic", "Stainaté",
-                "Stamström", "Stömberg", "Stamp", "Stampe", "Stammis", "Stalebäck", "Rasulzada", "Rastgar", "Putin", "Rangu", "Rangenstål",
+                "Stamström", "Stömberg",  "Stampe", "Stammis", "Stalebäck", "Rasulzada", "Rastgar",  "Rangenstål", "Larsson", "Svensson",
                 "Rangbo", "Ranemyr", "Ranebo", "Nelleros", "Nellhans", "Nelbäck", "Nekmal", "Nejadi", "Nesse", "Nedrup", "Nedbal", "Nattsjö",
-                "Nathaniel", "Nastrovji", "Bly", "Blum", "Bloom", "Gardell", "Ahlm", "Grenqvist", "Krön", "Stålberg", "Danielsson", "Ekberg",
-                "Fridolin", "Gran", "Hökqvist", "Ivarsson", "Jansson", "Knutsdottrí", "Lavin", "Mjolnir", "Nedved", "Oscarsdottrí", "Pistvakt",
-                "Qrench", "Zeon", "Xerxes", "Yves", "Ålström", "Ängmark", "Östman", "Wang", "Smith", "Devi", "Ivanov", "Kim", "Ali", "García", "Müller",
-                "Da Silva", "Mohamed", "Tesfaye", "Nguyen", "Ilunga", "González", "Deng", "Rodríguez", "Moyo", "Hansen", "Ardensten", "Alzuabi"};
+                "Nathaniel", "Nastrovji", "Andersson", "Gardell", "Bernadotte",  "Grenqvist", "Krön", "Stålberg", "Danielsson", "Ekberg",
+                "Fridolin", "Hökqvist", "Ivarsson", "Jansson", "Knutsdottrí", "Lavin", "Mjolnir", "Nedved", "Oscarsdottrí", "Pistvakt",
+                "Qrench",  "Xerxes",  "Ålström", "Ängmark", "Östman",  "Smith", "Devi", "Ivanov", "García", "Müller",
+                "Da Silva", "Mohamed", "Tesfaye", "Nguyen", "Ilunga", "González", "Deng", "Rodríguez",  "Hansen", "Ardensten", "Alzuabi"};
 
             Random rnd = new Random();
-            int randomName = rnd.Next(0, names.Length);
+            int randomName = rnd.Next(0, stop);
             return names[randomName];
         }
 
