@@ -11,12 +11,19 @@ namespace ResturangenGrupp1.GUI
 {
     internal class Eventhandler
     {
-        public static string[] _events = new string[8]; 
+        public static string[] _events = new string[9];
+        public static double Tips { get; set; }
+        
         public static void AddEventGuest(int competence, ITable table, int companyCash, int foodCost)
         {
+            for(int i = 0; i < _events.Length; i++)
+            {
+                _events[i] = "                                              ";
+            }
             
-            _events[0] = table.TableSize[0].Name + " + " + (table.FoodAtTable.Count - 1);            
+            _events[0] = "Sällskapet " + table.TableSize[0].Name;            
             
+
             for(int i = 0; i < table.TableSize.Length; i++)
             {
                 if (table.TableSize[i] == null)
@@ -28,82 +35,138 @@ namespace ResturangenGrupp1.GUI
                     _events[i + 1] = table.TableSize[i].PreferedFood[0].Name + " " + table.TableSize[i].PreferedFood[0].Price; 
                 }
             }
-            if(table.TableSize[0].Satisfaction > 3)
+            Random rnd = new Random();
+            int checkTip = rnd.Next(0, 100);            
+            if (table.TableSize[0].Satisfaction > 2)
             {
-                if(competence > 3)
+                if(competence > 2)
                 {
-                    _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet" : " men inte med bordet.");
-
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet" : " men inte med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten";
                     if (table.Quality)
-                    {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar 10% av totalkostnaden
+                    {                        
+                        if(checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.15, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.15;
+                        }                        
                     }
                     else
-                    {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar mindre eller inget
+                    {                        
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.10;
+                        }
                     }
                 }
                 else
                 {
-                    _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var inte nöjda med servicen men nöjda med maten" + (table.Quality == true ? " samt bordet" : " och inte med bordet.");
-
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen men nöjda med maten" + (table.Quality == true ? " samt bordet" : " och inte med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten"; // dom dricksar 10% av totalkostnaden
                     if (table.Quality)
                     {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar 10% av totalkostnaden
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.10;
+                        }
                     }
                     else
                     {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar mindre eller inget
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.05;
+                        }
                     }
+
                 }                
             }
             else
             {
-                if(competence > 3)
+                if(competence > 2)
                 {
-                    _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar" + foodCost + " kr för maten";
                     if (table.Quality)
                     {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar 10% av totalkostnaden
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.10;
+                        }
                     }
                     else
                     {
-                        _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar mindre eller inget
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.05;
+                        }
                     }
-                }
-                else
-                {
-                    _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var inte nöjda med servicen, maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
-                    _events[6] = "Sällskapet " + table.TableSize[0].Name + " betalar" + (foodCost < companyCash ? " " + foodCost + " kr för maten" : " så mycket dom har tillgängligt i sin gemensamma kassa"); // dom dricksar 10% av totalkostnaden
-                   
-                }
-                Random rnd = new Random();
-                int checkTip = rnd.Next(0, 100);
-                if(checkTip > 80)
-                {
-                    _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
-                    table.TableSize[0].GoToTheSink(table.TableSize[0]);
-                }
-                else
-                {
-                    if(competence > 3 && table.TableSize[0].Satisfaction > 3 && table.Quality)
-                    {
-                        _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.1) + " kr till resturangen";
-                    }
-                    else if((competence > 3 && table.TableSize[0].Satisfaction > 3) || (competence > 3 && table.Quality) || (table.TableSize[0].Satisfaction > 3 && table.Quality))
-                    {
-                        _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.05) + " kr till resturangen";
-                    }
-                    else if(competence > 3 || table.TableSize[0].Satisfaction > 3 || table.Quality)
-                    {
-                        _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.01) + " kr till resturangen";
-                    }
-                    else
-                    {
-                        _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar inget då de var missnöjda med allt";
-                    }
-                }
 
+                }
+                else
+                {
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen, maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar" + foodCost + " kr för maten";
+                    if (table.Quality)
+                    {
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            Tips += foodCost * 0.05;
+                        }
+                    }
+                    else
+                    {
+                        if (checkTip > 80)
+                        {
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            table.TableSize[0].GoToTheSink(table.TableSize[0]);
+                        }
+                        else
+                        {
+                            _events[7] = table.TableSize[0].Name + "'s dricksar inget då de var missnöjda med allt";                            
+                        }
+                    }
+                }
             } 
         }
         
