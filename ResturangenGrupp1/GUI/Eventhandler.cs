@@ -18,7 +18,10 @@ namespace ResturangenGrupp1.GUI
         public static void AddEventGuest(Waiter waiter, ITable table, int companyCash, int foodCost)
         {
             //använda companycash på något vis igen
-            _events[0] = table.TableSize[0].Name + " + " + (table.TableSize.Length - 1);            
+            
+            
+            
+            _events[0] = table.TableSize[0].Name + " + " + (table.FoodAtTable.Count - 1);            
             
             for(int i = 0; i < table.TableSize.Length; i++)
             {

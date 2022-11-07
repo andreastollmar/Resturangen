@@ -92,10 +92,11 @@ namespace ResturangenGrupp1.Person
         
         public void TakeFoodFromKitchen(Waiter waiter)
         {
+            waiter.Order.Clear();
             //Om kön är tom va ska vi göra då?
             waiter.Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());            
             waiter.Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
-            TakeCompanyToTheTable(waiter);
+            GoToTable(waiter);
         }
 
         public void PutFoodOnTable(Waiter waiter)
@@ -121,6 +122,13 @@ namespace ResturangenGrupp1.Person
                 { 
                     freeTable = true;
                     break;
+                }
+            }
+            for(int i = 0; i < GenerateObjects._waiters.Count; i++)
+            {
+                if (GenerateObjects._waiters[i].AtDoor)
+                {
+                    freeTable = false;
                 }
             }
             return freeTable;
@@ -149,10 +157,18 @@ namespace ResturangenGrupp1.Person
             {
                 orderDone = true;
             }
+            for (int i = 0; i < GenerateObjects._waiters.Count; i++)
+            {
+                if (GenerateObjects._waiters[i].AtKitchen)
+                {
+                    orderDone = false;
+                }
+            }
             return orderDone;
         }
         private bool CheckFinnishedWithFood(Waiter waiter)
         {
+            
             bool finnishedWithFood = false;
             for(int i = 0; i < GenerateObjects._tables.Count; i++)
             {
@@ -161,6 +177,7 @@ namespace ResturangenGrupp1.Person
                     finnishedWithFood = true;
                     waiter.Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
                     GenerateObjects._tables[i].GetsHelp = true;
+                    break;
                 }
             }
             return finnishedWithFood;
@@ -170,7 +187,15 @@ namespace ResturangenGrupp1.Person
             bool finnishedGuests = CheckFinnishedWithFood(waiter);
             bool foodToServe = CheckFoodToServe();
             bool tableFree = FindFreeTable();
-            if (tableFree)
+            if (finnishedGuests)
+            {
+                GoToTable(waiter);
+                waiter.HelpingTable = true;
+                waiter.Busy = true;
+                //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
+
+            }
+            else if (tableFree)
             {
                 AtDoor = true;
                 Busy = true;
@@ -183,19 +208,13 @@ namespace ResturangenGrupp1.Person
                 AtKitchen = true;
 
             }
-            else if (finnishedGuests) 
-            {
-                TakeCompanyToTheTable(waiter);
-                waiter.HelpingTable = true;
-                waiter.Busy = true;
-                //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
-
-            }
+            
 
         }
         
         public void MatchTableWithGuests(Waiter waiter)
         {
+            waiter.Order.Clear();
             int indexTable = 10;
             int indexCompany = 90;
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
@@ -207,7 +226,8 @@ namespace ResturangenGrupp1.Person
                     break;
                 }
             }
-            if (GenerateObjects._tables[indexTable] is TableForFour)
+            
+            if (GenerateObjects._tables[indexTable] is TableForFour && indexTable < 10)
             {
                 for (int i = 0; i < Company._companies.Count; i++)
                 {
@@ -228,10 +248,14 @@ namespace ResturangenGrupp1.Person
                         }
                     }
                 }
-                waiter.guests.AddRange(Company._companies[indexCompany]);
-                Company._companies.RemoveAt(indexCompany);
+                if(indexCompany < 85)
+                {
+                    waiter.guests.AddRange(Company._companies[indexCompany]);
+                    Company._companies.RemoveAt(indexCompany);
+                }
+                
             }
-            if (GenerateObjects._tables[indexTable] is TableForTwo)
+            if (GenerateObjects._tables[indexTable] is TableForTwo && indexTable < 10)
             {
                 for (int i = 0; i < Company._companies.Count; i++)
                 {
@@ -241,8 +265,12 @@ namespace ResturangenGrupp1.Person
                         break;
                     }
                 }
-                waiter.guests.AddRange(Company._companies[indexCompany]);
-                Company._companies.RemoveAt(indexCompany);
+                if(indexCompany < 80)
+                {
+                    waiter.guests.AddRange(Company._companies[indexCompany]);
+                    Company._companies.RemoveAt(indexCompany);
+                }
+               
             }
         }
 
@@ -263,10 +291,10 @@ namespace ResturangenGrupp1.Person
             Console.SetCursorPosition(25, 5);
             Console.Write(waiter.Name);
         }
-        public void GoToStandBy(Waiter waiter)
+        public void GoToStandBy()
         {
-            Console.SetCursorPosition(waiter.SetStandby, 7);
-            Console.WriteLine(waiter.Name);
+            Console.SetCursorPosition(SetStandby, 7);
+            Console.WriteLine(Name);
         }
         public void ResetTable(Waiter waiter)
         {
@@ -291,22 +319,25 @@ namespace ResturangenGrupp1.Person
             int companyCash = 0;
             int foodCost = 0;
             int TableNumber = (int)waiter.Order["TableNumber"];
+            GoToTable(waiter);
             for(int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
                     foreach (Guest guest in GenerateObjects._tables[i].TableSize)
                     {
-                        companyCash += guest.Cash;
-                        foodCost += guest.PreferedFood[0].Price;
-
-                        Eventhandler.AddEventGuest(waiter, GenerateObjects._tables[i], companyCash, foodCost);
-                        
-                        for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
+                        if (guest != null)
                         {
-                            GenerateObjects._tables[i].TableSize[j] = null;
-                            GenerateObjects._tables[i].TableNames[j] = " ";
-                        }
+                            companyCash += guest.Cash;
+                            foodCost += guest.PreferedFood[0].Price;
+                        } 
+                    }
+                    Eventhandler.AddEventGuest(waiter, GenerateObjects._tables[i], companyCash, foodCost);
+
+                    for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
+                    {
+                        GenerateObjects._tables[i].TableSize[j] = null;
+                        GenerateObjects._tables[i].TableNames[j] = " ";
                     }
                 }                  
             }
@@ -334,7 +365,7 @@ namespace ResturangenGrupp1.Person
         }
               
 
-        public void TakeCompanyToTheTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
+        public void GoToTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
         {
             if (waiter.Order.Contains("TableNumber"))
             {
@@ -392,63 +423,7 @@ namespace ResturangenGrupp1.Person
                         break;
                 }
             }
-            else 
-            {
-                int TableNumber = (int)((Hashtable)waiter.Order[1])["TableNumber"];
 
-                switch (TableNumber)
-                {
-                    case 1:
-                        Console.SetCursorPosition(20, 14);    // bord 1 
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 2:
-                        Console.SetCursorPosition(20, 21);    // bord 2 
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 3:
-                        Console.SetCursorPosition(20, 28);    // bord 3 
-                        Console.Write(waiter.Name);
-                        break; ;
-
-                    case 4:
-                        Console.SetCursorPosition(20, 35);    // bord 4 
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 5:
-                        Console.SetCursorPosition(20, 42);    // bord 5
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 6:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 12);     // bord 6
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 7:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 19);   // bord 7
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 8:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 26);   // bord 8
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 9:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 33);   // bord 9 
-                        Console.Write(waiter.Name);
-                        break;
-
-                    case 10:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 40);   // bord 10
-                        Console.Write(waiter.Name);
-                        break;
-                }
-            }
         }
            
      

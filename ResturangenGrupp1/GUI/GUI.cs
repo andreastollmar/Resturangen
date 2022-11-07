@@ -26,25 +26,32 @@ namespace ResturangenGrupp1.GUI
             {
                 Window.DrawRestaurant();
                 
+
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
-                {                    
-                    //Console.ReadKey();
+                {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);                        
-                    }
+                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);
+                        if (!GenerateObjects._waiters[i].Busy)
+                        {
+                            GenerateObjects._waiters[i].GoToStandBy();
+                        }    
+                    }                    
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
                         GenerateObjects._waiters[i].AtDoor = false;
-                        GenerateObjects._waiters[i].TakeCompanyToTheTable(GenerateObjects._waiters[i]);    //lägg gästerna på bordets gästlista
+                        GenerateObjects._waiters[i].GoToTable(GenerateObjects._waiters[i]);    //lägg gästerna på bordets gästlista
                         GenerateObjects._waiters[i].PutCompanyAtTable(GenerateObjects._waiters[i]);        //cleara waiters gästlista
                         GenerateObjects._waiters[i].OrderTaken = true;        // sätta bool ordertaken till true
                     }
-                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken)
+                    else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken && Kitchen.Kitchen.OrdersDone.Count > 0)
                     {
                         GenerateObjects._waiters[i].TakeFoodFromKitchen(GenerateObjects._waiters[i]);        //Ta in order  //gå till rätt bordsnummer
                         GenerateObjects._waiters[i].PutFoodOnTable(GenerateObjects._waiters[i]); //lämna maten
+                        GenerateObjects._waiters[i].Busy = false;
+                        GenerateObjects._waiters[i].AtKitchen = false;
+                        //GenerateObjects._waiters[i].GoToStandBy(GenerateObjects._waiters[i]);
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
@@ -54,6 +61,7 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].AtDoor = false;
                         GenerateObjects._waiters[i].AtKitchen = false;
                         GenerateObjects._waiters[i].Order.Clear();
+                        GenerateObjects._waiters[i].GoToStandBy();
 
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
@@ -72,11 +80,10 @@ namespace ResturangenGrupp1.GUI
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
                         GenerateObjects._waiters[i].TimeActivity--;
+                        GenerateObjects._waiters[i].GoToTable(GenerateObjects._waiters[i]);
                         if (GenerateObjects._waiters[i].TimeActivity == 0)
                         {
-                            GenerateObjects._waiters[i].ResetTable(GenerateObjects._waiters[i]);
-                            //go to standby
-                            //tömma alla listor på waiter
+                            GenerateObjects._waiters[i].ResetTable(GenerateObjects._waiters[i]);                            
                             GenerateObjects._waiters[i].Order.Clear();
                             GenerateObjects._waiters[i].guests.Clear(); 
                             GenerateObjects._waiters[i].TimeActivity = 3;
@@ -84,6 +91,7 @@ namespace ResturangenGrupp1.GUI
                             GenerateObjects._waiters[i].CleaningTable = false;
                         }
                     }
+                    
                 }
                 for(int i = 0; i < GenerateObjects._chefs.Count; i++)
                 {
@@ -107,11 +115,7 @@ namespace ResturangenGrupp1.GUI
                     {
                         for(int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                         {
-                            if (GenerateObjects._tables[i].TableSize[j] == null)
-                            {
-                                continue;
-                            }
-                            else
+                            if (GenerateObjects._tables[i].TableSize[j] != null)
                             {
                                 GenerateObjects._tables[i].TableSize[j].TimeActivity--;
                                 if (GenerateObjects._tables[i].TableSize[j].TimeActivity == 0)
@@ -119,6 +123,10 @@ namespace ResturangenGrupp1.GUI
                                     GenerateObjects._tables[i].FinnishedWithFood = true;
                                 }
                             }
+                            //else
+                            //{
+                                
+                            //}
                             
                         }
                     }
@@ -190,9 +198,38 @@ namespace ResturangenGrupp1.GUI
 
             }            
             string[] waitingGuests = new string[10];
-            for (int i = 0; i < waitingGuests.Length; i++)
+            for (int i = 0; i < Company._companies.Count; i++)
             {
-                waitingGuests[i] = Company._companies[i][0].Name + " + " + (Company._companies[i].Count - 1);                
+                if(i > 9)
+                {
+                    break;
+                }
+                
+                else if(Company._companies.Count < 10)
+                {
+                    int safeFail = Company._companies.Count;
+                    for(int j = safeFail; j < waitingGuests.Length; j++)
+                    {
+                        waitingGuests[j] = " "; 
+                    }
+                    for(int k = 0; k < Company._companies.Count; k++)
+                    {
+                        waitingGuests[k] = Company._companies[k][0].Name + " + " + (Company._companies[k].Count - 1);
+                    }
+                }                
+                else
+                {
+                    waitingGuests[i] = Company._companies[i][0].Name + " + " + (Company._companies[i].Count - 1);
+                    
+                }
+                                
+            }
+            if (Company._companies.Count == 0)
+            {
+                for (int l = 0; l < waitingGuests.Length; l++)
+                {
+                    waitingGuests[l] = " ";
+                }
             }
 
             string[] events = new string[31];
@@ -232,9 +269,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
-            Window.Draw("Guests waiting", 66, 1, waitingGuests);
-            Console.SetCursorPosition(68, 2);
-            Console.WriteLine(Company._companies[0][0].Name + " + " + (Company._companies[0].Count - 1));
+            Window.Draw("Guests waiting", 66, 1, waitingGuests);            
             Window.Draw("Events", 66, 13, Eventhandler._events);
 
 
