@@ -20,7 +20,8 @@ namespace ResturangenGrupp1.Person
                 "Rangbo", "Ranemyr", "Ranebo", "Nelleros", "Nellhans", "Nelbäck", "Nekmal", "Nejadi", "Nesse", "Nedrup", "Nedbal", "Nattsjö",
                 "Nathaniel", "Nastrovji", "Bly", "Blum", "Bloom", "Gardell", "Ahlm", "Grenqvist", "Krön", "Stålberg", "Danielsson", "Ekberg",
                 "Fridolin", "Gran", "Hökqvist", "Ivarsson", "Jansson", "Knutsdottrí", "Lavin", "Mjolnir", "Nedved", "Oscarsdottrí", "Pistvakt",
-                "Qrench", "Zeon", "Xerxes", "Yves", "Ålström", "Ängmark", "Östman"};
+                "Qrench", "Zeon", "Xerxes", "Yves", "Ålström", "Ängmark", "Östman", "Wang", "Smith", "Devi", "Ivanov", "Kim", "Ali", "García", "Müller"
+                "Da Silva", "Mohamed", "Tesfaye", "Nguyen", "Ilunga", "González", "Deng", "Rodríguez", "Moyo", "Hansen"};
 
             Random rnd = new Random();
             int randomName = rnd.Next(0, names.Length);
