@@ -63,7 +63,7 @@ namespace ResturangenGrupp1.Person
         // Constructor
         public Guest(): base()
         {            
-            Name = Names.NameGenerator(110);
+            Name = Names.NameGenerator(109);
             TimeActivity = 20;
             Cash = RandomCash();            
             PreferedFood = new List<Food>();
@@ -327,15 +327,16 @@ namespace ResturangenGrupp1.Person
                             companyCash += guest.Cash;
                             foodCost += guest.PreferedFood[0].Price;
                         } 
-                    }
+                    }                    
                     Eventhandler.AddEventGuest(Competence, GenerateObjects._tables[i], companyCash, foodCost);
-
                     for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = null;
                         GenerateObjects._tables[i].TableNames[j] = " ";
                     }
-                }                  
+
+
+                }
             }
         }
 
@@ -473,7 +474,7 @@ namespace ResturangenGrupp1.Person
         // Constructor
         public Chef(): base()
         {
-            Name = Names.NameGenerator(110);
+            Name = Names.NameGenerator(109);
             TimeActivity = 10;
             Busy = false;
             Competence = RandomCompetence();
