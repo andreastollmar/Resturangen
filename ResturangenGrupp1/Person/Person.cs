@@ -346,7 +346,7 @@ namespace ResturangenGrupp1.Person
                         break;
 
                     case 2:
-                        Console.SetCursorPosition(20, 20);    // bord 2 
+                        Console.SetCursorPosition(20, 19);    // bord 2 
                         Console.Write(waiter.Name);
                         break;
 
@@ -366,28 +366,28 @@ namespace ResturangenGrupp1.Person
                         break;
 
                     case 6:
-                        Console.SetCursorPosition(40, 12);     // bord 6
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 12);     // bord 6
                         Console.Write(waiter.Name);
                         break;
 
                     case 7:
-                        Console.SetCursorPosition(40, 20);   // bord 7
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 19);   // bord 7
                         Console.Write(waiter.Name);
                         break;
 
 
                     case 8:
-                        Console.SetCursorPosition(40, 26);   // bord 8
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 26);   // bord 8
                         Console.Write(waiter.Name);
                         break;
 
                     case 9:
-                        Console.SetCursorPosition(40, 33);   // bord 9 
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 33);   // bord 9 
                         Console.Write(waiter.Name);
                         break;
 
                     case 10:
-                        Console.SetCursorPosition(40, 40);   // bord 10
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 40);   // bord 10
                         Console.Write(waiter.Name);
                         break;
                 }
@@ -404,7 +404,7 @@ namespace ResturangenGrupp1.Person
                         break;
 
                     case 2:
-                        Console.SetCursorPosition(20, 20);    // bord 2 
+                        Console.SetCursorPosition(20, 19);    // bord 2 
                         Console.Write(waiter.Name);
                         break;
 
@@ -424,27 +424,27 @@ namespace ResturangenGrupp1.Person
                         break;
 
                     case 6:
-                        Console.SetCursorPosition(40, 12);     // bord 6
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 12);     // bord 6
                         Console.Write(waiter.Name);
                         break;
 
                     case 7:
-                        Console.SetCursorPosition(40, 20);   // bord 7
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 19);   // bord 7
                         Console.Write(waiter.Name);
                         break;
 
                     case 8:
-                        Console.SetCursorPosition(40, 26);   // bord 8
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 26);   // bord 8
                         Console.Write(waiter.Name);
                         break;
 
                     case 9:
-                        Console.SetCursorPosition(40, 33);   // bord 9 
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 33);   // bord 9 
                         Console.Write(waiter.Name);
                         break;
 
                     case 10:
-                        Console.SetCursorPosition(40, 40);   // bord 10
+                        Console.SetCursorPosition((46 - waiter.Name.Length), 40);   // bord 10
                         Console.Write(waiter.Name);
                         break;
                 }
