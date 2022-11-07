@@ -269,9 +269,14 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Events", 66, 13, Eventhandler._events);
 
 
+            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
+            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
+            {
+                bool condition = GenerateObjects._chefs[i].Busy;
+                chefsActivity[i] = condition ? "Kocken " + GenerateObjects._chefs[i].Name + " lagar mat." : "Kocken " + GenerateObjects._chefs[i].Name + " latar sig.";
+            }
 
-
+            Window.Draw("Chefs", 66, 39, chefsActivity);
         }
     }
-
 }
