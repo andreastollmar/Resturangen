@@ -12,14 +12,8 @@ namespace ResturangenGrupp1.GUI
     internal class Eventhandler
     {
         public static string[] _events = new string[8]; 
-        //Metoder med listor där vi visar x - mycket data i GUI:n
-       
-
-        public static void AddEventGuest(Waiter waiter, ITable table, int companyCash, int foodCost)
+        public static void AddEventGuest(int competence, ITable table, int companyCash, int foodCost)
         {
-            //använda companycash på något vis igen
-            
-            
             
             _events[0] = table.TableSize[0].Name + " + " + (table.FoodAtTable.Count - 1);            
             
@@ -36,7 +30,7 @@ namespace ResturangenGrupp1.GUI
             }
             if(table.TableSize[0].Satisfaction > 3)
             {
-                if(waiter.Competence > 3)
+                if(competence > 3)
                 {
                     _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet" : " men inte med bordet.");
 
@@ -65,7 +59,7 @@ namespace ResturangenGrupp1.GUI
             }
             else
             {
-                if(waiter.Competence > 3)
+                if(competence > 3)
                 {
                     _events[table.TableSize.Length] = "Sällskapet " + table.TableSize[0].Name + " var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
                     if (table.Quality)
@@ -92,15 +86,15 @@ namespace ResturangenGrupp1.GUI
                 }
                 else
                 {
-                    if(waiter.Competence > 3 && table.TableSize[0].Satisfaction > 3 && table.Quality)
+                    if(competence > 3 && table.TableSize[0].Satisfaction > 3 && table.Quality)
                     {
                         _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.1) + " kr till resturangen";
                     }
-                    else if((waiter.Competence > 3 && table.TableSize[0].Satisfaction > 3) || (waiter.Competence > 3 && table.Quality) || (table.TableSize[0].Satisfaction > 3 && table.Quality))
+                    else if((competence > 3 && table.TableSize[0].Satisfaction > 3) || (competence > 3 && table.Quality) || (table.TableSize[0].Satisfaction > 3 && table.Quality))
                     {
                         _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.05) + " kr till resturangen";
                     }
-                    else if(waiter.Competence > 3 || table.TableSize[0].Satisfaction > 3 || table.Quality)
+                    else if(competence > 3 || table.TableSize[0].Satisfaction > 3 || table.Quality)
                     {
                         _events[7] = "Sällskapet " + table.TableSize[0].Name + " dricksar " + (foodCost * 0.01) + " kr till resturangen";
                     }
@@ -112,13 +106,6 @@ namespace ResturangenGrupp1.GUI
 
             } 
         }
-        public void ShowGuestList()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine(GenerateObjects._guests[i].Name);
-                //Console.Write(" + " GenerateObjects._guests[i].);
-            }
-        }
+        
     }
 }

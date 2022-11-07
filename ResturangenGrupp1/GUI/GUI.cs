@@ -31,7 +31,7 @@ namespace ResturangenGrupp1.GUI
                 {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].Activity();
                         if (!GenerateObjects._waiters[i].Busy)
                         {
                             GenerateObjects._waiters[i].GoToStandBy();
@@ -39,23 +39,22 @@ namespace ResturangenGrupp1.GUI
                     }                    
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
-                        GenerateObjects._waiters[i].MatchTableWithGuests(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].MatchTableWithGuests();
                         GenerateObjects._waiters[i].AtDoor = false;
-                        GenerateObjects._waiters[i].GoToTable(GenerateObjects._waiters[i]);    //lägg gästerna på bordets gästlista
-                        GenerateObjects._waiters[i].PutCompanyAtTable(GenerateObjects._waiters[i]);        //cleara waiters gästlista
+                        GenerateObjects._waiters[i].GoToTable();    //lägg gästerna på bordets gästlista
+                        GenerateObjects._waiters[i].PutCompanyAtTable();        //cleara waiters gästlista
                         GenerateObjects._waiters[i].OrderTaken = true;        // sätta bool ordertaken till true
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken && Kitchen.Kitchen.OrdersDone.Count > 0)
                     {
-                        GenerateObjects._waiters[i].TakeFoodFromKitchen(GenerateObjects._waiters[i]);        //Ta in order  //gå till rätt bordsnummer
-                        GenerateObjects._waiters[i].PutFoodOnTable(GenerateObjects._waiters[i]); //lämna maten
+                        GenerateObjects._waiters[i].TakeFoodFromKitchen();        //Ta in order  //gå till rätt bordsnummer
+                        GenerateObjects._waiters[i].PutFoodOnTable(); //lämna maten
                         GenerateObjects._waiters[i].Busy = false;
                         GenerateObjects._waiters[i].AtKitchen = false;
-                        //GenerateObjects._waiters[i].GoToStandBy(GenerateObjects._waiters[i]);
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
-                        GenerateObjects._waiters[i].LeaveOrderToKitchen(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].LeaveOrderToKitchen();
                         GenerateObjects._waiters[i].Busy = false;
                         GenerateObjects._waiters[i].OrderTaken = false;
                         GenerateObjects._waiters[i].AtDoor = false;
@@ -66,12 +65,12 @@ namespace ResturangenGrupp1.GUI
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
-                        GenerateObjects._waiters[i].GoToTheKitchen(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].GoToTheKitchen();
                         GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
                     {                     
-                        GenerateObjects._waiters[i].TakeCashFromCompany(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].TakeCashFromCompany();
                         GenerateObjects._waiters[i].CleaningTable = true;
                         GenerateObjects._waiters[i].HelpingTable = false;
 
@@ -80,10 +79,10 @@ namespace ResturangenGrupp1.GUI
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
                     {
                         GenerateObjects._waiters[i].TimeActivity--;
-                        GenerateObjects._waiters[i].GoToTable(GenerateObjects._waiters[i]);
+                        GenerateObjects._waiters[i].GoToTable();
                         if (GenerateObjects._waiters[i].TimeActivity == 0)
                         {
-                            GenerateObjects._waiters[i].ResetTable(GenerateObjects._waiters[i]);                            
+                            GenerateObjects._waiters[i].ResetTable();                            
                             GenerateObjects._waiters[i].Order.Clear();
                             GenerateObjects._waiters[i].guests.Clear(); 
                             GenerateObjects._waiters[i].TimeActivity = 3;
@@ -97,14 +96,14 @@ namespace ResturangenGrupp1.GUI
                 {
                     if (!GenerateObjects._chefs[i].Busy)
                     {
-                        GenerateObjects._chefs[i].Activity(GenerateObjects._chefs[i]);
+                        GenerateObjects._chefs[i].Activity();
                     }
                     else if (GenerateObjects._chefs[i].Busy)
                     {
                         GenerateObjects._chefs[i].TimeActivity--;
                         if (GenerateObjects._chefs[i].TimeActivity == 0)
                         {
-                            GenerateObjects._chefs[i].OrderDone(GenerateObjects._chefs[i]);
+                            GenerateObjects._chefs[i].OrderDone();
                             GenerateObjects._chefs[i].TimeActivity = 10;
                         }
                     }
@@ -123,10 +122,7 @@ namespace ResturangenGrupp1.GUI
                                     GenerateObjects._tables[i].FinnishedWithFood = true;
                                 }
                             }
-                            //else
-                            //{
-                                
-                            //}
+                            
                             
                         }
                     }

@@ -90,25 +90,25 @@ namespace ResturangenGrupp1.Person
 
         // Methods
         
-        public void TakeFoodFromKitchen(Waiter waiter)
+        public void TakeFoodFromKitchen()
         {
-            waiter.Order.Clear();
-            //Om kön är tom va ska vi göra då?
-            waiter.Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());            
-            waiter.Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
-            GoToTable(waiter);
+            Order.Clear();
+            
+            Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());            
+            Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
+            GoToTable();
         }
 
-        public void PutFoodOnTable(Waiter waiter)
+        public void PutFoodOnTable()
         {
-            int TableNumber = (int)waiter.Order["TableNumber"];
+            int TableNumber = (int)Order["TableNumber"];
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if (GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
                     GenerateObjects._tables[i].DinnerServerd = true;
 
-                    waiter.Order.Clear();
+                    Order.Clear();
                 }
             }
         }
@@ -166,7 +166,7 @@ namespace ResturangenGrupp1.Person
             }
             return orderDone;
         }
-        private bool CheckFinnishedWithFood(Waiter waiter)
+        private bool CheckFinnishedWithFood()
         {
             
             bool finnishedWithFood = false;
@@ -175,46 +175,42 @@ namespace ResturangenGrupp1.Person
                 if (GenerateObjects._tables[i].FinnishedWithFood && !GenerateObjects._tables[i].GetsHelp)
                 {                    
                     finnishedWithFood = true;
-                    waiter.Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
+                    Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
                     GenerateObjects._tables[i].GetsHelp = true;
                     break;
                 }
             }
             return finnishedWithFood;
         }
-        public void Activity(Waiter waiter)
+        public void Activity()
         {            
-            bool finnishedGuests = CheckFinnishedWithFood(waiter);
+            bool finnishedGuests = CheckFinnishedWithFood();
             bool foodToServe = CheckFoodToServe();
             bool tableFree = FindFreeTable();
             if (finnishedGuests)
             {
-                GoToTable(waiter);
-                waiter.HelpingTable = true;
-                waiter.Busy = true;
-                //Table to clean or guests finnished with food stå vid bordet och cleana tills inte busy
-
+                GoToTable();
+                HelpingTable = true;
+                Busy = true;
             }
             else if (tableFree)
             {
                 AtDoor = true;
                 Busy = true;
-                GoToTheDoor(waiter);
+                GoToTheDoor();
             }
             else if (foodToServe) 
             {
-                waiter.GoToTheKitchen(waiter);
+                GoToTheKitchen();
                 Busy = true;
                 AtKitchen = true;
 
             }
-            
-
         }
         
-        public void MatchTableWithGuests(Waiter waiter)
+        public void MatchTableWithGuests()
         {
-            waiter.Order.Clear();
+            Order.Clear();
             int indexTable = 10;
             int indexCompany = 90;
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
@@ -222,7 +218,7 @@ namespace ResturangenGrupp1.Person
                 if (GenerateObjects._tables[i].Empty)
                 {
                     indexTable = i;
-                    waiter.Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
+                    Order.Add("TableNumber", GenerateObjects._tables[i].TableNumber);
                     break;
                 }
             }
@@ -250,7 +246,7 @@ namespace ResturangenGrupp1.Person
                 }
                 if(indexCompany < 85)
                 {
-                    waiter.guests.AddRange(Company._companies[indexCompany]);
+                    guests.AddRange(Company._companies[indexCompany]);
                     Company._companies.RemoveAt(indexCompany);
                 }
                 
@@ -267,38 +263,38 @@ namespace ResturangenGrupp1.Person
                 }
                 if(indexCompany < 80)
                 {
-                    waiter.guests.AddRange(Company._companies[indexCompany]);
+                    guests.AddRange(Company._companies[indexCompany]);
                     Company._companies.RemoveAt(indexCompany);
                 }
                
             }
         }
 
-        public void LeaveOrderToKitchen(Waiter waiter) 
+        public void LeaveOrderToKitchen() 
         {
-            Kitchen.Kitchen.OrdersToCook.Enqueue(waiter.Order);
-            waiter.Busy = false;
+            Kitchen.Kitchen.OrdersToCook.Enqueue(Order);
+            Busy = false;
         }
 
-        public void GoToTheDoor(Waiter waiter) // Metod för flytta waiter position vid dörren 
+        public void GoToTheDoor() // Metod för flytta waiter position vid dörren 
         {
             Console.SetCursorPosition(47,5);
-            Console.Write(waiter.Name);
+            Console.Write(Name);
         }
 
-        public void GoToTheKitchen(Waiter waiter) // Metod för att flytta waiter postion vid köket
+        public void GoToTheKitchen() // Metod för att flytta waiter postion vid köket
         {
             Console.SetCursorPosition(25, 5);
-            Console.Write(waiter.Name);
+            Console.Write(Name);
         }
         public void GoToStandBy()
         {
             Console.SetCursorPosition(SetStandby, 7);
             Console.WriteLine(Name);
         }
-        public void ResetTable(Waiter waiter)
+        public void ResetTable()
         {
-            int TableNumber = (int)waiter.Order["TableNumber"];
+            int TableNumber = (int)Order["TableNumber"];
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if (GenerateObjects._tables[i].TableNumber == TableNumber)
@@ -314,12 +310,12 @@ namespace ResturangenGrupp1.Person
             }
 
         }
-        public void TakeCashFromCompany(Waiter waiter) // Metoden till gästen för att kunna betala sin mat
+        public void TakeCashFromCompany() // Metoden till gästen för att kunna betala sin mat
         {     
             int companyCash = 0;
-            int foodCost = 0;
-            int TableNumber = (int)waiter.Order["TableNumber"];
-            GoToTable(waiter);
+            int foodCost = 0;            
+            int TableNumber = (int)Order["TableNumber"];
+            GoToTable();
             for(int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
@@ -332,7 +328,7 @@ namespace ResturangenGrupp1.Person
                             foodCost += guest.PreferedFood[0].Price;
                         } 
                     }
-                    Eventhandler.AddEventGuest(waiter, GenerateObjects._tables[i], companyCash, foodCost);
+                    Eventhandler.AddEventGuest(Competence, GenerateObjects._tables[i], companyCash, foodCost);
 
                     for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                     {
@@ -343,83 +339,83 @@ namespace ResturangenGrupp1.Person
             }
         }
 
-        public void PutCompanyAtTable(Waiter waiter)
+        public void PutCompanyAtTable()
         {
-            int TableNumber = (int)waiter.Order["TableNumber"];
+            int TableNumber = (int)Order["TableNumber"];
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    for(int j = 0; j < waiter.guests.Count; j++)
+                    for(int j = 0; j < guests.Count; j++)
                     {
-                        GenerateObjects._tables[i].TableSize[j] = waiter.guests[j];
-                        GenerateObjects._tables[i].TableSize[j].Satisfaction += waiter.Competence;
+                        GenerateObjects._tables[i].TableSize[j] = guests[j];
+                        GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence;
                     }
-                    waiter.guests.Clear();
+                    guests.Clear();
                     GenerateObjects._tables[i].Empty = false;
                     GenerateObjects._tables[i].TransferNames(GenerateObjects._tables[i].TableSize);
-                    waiter.Order.Clear();
-                    waiter.TakeOrderFromTable(GenerateObjects._tables[i]);
+                    Order.Clear();
+                    TakeOrderFromTable(GenerateObjects._tables[i]);
                 }
             }
         }
               
 
-        public void GoToTable(Waiter waiter) // Metod för att lägga in waiter position vid alla bord
+        public void GoToTable() // Metod för att lägga in waiter position vid alla bord
         {
-            if (waiter.Order.Contains("TableNumber"))
+            if (Order.Contains("TableNumber"))
             {
-                switch (waiter.Order["TableNumber"])
+                switch (Order["TableNumber"])
                 {
                     case 1:
                         Console.SetCursorPosition(20, 14);    // bord 1 
-                        Console.Write(waiter.Name);
+                        Console.Write(Name);
                         break;
 
                     case 2:
                         Console.SetCursorPosition(20, 21);    // bord 2 
-                        Console.Write(waiter.Name);
+                        Console.Write(Name);
                         break;
 
                     case 3:
                         Console.SetCursorPosition(20, 28);    // bord 3 
-                        Console.Write(waiter.Name);
+                        Console.Write(Name);
                         break; ;
 
                     case 4:
                         Console.SetCursorPosition(20, 35);    // bord 4 
-                        Console.Write(waiter.Name);
+                        Console.Write(Name);
                         break;
 
                     case 5:
                         Console.SetCursorPosition(20, 42);    // bord 5
-                        Console.Write(waiter.Name);
+                        Console.Write(Name);
                         break;
 
                     case 6:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 12);     // bord 6
-                        Console.Write(waiter.Name);
+                        Console.SetCursorPosition((46 - Name.Length), 12);     // bord 6
+                        Console.Write(Name);
                         break;
 
                     case 7:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 19);   // bord 7
-                        Console.Write(waiter.Name);
+                        Console.SetCursorPosition((46 - Name.Length), 19);   // bord 7
+                        Console.Write(Name);
                         break;
 
 
                     case 8:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 26);   // bord 8
-                        Console.Write(waiter.Name);
+                        Console.SetCursorPosition((46 - Name.Length), 26);   // bord 8
+                        Console.Write(Name);
                         break;
 
                     case 9:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 33);   // bord 9 
-                        Console.Write(waiter.Name);
+                        Console.SetCursorPosition((46 - Name.Length), 33);   // bord 9 
+                        Console.Write(Name);
                         break;
 
                     case 10:
-                        Console.SetCursorPosition((46 - waiter.Name.Length), 40);   // bord 10
-                        Console.Write(waiter.Name);
+                        Console.SetCursorPosition((46 - Name.Length), 40);   // bord 10
+                        Console.Write(Name);
                         break;
                 }
             }
@@ -450,20 +446,20 @@ namespace ResturangenGrupp1.Person
         public bool Busy { get; set; }
         public Hashtable CookOrders { get; set; }
         // Methods
-        public void Activity(Chef chef)
+        public void Activity()
         {            
             bool ordersToCook = CheckOrders();
             if(ordersToCook)
             {
-                chef.CookOrders.Add("Order", Kitchen.Kitchen.OrdersToCook.Dequeue());
-                chef.Busy = true;
+                CookOrders.Add("Order", Kitchen.Kitchen.OrdersToCook.Dequeue());
+                Busy = true;
             }
         }
-        public void OrderDone(Chef chef)
+        public void OrderDone()
         {
-            Kitchen.Kitchen.OrdersDone.Enqueue(chef.CookOrders);
-            chef.CookOrders.Clear();
-            chef.Busy = false;
+            Kitchen.Kitchen.OrdersDone.Enqueue(CookOrders);
+            CookOrders.Clear();
+            Busy = false;
         }
         private bool CheckOrders()
         {
