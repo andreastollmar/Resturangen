@@ -9,8 +9,7 @@ using ResturangenGrupp1.Restaurant;
 namespace ResturangenGrupp1.Person
 {
     internal class Company
-    {
-        
+    { 
         // Properties
         private int CompanySize { get; set; }
         private int CompanyCash { get; set; }
@@ -18,9 +17,7 @@ namespace ResturangenGrupp1.Person
         public static List<List<Guest>> _companies = new List<List<Guest>>();
 
 
-
         //Methods
-
         private protected static int RandomSize()
         {
             Random random = new Random();
@@ -59,16 +56,12 @@ namespace ResturangenGrupp1.Person
                 CompanyList.Clear();
                 j = 0;
             }
-
         }
 
         // Constructor
-
         public Company()
         {
             CompanySize = RandomSize();
-
         }
-
     }
 }

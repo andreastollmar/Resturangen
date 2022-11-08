@@ -71,7 +71,5 @@ namespace ResturangenGrupp1.GUI
             CreateTables();
             CreateWaiters();
         }
-        
-
     }
 }

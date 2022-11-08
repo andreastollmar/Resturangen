@@ -68,14 +68,10 @@ namespace ResturangenGrupp1.Restaurant
                         break;
                 }
             }
-            
-
-
         }
 
         public Food()
         {
-
         }
     }
 
@@ -107,7 +103,6 @@ namespace ResturangenGrupp1.Restaurant
                 Price = 120;
              }
         }
-
     }
 
     class Meat : Food

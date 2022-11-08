@@ -18,12 +18,11 @@ namespace ResturangenGrupp1.GUI
         {
             for(int i = 0; i < _events.Length; i++)
             {
-                _events[i] = "                                              ";
+                _events[i] = "";
             }
             
             _events[0] = "Sällskapet " + table.TableSize[0].Name;            
             
-
             for(int i = 0; i < table.TableSize.Length; i++)
             {
                 if (table.TableSize[i] == null)
@@ -100,7 +99,6 @@ namespace ResturangenGrupp1.GUI
                             Tips += foodCost * 0.05;
                         }
                     }
-
                 }                
             }
             else
@@ -135,7 +133,6 @@ namespace ResturangenGrupp1.GUI
                             Tips += foodCost * 0.05;
                         }
                     }
-
                 }
                 else
                 {
@@ -168,7 +165,6 @@ namespace ResturangenGrupp1.GUI
                     }
                 }
             } 
-        }
-        
+        }   
     }
 }
