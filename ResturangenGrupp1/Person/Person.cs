@@ -109,22 +109,27 @@ namespace ResturangenGrupp1.Person
         private bool FindFreeTable()
         {
             bool freeTable = false;
-            for (int i = 0; i < GenerateObjects._tables.Count; i++)
+            if(Company._companies.Count > 0)
             {
-                if (GenerateObjects._tables[i].Empty)
-                { 
-                    freeTable = true;
-                    break;
-                }
-            }
-            for(int i = 0; i < GenerateObjects._waiters.Count; i++)
-            {
-                if (GenerateObjects._waiters[i].AtDoor)
+                for (int i = 0; i < GenerateObjects._tables.Count; i++)
                 {
-                    freeTable = false;
+                    if (GenerateObjects._tables[i].Empty)
+                    {
+                        freeTable = true;
+                        break;
+                    }
                 }
+                for (int i = 0; i < GenerateObjects._waiters.Count; i++)
+                {
+                    if (GenerateObjects._waiters[i].AtDoor)
+                    {
+                        freeTable = false;
+                    }
+                }
+                
             }
             return freeTable;
+
         }
         public void TakeOrderFromTable(ITable table)
         {

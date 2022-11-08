@@ -49,6 +49,10 @@ namespace ResturangenGrupp1.Person
                         }
                         CompanyList.Add(GenerateObjects._guests[i]);
                         GenerateObjects._guests.RemoveAt(i);
+                        if(CompanyList.Count == 4)
+                        {
+                            break;
+                        }
                     }
                 }                
                 _companies.Add(new List<Guest> (CompanyList) );
