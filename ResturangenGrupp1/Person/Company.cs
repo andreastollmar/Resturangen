@@ -25,8 +25,7 @@ namespace ResturangenGrupp1.Person
         }
 
         public static void CreateCompany()
-        {
-            
+        {            
             for (int j = 0; j < GenerateObjects._guests.Count; j++)
             {
                 int companySize = RandomSize();
