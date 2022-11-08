@@ -12,8 +12,6 @@ namespace ResturangenGrupp1.Restaurant
 {
     internal class Restaurant
     {
-
-
         public bool CheckTableForFree()
         {
             bool tableFree = false;
@@ -34,7 +32,6 @@ namespace ResturangenGrupp1.Restaurant
             }
             return tableFree;
         }
-
         public int MatchCheckTable(int guestSize)
         {
             int indexValue = 0;
@@ -48,7 +45,6 @@ namespace ResturangenGrupp1.Restaurant
             }
             return indexValue;            
         }
-
         private int CheckTableForFour()
         {
             int indexValue = 0;            
@@ -81,8 +77,5 @@ namespace ResturangenGrupp1.Restaurant
             }
             return indexValue;
         }
-
-
-
     }
 }

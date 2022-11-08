@@ -21,8 +21,6 @@ namespace ResturangenGrupp1.Restaurant
         bool GetsHelp { get; set; }
         bool RandomQuality();
         void TransferNames(Guest[] guests);
-
-
     }
     class TableForTwo : ITable
     {        
@@ -131,7 +129,4 @@ namespace ResturangenGrupp1.Restaurant
             DinnerServerd = false;
         }
     }
-
-
-
 }
