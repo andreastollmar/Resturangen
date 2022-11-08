@@ -1,4 +1,5 @@
-﻿using ResturangenGrupp1.Person;
+﻿using ResturangenGrupp1.GUI;
+using ResturangenGrupp1.Person;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace ResturangenGrupp1.Restaurant
         bool GetsHelp { get; set; }
         bool RandomQuality();
         void TransferNames(Guest[] guests);
+        void DrawTable();
+
+
+
     }
     class TableForTwo : ITable
     {        
@@ -34,6 +39,42 @@ namespace ResturangenGrupp1.Restaurant
         public bool GetsHelp { get; set; }
         public List<Food> FoodAtTable { get; set; }
         public Guest[] TableSize { get; set; }
+        public void DrawTable()
+        {
+            switch (TableNumber)
+            {
+                case 1:
+                    Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
+                    break;
+                case 2:
+                    Window.Draw("Table 2 ", 5, 17, GenerateObjects._tables[1].TableNames);
+                    break;
+                case 3:
+                    Window.Draw("Table 3 ", 5, 24, GenerateObjects._tables[2].TableNames);
+                    break;
+                case 4:
+                    Window.Draw("Table 4 ", 5, 31, GenerateObjects._tables[3].TableNames);
+                    break;
+                case 5:
+                    Window.Draw("Table 5 ", 5, 38, GenerateObjects._tables[4].TableNames);
+                    break;
+                case 6:
+                    Window.Draw("Table 6 ", 45, 10, GenerateObjects._tables[5].TableNames);
+                    break;
+                case 7:
+                    Window.Draw("Table 7 ", 45, 17, GenerateObjects._tables[6].TableNames);
+                    break;
+                case 8:
+                    Window.Draw("Table 8 ", 45, 24, GenerateObjects._tables[7].TableNames);
+                    break;
+                case 9:
+                    Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
+                    break;
+                case 10:
+                    Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
+                    break;
+            }
+        }
         public bool RandomQuality()
         {
             bool goodQuality = false;
@@ -87,6 +128,43 @@ namespace ResturangenGrupp1.Restaurant
         public bool Cleaned { get; set; }
         public bool GetsHelp { get; set; }
         public Guest[] TableSize { get; set; }
+        public void DrawTable()
+        {
+            switch(TableNumber)
+            {
+                case 1:
+                    Window.Draw("Table 1 ", 5, 10, GenerateObjects._tables[0].TableNames);
+                    break;
+                case 2:
+                    Window.Draw("Table 2 ", 5, 17, GenerateObjects._tables[1].TableNames);
+                    break;
+                case 3:
+                    Window.Draw("Table 3 ", 5, 24, GenerateObjects._tables[2].TableNames);
+                    break;
+                case 4:
+                    Window.Draw("Table 4 ", 5, 31, GenerateObjects._tables[3].TableNames);
+                    break;
+                case 5:
+                    Window.Draw("Table 5 ", 5, 38, GenerateObjects._tables[4].TableNames);
+                    break;
+                case 6:
+                    Window.Draw("Table 6 ", 45, 10, GenerateObjects._tables[5].TableNames);
+                    break;
+                case 7:
+                    Window.Draw("Table 7 ", 45, 17, GenerateObjects._tables[6].TableNames);
+                    break;
+                case 8:
+                    Window.Draw("Table 8 ", 45, 24, GenerateObjects._tables[7].TableNames);
+                    break;
+                case 9:
+                    Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
+                    break;
+                case 10:
+                    Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
+                    break;
+            }
+
+        }
         public bool RandomQuality()
         {
             bool goodQuality = true;
