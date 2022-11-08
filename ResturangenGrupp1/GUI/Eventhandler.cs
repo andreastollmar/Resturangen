@@ -40,18 +40,18 @@ namespace ResturangenGrupp1.GUI
             {
                 if(competence > 2)
                 {
-                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet" : " men inte med bordet.");
-                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten";
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet." : " men inte med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten.";
                     if (table.Quality)
                     {                        
                         if(checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.15, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.15, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.15;
                         }                        
                     }
@@ -59,30 +59,30 @@ namespace ResturangenGrupp1.GUI
                     {                        
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.10;
                         }
                     }
                 }
                 else
                 {
-                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen men nöjda med maten" + (table.Quality == true ? " samt bordet" : " och inte med bordet.");
-                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten"; // dom dricksar 10% av totalkostnaden
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen men nöjda med maten" + (table.Quality == true ? " samt bordet." : " och inte med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten."; // dom dricksar 10% av totalkostnaden
                     if (table.Quality)
                     {
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.10;
                         }
                     }
@@ -90,12 +90,12 @@ namespace ResturangenGrupp1.GUI
                     {
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.05;
                         }
                     }
@@ -105,18 +105,18 @@ namespace ResturangenGrupp1.GUI
             {
                 if(competence > 2)
                 {
-                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
-                    _events[6] = table.TableSize[0].Name + "'s betalar" + foodCost + " kr för maten";
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet." : " men nöjd med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten.";
                     if (table.Quality)
                     {
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.10, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.10;
                         }
                     }
@@ -124,30 +124,30 @@ namespace ResturangenGrupp1.GUI
                     {
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.05;
                         }
                     }
                 }
                 else
                 {
-                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen, maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
-                    _events[6] = table.TableSize[0].Name + "'s betalar" + foodCost + " kr för maten";
+                    _events[table.TableSize.Length] = table.TableSize[0].Name + "'s var inte nöjda med servicen, maten" + (table.Quality == false ? " och bordet." : " men nöjd med bordet.");
+                    _events[6] = table.TableSize[0].Name + "'s betalar " + foodCost + " kr för maten";
                     if (table.Quality)
                     {
                         if (checkTip > 80)
                         {
-                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa";
+                            _events[7] = table.TableSize[0].Name + " går till disken istället för att dricksa.";
                             table.TableSize[0].GoToTheSink(table.TableSize[0]);
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen";
+                            _events[7] = table.TableSize[0].Name + "'s dricksar " + (Math.Round(foodCost * 0.05, 2)) + " kr till resturangen.";
                             Tips += foodCost * 0.05;
                         }
                     }
@@ -160,7 +160,7 @@ namespace ResturangenGrupp1.GUI
                         }
                         else
                         {
-                            _events[7] = table.TableSize[0].Name + "'s dricksar inget då de var missnöjda med allt";                            
+                            _events[7] = table.TableSize[0].Name + "'s dricksar inget då de var missnöjda med allt.";                            
                         }
                     }
                 }
