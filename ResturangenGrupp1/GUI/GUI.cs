@@ -284,7 +284,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Window.Draw("Events", 66, 13, Eventhandler._events);
             Console.SetCursorPosition(66, 25);
-            Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips) + "  Kr", 2 );        
+            Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips) + "  Kr", 2 );
             Window.Draw("Chefs", 66, 39, chefsActivity);
             Window.Draw("Waiters", 66, 30, witerActivity);
         }
