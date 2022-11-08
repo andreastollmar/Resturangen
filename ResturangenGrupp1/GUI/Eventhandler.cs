@@ -29,7 +29,10 @@ namespace ResturangenGrupp1.GUI
 
             for(int i = 0; i < guests.Count; i++)
             {
-                _events[i + 1] = guests[i].PreferedFood[0].Name + " " + guests[i].PreferedFood[0].Price;
+                if (guests[i] != null)
+                {
+                    _events[i + 1] = guests[i].PreferedFood[0].Name + " " + guests[i].PreferedFood[0].Price;
+                }
             }
             Random rnd = new Random();
             int checkTip = rnd.Next(0, 100);            
