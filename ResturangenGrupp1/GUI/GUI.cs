@@ -135,7 +135,7 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
-                Console.ReadKey(); 
+                Thread.Sleep(500);
             }
         }
     }
