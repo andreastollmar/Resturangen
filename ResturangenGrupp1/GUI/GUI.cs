@@ -249,6 +249,14 @@ namespace ResturangenGrupp1.GUI
             sink[0] = "          ";
             sink[1] = "          ";
 
+            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
+            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
+            {
+                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. " + GenerateObjects._chefs[i].TimeActivity : " latar sig.";
+                chefsActivity[i] = first + second;
+            }
+
             Window.Draw("Resturang", 1, 1, resturangList);
             Window.Draw("Kitchen", 25, 2, kitchen);
             Window.Draw("Door", 47, 2, door);
@@ -267,23 +275,12 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
-            //Helper.Eraser(115, 13, 24);
             Window.Draw("Events", 66, 13, Eventhandler._events);
             Console.SetCursorPosition(66, 25);
             Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);
-
-
-            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
-            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
-            {
-                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
-                string second = GenerateObjects._chefs[i].Busy ? " lagar mat." + GenerateObjects._chefs[i].TimeActivity : " latar sig";
-                chefsActivity[i] = first + second;
-            }
-
-
-
+            Helper.Eraser(95, 39, 46);
             Window.Draw("Chefs", 66, 39, chefsActivity);
+            
         }
     }
 }
