@@ -28,7 +28,7 @@ namespace ResturangenGrupp1.GUI
             for (int i = fromPosY; i < toPosY; i++)
             {
                 Console.SetCursorPosition(fromPosX, i);
-                Console.WriteLine("                                        ");
+                Console.WriteLine("               ");
             }
         }
     }
