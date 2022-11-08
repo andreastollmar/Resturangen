@@ -247,19 +247,29 @@ namespace ResturangenGrupp1.GUI
             sink[0] = "          ";
             sink[1] = "          ";
 
-            string[] witerActivity = new string[GenerateObjects._waiters.Count];
+            string[] waiterActivity = new string[GenerateObjects._waiters.Count];
             for (int i = 0; i < GenerateObjects._waiters.Count; i++)
             {
-                string first = GenerateObjects._waiters[i].CleaningTable ? GenerateObjects._waiters[i].Name + " städer bordet [" + GenerateObjects._waiters[i].TimeActivity  +"]": GenerateObjects._waiters[i].Name + " jobbar hårt ";
-                witerActivity[i] = first;
-
+                if (GenerateObjects._waiters[i].CleaningTable)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
+                }
+                else if (GenerateObjects._waiters[i].Busy)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
+                }
+                else
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
+                }
+                
             }
 
             string[] chefsActivity = new string[GenerateObjects._chefs.Count];
             for (int i = 0; i < GenerateObjects._chefs.Count; i++)
             {
                 string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
-                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig";
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig.";
                 chefsActivity[i] = first + second;
             }
             Helper.Eraser(80, 25, 46);
@@ -286,7 +296,7 @@ namespace ResturangenGrupp1.GUI
             Console.SetCursorPosition(66, 25);
             Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips) + "  Kr", 2 );
             Window.Draw("Chefs", 66, 39, chefsActivity);
-            Window.Draw("Waiters", 66, 30, witerActivity);
+            Window.Draw("Waiters", 66, 30, waiterActivity);
         }
     }
 }
