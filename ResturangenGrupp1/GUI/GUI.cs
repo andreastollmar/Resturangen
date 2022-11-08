@@ -69,11 +69,23 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
-                    {                     
+                    {
+                        GenerateObjects._waiters[i].GoToTable();
                         GenerateObjects._waiters[i].TakeCashFromCompany();
                         GenerateObjects._waiters[i].CleaningTable = true;
                         GenerateObjects._waiters[i].HelpingTable = false;
+                        //Metod för att rita ut bordet utan namnen
+                        int TableNumber = (int)GenerateObjects._waiters[i].Order["TableNumber"];
+                        for (int j = 0; j < GenerateObjects._tables.Count; j++)
+                        {
+                            if (GenerateObjects._tables[i].TableNumber == TableNumber)
+                            {
+                                GenerateObjects._tables[i].DrawTable();
+                            }
 
+                        }
+                        Window.Draw("Events", 66, 13, Eventhandler._events);
+                        GenerateObjects._waiters[i].GoToTable();
                     }
 
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
@@ -84,7 +96,7 @@ namespace ResturangenGrupp1.GUI
                         {
                             GenerateObjects._waiters[i].ResetTable();                            
                             GenerateObjects._waiters[i].Order.Clear();
-                            GenerateObjects._waiters[i].guests.Clear(); 
+                            GenerateObjects._waiters[i].Guests.Clear(); 
                             GenerateObjects._waiters[i].TimeActivity = 3;
                             GenerateObjects._waiters[i].Busy = false;
                             GenerateObjects._waiters[i].CleaningTable = false;
@@ -278,7 +290,7 @@ namespace ResturangenGrupp1.GUI
             for (int i = 0; i < GenerateObjects._chefs.Count; i++)
             {
                 string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
-                string second = GenerateObjects._chefs[i].Busy ? " lagar mat." : " latar sig";
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat." + GenerateObjects._chefs[i].TimeActivity : " latar sig";
                 chefsActivity[i] = first + second;        
             }
 

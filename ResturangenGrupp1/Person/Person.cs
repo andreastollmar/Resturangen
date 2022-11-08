@@ -86,7 +86,7 @@ namespace ResturangenGrupp1.Person
 
         public Hashtable Order = new Hashtable();
 
-        public List<Guest> guests = new List<Guest>();
+        public List<Guest> Guests = new List<Guest>();
 
         // Methods
         
@@ -246,7 +246,7 @@ namespace ResturangenGrupp1.Person
                 }
                 if(indexCompany < 85)
                 {
-                    guests.AddRange(Company._companies[indexCompany]);
+                    Guests.AddRange(Company._companies[indexCompany]);
                     Company._companies.RemoveAt(indexCompany);
                 }
                 
@@ -263,7 +263,7 @@ namespace ResturangenGrupp1.Person
                 }
                 if(indexCompany < 80)
                 {
-                    guests.AddRange(Company._companies[indexCompany]);
+                    Guests.AddRange(Company._companies[indexCompany]);
                     Company._companies.RemoveAt(indexCompany);
                 }
                
@@ -314,26 +314,30 @@ namespace ResturangenGrupp1.Person
         {     
             int companyCash = 0;
             int foodCost = 0;            
-            int TableNumber = (int)Order["TableNumber"];
-            GoToTable();
+            int TableNumber = (int)Order["TableNumber"];            
             for(int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    foreach (Guest guest in GenerateObjects._tables[i].TableSize)
-                    {
-                        if (guest != null)
-                        {
-                            companyCash += guest.Cash;
-                            foodCost += guest.PreferedFood[0].Price;
-                        } 
-                    }                    
-                    Eventhandler.AddEventGuest(Competence, GenerateObjects._tables[i], companyCash, foodCost);
+                    Guests.AddRange(GenerateObjects._tables[i].TableSize);
                     for (int j = 0; j < GenerateObjects._tables[i].TableSize.Length; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = null;
                         GenerateObjects._tables[i].TableNames[j] = " ";
-                    }
+                    }                    
+                    for (int k = 0; k < Guests.Count; k++)
+                    {
+                        if (Guests[k] != null)
+                        {
+                            companyCash += Guests[k].Cash;
+                            foodCost += Guests[k].PreferedFood[0].Price;
+                        }
+                        
+                    }                    
+                    Eventhandler.AddEventGuest(Guests, Competence, GenerateObjects._tables[i], companyCash, foodCost);
+                    
+                    
+
 
 
                 }
@@ -347,12 +351,12 @@ namespace ResturangenGrupp1.Person
             {
                 if(GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
-                    for(int j = 0; j < guests.Count; j++)
+                    for(int j = 0; j < Guests.Count; j++)
                     {
-                        GenerateObjects._tables[i].TableSize[j] = guests[j];
+                        GenerateObjects._tables[i].TableSize[j] = Guests[j];
                         GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence;
                     }
-                    guests.Clear();
+                    Guests.Clear();
                     GenerateObjects._tables[i].Empty = false;
                     GenerateObjects._tables[i].TransferNames(GenerateObjects._tables[i].TableSize);
                     Order.Clear();
