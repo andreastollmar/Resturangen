@@ -264,7 +264,7 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
-            Helper.Eraser(13, 24);
+            Helper.Eraser(115, 13, 24);
             Window.Draw("Events", 66, 13, Eventhandler._events);
             Console.SetCursorPosition(66, 25);
             Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);
