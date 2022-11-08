@@ -262,6 +262,8 @@ namespace ResturangenGrupp1.GUI
                 string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig";
                 chefsActivity[i] = first + second;
             }
+            Helper.Eraser(80, 25, 46);
+
             Window.Draw("Resturang", 1, 1, resturangList);
             Window.Draw("Kitchen", 25, 2, kitchen);
             Window.Draw("Door", 47, 2, door);
@@ -283,9 +285,8 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Events", 66, 13, Eventhandler._events);
             Console.SetCursorPosition(66, 25);
             Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);        
-            Helper.Eraser(95, 25, 46);
             Window.Draw("Chefs", 66, 39, chefsActivity);
-            //Window.Draw("Waiters", 66, 30, witerActivity);
+            Window.Draw("Waiters", 66, 30, witerActivity);
         }
     }
 }
