@@ -250,10 +250,19 @@ namespace ResturangenGrupp1.GUI
             string[] waiterActivity = new string[GenerateObjects._waiters.Count];
             for (int i = 0; i < GenerateObjects._waiters.Count; i++)
             {
+                if (GenerateObjects._waiters[i].CleaningTable)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
+                }
+                else if (GenerateObjects._waiters[i].Busy)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
+                }
+                else
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
+                }
                 
-                waiterActivity[i] = GenerateObjects._waiters[i].CleaningTable ? GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]" : 
-                                   GenerateObjects._waiters[i].Name + " jobbar hårt.";
-
             }
 
             string[] chefsActivity = new string[GenerateObjects._chefs.Count];
@@ -285,7 +294,8 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Guests waiting", 66, 1, waitingGuests);
             Window.Draw("Events", 66, 13, Eventhandler._events);
             Console.SetCursorPosition(66, 25);
-            Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);        
+            Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);
+            Console.SetCursorPosition(66, 26);
             Window.Draw("Chefs", 66, 39, chefsActivity);
             Window.Draw("Waiters", 66, 30, waiterActivity);
         }
