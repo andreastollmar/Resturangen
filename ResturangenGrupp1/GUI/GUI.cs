@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ResturangenGrupp1.Kitchen;
 using ResturangenGrupp1.Person;
 using ResturangenGrupp1.Restaurant;
+using ResturangenGrupp1;
 
 namespace ResturangenGrupp1.GUI
 {
@@ -20,13 +21,11 @@ namespace ResturangenGrupp1.GUI
             }
             GenerateObjects.CreateObjects();
             Company.CreateCompany();
-            
 
             while (true)
             {
                 Window.DrawRestaurant();
                 
-
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
@@ -102,7 +101,6 @@ namespace ResturangenGrupp1.GUI
                             GenerateObjects._waiters[i].CleaningTable = false;
                         }
                     }
-                    
                 }
                 for(int i = 0; i < GenerateObjects._chefs.Count; i++)
                 {
@@ -139,9 +137,7 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
-                Console.ReadKey();
-
-                
+                Console.ReadKey(); 
             }
         }
     }
@@ -149,7 +145,6 @@ namespace ResturangenGrupp1.GUI
     {
         public static void Draw(string header, int fromLeft, int fromTop, string[] graphics)
         {
-
             int width = 0;
             for (int i = 0; i < graphics.Length; i++)
             {
@@ -184,9 +179,7 @@ namespace ResturangenGrupp1.GUI
             }
             Console.SetCursorPosition(fromLeft, fromTop + maxRows + 2);
             Console.Write('└' + new String('─', width + 2) + '┘');
-
         }
-
 
         public static void DrawRestaurant()
         {
@@ -197,7 +190,6 @@ namespace ResturangenGrupp1.GUI
             table[1] = "          ";
             table[2] = "          ";
             table[3] = "          ";
-
 
             string[] resturangList = new string[43];
             for (int i = 0; i < resturangList.Length; i++)
@@ -243,7 +235,7 @@ namespace ResturangenGrupp1.GUI
             string[] events = new string[31];
             for (int i = 0; i < events.Length; i++)
             {
-                events[i] = "                    ";
+                events[i] = " ";
             }
 
             string[] kitchen = new string[2];
@@ -258,7 +250,13 @@ namespace ResturangenGrupp1.GUI
             sink[0] = "          ";
             sink[1] = "          ";
 
-
+            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
+            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
+            {
+                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat." : " latar sig.";
+                chefsActivity[i] = first + second;
+            }
 
             Window.Draw("Resturang", 1, 1, resturangList);
             Window.Draw("Kitchen", 25, 2, kitchen);
@@ -277,13 +275,12 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
-            Window.Draw("Guests waiting", 66, 1, waitingGuests);            
+            Window.Draw("Guests waiting", 66, 1, waitingGuests);
+            Helper.Eraser(115, 13, 24);
             Window.Draw("Events", 66, 13, Eventhandler._events);
-
-
-            
             Console.SetCursorPosition(66, 25);
             Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips), 2);
+
 
 
             string[] chefsActivity = new string[GenerateObjects._chefs.Count];
@@ -293,6 +290,7 @@ namespace ResturangenGrupp1.GUI
                 string second = GenerateObjects._chefs[i].Busy ? " lagar mat." + GenerateObjects._chefs[i].TimeActivity : " latar sig";
                 chefsActivity[i] = first + second;        
             }
+
 
 
             Window.Draw("Chefs", 66, 39, chefsActivity);

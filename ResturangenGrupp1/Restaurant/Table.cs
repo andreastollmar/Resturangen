@@ -25,6 +25,7 @@ namespace ResturangenGrupp1.Restaurant
         void DrawTable();
 
 
+
     }
     class TableForTwo : ITable
     {        
@@ -206,7 +207,4 @@ namespace ResturangenGrupp1.Restaurant
             DinnerServerd = false;
         }
     }
-
-
-
 }

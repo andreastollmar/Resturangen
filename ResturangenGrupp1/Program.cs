@@ -16,13 +16,7 @@ namespace ResturangenGrupp1
         static void Main(string[] args)
         {
             GUI.GUI gui = new GUI.GUI();
-            
-
             gui.StartResturant();
-
-           
-       
-
         }
     }
 }

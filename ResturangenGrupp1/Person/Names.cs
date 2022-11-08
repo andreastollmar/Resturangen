@@ -8,8 +8,6 @@ namespace ResturangenGrupp1.Person
 {
     internal class Names
     {
-
-
         public static string NameGenerator(int stop)
         {
             string[] names = {"Blum", "Bloom", "Stamp", "Yves", "Bly", "Rangu", "Frid", "Isak", "Kim", "Moyo", "Ali", "Löfven", "Zeon",
@@ -27,7 +25,5 @@ namespace ResturangenGrupp1.Person
             int randomName = rnd.Next(0, stop);
             return names[randomName];
         }
-
-
     }
 }

@@ -13,17 +13,19 @@ namespace ResturangenGrupp1.Person
 {
     internal class Person
     {
+        // Properties
         internal string Name { get; set; }
         internal int Competence { get; set; }
         internal int TimeActivity { get; set; }
         
-
+        // Methods
         private protected int RandomCompetence()
         {
             Random rnd = new Random();
             return rnd.Next(1, 6);
         }
 
+        // Constructor
         public Person()
         {
             Name = "";
@@ -35,11 +37,8 @@ namespace ResturangenGrupp1.Person
     internal class Guest : Person
     {
         // Properties
-
         internal int Satisfaction { get; set; }
         internal int Cash { get; set; }       
-        
-
         internal List<Food> PreferedFood = new List<Food>();        
 
         // Methods
@@ -68,8 +67,6 @@ namespace ResturangenGrupp1.Person
             Cash = RandomCash();            
             PreferedFood = new List<Food>();
         }
-
-
     }
 
     internal class Waiter : Person
@@ -81,7 +78,6 @@ namespace ResturangenGrupp1.Person
         public bool AtKitchen { get; set; }
         public bool HelpingTable { get; set; }
         public int SetStandby { get; set; }
-
         public bool OrderTaken { get; set; }
 
         public Hashtable Order = new Hashtable();
@@ -89,7 +85,6 @@ namespace ResturangenGrupp1.Person
         public List<Guest> Guests = new List<Guest>();
 
         // Methods
-        
         public void TakeFoodFromKitchen()
         {
             Order.Clear();
@@ -98,7 +93,6 @@ namespace ResturangenGrupp1.Person
             Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
             GoToTable();
         }
-
         public void PutFoodOnTable()
         {
             int TableNumber = (int)Order["TableNumber"];
@@ -112,7 +106,6 @@ namespace ResturangenGrupp1.Person
                 }
             }
         }
-
         private bool FindFreeTable()
         {
             bool freeTable = false;
@@ -266,7 +259,6 @@ namespace ResturangenGrupp1.Person
                     Guests.AddRange(Company._companies[indexCompany]);
                     Company._companies.RemoveAt(indexCompany);
                 }
-               
             }
         }
 
@@ -373,27 +365,27 @@ namespace ResturangenGrupp1.Person
                 switch (Order["TableNumber"])
                 {
                     case 1:
-                        Console.SetCursorPosition(20, 14);    // bord 1 
+                        Console.SetCursorPosition(20, 12);    // bord 1 
                         Console.Write(Name);
                         break;
 
                     case 2:
-                        Console.SetCursorPosition(20, 21);    // bord 2 
+                        Console.SetCursorPosition(20, 19);    // bord 2 
                         Console.Write(Name);
                         break;
 
                     case 3:
-                        Console.SetCursorPosition(20, 28);    // bord 3 
+                        Console.SetCursorPosition(20, 26);    // bord 3 
                         Console.Write(Name);
                         break; ;
 
                     case 4:
-                        Console.SetCursorPosition(20, 35);    // bord 4 
+                        Console.SetCursorPosition(20, 33);    // bord 4 
                         Console.Write(Name);
                         break;
 
                     case 5:
-                        Console.SetCursorPosition(20, 42);    // bord 5
+                        Console.SetCursorPosition(20, 40);    // bord 5
                         Console.Write(Name);
                         break;
 
@@ -424,10 +416,8 @@ namespace ResturangenGrupp1.Person
                         break;
                 }
             }
-
         }
            
-     
         // Constructor
         public Waiter(): base()
         {
@@ -442,7 +432,6 @@ namespace ResturangenGrupp1.Person
             Competence = RandomCompetence();
             HelpingTable = false;            
         }
-
     }
 
     internal class Chef : Person
@@ -450,6 +439,7 @@ namespace ResturangenGrupp1.Person
         // Properties
         public bool Busy { get; set; }
         public Hashtable CookOrders { get; set; }
+
         // Methods
         public void Activity()
         {            
@@ -475,6 +465,7 @@ namespace ResturangenGrupp1.Person
             }
             return ordersToCook;
         }
+
         // Constructor
         public Chef(): base()
         {
@@ -484,8 +475,5 @@ namespace ResturangenGrupp1.Person
             Competence = RandomCompetence();
             CookOrders = new Hashtable();
         }
-
-     
     }
-
 }

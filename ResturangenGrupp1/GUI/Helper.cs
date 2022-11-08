@@ -23,5 +23,13 @@ namespace ResturangenGrupp1.GUI
             }
             return index;
         }
+        public static void Eraser(int fromPosX, int fromPosY, int toPosY)
+        {
+            for (int i = fromPosY; i < toPosY; i++)
+            {
+                Console.SetCursorPosition(fromPosX, i);
+                Console.WriteLine("                                        ");
+            }
+        }
     }
 }
