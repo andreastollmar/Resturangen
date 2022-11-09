@@ -12,6 +12,7 @@ namespace ResturangenGrupp1.GUI
 {
     internal class Helper
     {
+        public static int Rounds = 0;
         public static void DisplayThings<T>(T value)
         {            
             if(value is string)
