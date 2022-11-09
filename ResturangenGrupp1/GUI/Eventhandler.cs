@@ -192,7 +192,7 @@ namespace ResturangenGrupp1.GUI
 
 
         }
-        
+
         public static void WaitersEvent()
         {
             string[] waiterActivity = new string[GenerateObjects._waiters.Count];

@@ -15,6 +15,7 @@ namespace ResturangenGrupp1.GUI
     {
         public static void StartResturant()
         {
+
             for (int i = 0; i < Eventhandler._events.Length; i++)
             {
                 Eventhandler._events[i] = "                   ";
@@ -39,10 +40,21 @@ namespace ResturangenGrupp1.GUI
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
                         GenerateObjects._waiters[i].MatchTableWithGuests(); // Matcha company storlek med bord
+
+                        if (GenerateObjects._waiters[i].Guests.Count > 0)
+                        {
                         GenerateObjects._waiters[i].AtDoor = false; // Dörren är ledig
                         GenerateObjects._waiters[i].GoToTable();    // Gå till rätt bord
                         GenerateObjects._waiters[i].PutCompanyAtTable();        // Visa gästerna bordet och ta in matorder 
                         GenerateObjects._waiters[i].OrderTaken = true;        // Sätta bool ordertaken till true
+                        }
+                        else
+                        {
+                            GenerateObjects._waiters[i].Order.Clear();
+                            GenerateObjects._waiters[i].Guests.Clear();
+                            GenerateObjects._waiters[i].Busy = false;
+                            GenerateObjects._waiters[i].AtDoor = false;
+                        }
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken && Kitchen.Kitchen.OrdersDone.Count > 0)
                     {
@@ -135,8 +147,8 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
-                //Thread.Sleep(500);
-                Console.ReadKey();
+                Thread.Sleep(500);
+
             }
         }
     }
@@ -271,10 +283,14 @@ namespace ResturangenGrupp1.GUI
                         
             Helper.DisplayThings(waitingGuests);            
             Helper.DisplayThings(Eventhandler._events);
-            Helper.DisplayThings("Dagens dricks =");            
+            Helper.DisplayThings("Dagens dricks =");
+
             Eventhandler.ChefsEvent();
             Eventhandler.WaitersEvent();
-           
+
+            Console.SetCursorPosition(66, 26);
+            Console.WriteLine("Antal rundor: " + Helper.Rounds);
+            Helper.Rounds++;
 
         }
 
