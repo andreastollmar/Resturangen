@@ -195,6 +195,40 @@ namespace ResturangenGrupp1.GUI
 
         }
         
+        public static void WaitersEvent()
+        {
+            string[] waiterActivity = new string[GenerateObjects._waiters.Count];
+            for (int i = 0; i < GenerateObjects._waiters.Count; i++)
+            {
+                if (GenerateObjects._waiters[i].CleaningTable)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
+                }
+                else if (GenerateObjects._waiters[i].Busy)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
+                }
+                else
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
+                }
+
+            }
+            Window.Draw("Waiters", 66, 30, waiterActivity);
+        }
+
+        public static void ChefsEvent()
+        {
+            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
+            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
+            {
+                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig.";
+                chefsActivity[i] = first + second;
+            }
+     
+            Window.Draw("Chefs", 66, 39, chefsActivity);
+        }
 
     }
 }
