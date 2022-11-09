@@ -135,7 +135,8 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
+                Console.ReadKey();
             }
         }
     }
@@ -270,8 +271,7 @@ namespace ResturangenGrupp1.GUI
                         
             Helper.DisplayThings(waitingGuests);            
             Helper.DisplayThings(Eventhandler._events);
-            Helper.DisplayThings("Dagens dricks =");
-            // counter på 66, 28 ish
+            Helper.DisplayThings("Dagens dricks =");            
             Eventhandler.ChefsEvent();
             Eventhandler.WaitersEvent();
            

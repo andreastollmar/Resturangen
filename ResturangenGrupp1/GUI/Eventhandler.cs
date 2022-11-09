@@ -187,11 +187,9 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
-            }            
-            table.DrawTable();
-            Window.Draw("Events", 66, 13, Eventhandler._events);
-            Console.SetCursorPosition(66, 25);
-            Console.WriteLine("Dagens dricks = " + Math.Round(Tips), 2);
+            }
+            Helper.DisplayThings(_events);
+
 
         }
         
