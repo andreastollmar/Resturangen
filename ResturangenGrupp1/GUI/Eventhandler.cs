@@ -25,7 +25,7 @@ namespace ResturangenGrupp1.GUI
                 _events[i] = "                                                                                       ";
             }
             
-            _events[0] = "Sällskapet " + guests[0].Name;         
+            _events[0] = "Sällskapet " + guests[0].Name;
             
 
             for(int i = 0; i < guests.Count; i++)
