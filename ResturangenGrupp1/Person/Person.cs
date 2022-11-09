@@ -98,8 +98,7 @@ namespace ResturangenGrupp1.Person
         {
             int TableNumber = (int)Order["TableNumber"];
             int satisfaction = (int)Order["Competence"];
-            
-            
+                       
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if (GenerateObjects._tables[i].TableNumber == TableNumber)
@@ -133,7 +132,6 @@ namespace ResturangenGrupp1.Person
                 
             }
             return freeTable;
-
         }
         public void TakeOrderFromTable(ITable table)
         {
@@ -149,8 +147,7 @@ namespace ResturangenGrupp1.Person
             {
                 Order.Add(i , table.FoodAtTable[i]);
             }
-            Kitchen.Kitchen.TableNumbersDone.Enqueue(table.TableNumber);
-            
+            Kitchen.Kitchen.TableNumbersDone.Enqueue(table.TableNumber);            
         }
         private bool CheckFoodToServe()
         {
@@ -170,7 +167,6 @@ namespace ResturangenGrupp1.Person
         }
         private bool CheckFinnishedWithFood()
         {
-            
             bool finnishedWithFood = false;
             for(int i = 0; i < GenerateObjects._tables.Count; i++)
             {
@@ -206,7 +202,6 @@ namespace ResturangenGrupp1.Person
                 GoToTheKitchen();
                 Busy = true;
                 AtKitchen = true;
-
             }
         }
         
@@ -305,11 +300,9 @@ namespace ResturangenGrupp1.Person
                     GenerateObjects._tables[i].DinnerServerd = false;
                     GenerateObjects._tables[i].FinnishedWithFood = false;
                     GenerateObjects._tables[i].GetsHelp = false;
-                    GenerateObjects._tables[i].FoodAtTable.Clear();                    
-                    
+                    GenerateObjects._tables[i].FoodAtTable.Clear();                                        
                 }
             }
-
         }
         public void TakeCashFromCompany() // Metoden till gästen för att kunna betala sin mat
         {     
@@ -332,15 +325,9 @@ namespace ResturangenGrupp1.Person
                         {
                             companyCash += Guests[k].Cash;
                             foodCost += Guests[k].PreferedFood[0].Price;
-                        }
-                        
+                        }                        
                     }                    
                     Eventhandler.AddEventGuest(Guests, Competence, GenerateObjects._tables[i], companyCash, foodCost);
-                    
-                    
-
-
-
                 }
             }
         }
@@ -366,7 +353,6 @@ namespace ResturangenGrupp1.Person
             }
         }
               
-
         public void GoToTable() // Metod för att lägga in waiter position vid alla bord
         {
             if (Order.Contains("TableNumber"))

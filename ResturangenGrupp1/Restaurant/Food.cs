@@ -16,9 +16,7 @@ namespace ResturangenGrupp1.Restaurant
 
         public void AddFoodToGuest(Guest guest)
         {
-            Random rnd = new Random();
-            
-            
+            Random rnd = new Random();            
             int randomDish = rnd.Next(1, 10);
 
             switch (randomDish)
@@ -60,11 +58,10 @@ namespace ResturangenGrupp1.Restaurant
                     guest.PreferedFood.Add(risotto);
                     break;
             }
-            
         }
-
         public Food()
         {
+
         }
     }
 
@@ -90,11 +87,11 @@ namespace ResturangenGrupp1.Restaurant
 
         internal class Moules : Fish
         {       
-             public Moules()
-             {
+            public Moules()
+            {
                 Name = "Moules";
                 Price = 120;
-             }
+            }
         }
     }
 
@@ -102,10 +99,10 @@ namespace ResturangenGrupp1.Restaurant
     { 
         internal class Kebab : Meat
         {    
-          public Kebab()
+            public Kebab()
             {
-                Name = "Kebab";
-                Price = 110;
+               Name = "Kebab";
+               Price = 110;         
             }
         }
 
@@ -114,8 +111,7 @@ namespace ResturangenGrupp1.Restaurant
             public Steak()
             {
                 Name = "Steak";
-                Price = 160;
-                
+                Price = 160;                
             }
         }
 
@@ -139,7 +135,6 @@ namespace ResturangenGrupp1.Restaurant
                 Price = 160;
             }
         }
-
         internal class Falafel : Vegetarian
         { 
             public Falafel()
