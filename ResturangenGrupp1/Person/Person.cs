@@ -91,17 +91,21 @@ namespace ResturangenGrupp1.Person
             
             Order.Add(1, (Hashtable)Kitchen.Kitchen.OrdersDone.Dequeue());            
             Order.Add("TableNumber", Kitchen.Kitchen.TableNumbersDone.Dequeue());
+            Order.Add("Competence", Kitchen.Kitchen.ChefCompetence.Dequeue());
             GoToTable();
         }
         public void PutFoodOnTable()
         {
             int TableNumber = (int)Order["TableNumber"];
+            int satisfaction = (int)Order["Competence"];
+            
+            
             for (int i = 0; i < GenerateObjects._tables.Count; i++)
             {
                 if (GenerateObjects._tables[i].TableNumber == TableNumber)
                 {
                     GenerateObjects._tables[i].DinnerServerd = true;
-
+                    GenerateObjects._tables[i].TableSize[0].Satisfaction = satisfaction;
                     Order.Clear();
                 }
             }
@@ -351,7 +355,7 @@ namespace ResturangenGrupp1.Person
                     for(int j = 0; j < Guests.Count; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = Guests[j];
-                        GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence; // nöjdhet på waiter
+                        //GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence; // nöjdhet på waiter
                     }
                     Guests.Clear();
                     GenerateObjects._tables[i].Empty = false;
@@ -451,13 +455,14 @@ namespace ResturangenGrupp1.Person
             bool ordersToCook = CheckOrders();
             if(ordersToCook)
             {
-                CookOrders.Add("Order", Kitchen.Kitchen.OrdersToCook.Dequeue());
+                CookOrders.Add("Order", Kitchen.Kitchen.OrdersToCook.Dequeue());                
                 Busy = true;
             }
         }
         public void OrderDone()
         {
             Kitchen.Kitchen.OrdersDone.Enqueue(CookOrders);
+            Kitchen.Kitchen.ChefCompetence.Enqueue(Competence);
             CookOrders.Clear();
             Busy = false;
         }
