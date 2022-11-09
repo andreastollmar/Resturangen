@@ -13,58 +13,58 @@ namespace ResturangenGrupp1.GUI
 {
     internal class GUI
     {
-        public void StartResturant()
+        public static void StartResturant()
         {
-            for(int i = 0; i < Eventhandler._events.Length; i++)
+            for (int i = 0; i < Eventhandler._events.Length; i++)
             {
                 Eventhandler._events[i] = "                   ";
             }
-            GenerateObjects.CreateObjects();
-            Company.CreateCompany();
+            GenerateObjects.CreateObjects(); // Skapandet av alla object
+            Company.CreateCompany(); // Skapandet av companies
 
             while (true)
             {
-                Window.DrawRestaurant();
+                Window.DrawRestaurant(); // Ritar ut hela brädet
                 
                 for (int i = 0; i < GenerateObjects._waiters.Count; i++)
                 {
                     if (!GenerateObjects._waiters[i].Busy)
                     {
-                        GenerateObjects._waiters[i].Activity();
+                        GenerateObjects._waiters[i].Activity(); // Leta upp aktivitet till Slöa servitörer
                         if (!GenerateObjects._waiters[i].Busy)
                         {
-                            GenerateObjects._waiters[i].GoToStandBy();
+                            GenerateObjects._waiters[i].GoToStandBy(); // Gå till standbyläge om inget finns att göra
                         }    
                     }                    
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtDoor)
                     {
-                        GenerateObjects._waiters[i].MatchTableWithGuests();
-                        GenerateObjects._waiters[i].AtDoor = false;
-                        GenerateObjects._waiters[i].GoToTable();    //lägg gästerna på bordets gästlista
-                        GenerateObjects._waiters[i].PutCompanyAtTable();        //cleara waiters gästlista
-                        GenerateObjects._waiters[i].OrderTaken = true;        // sätta bool ordertaken till true
+                        GenerateObjects._waiters[i].MatchTableWithGuests(); // Matcha company storlek med bord
+                        GenerateObjects._waiters[i].AtDoor = false; // Dörren är ledig
+                        GenerateObjects._waiters[i].GoToTable();    // Gå till rätt bord
+                        GenerateObjects._waiters[i].PutCompanyAtTable();        // Visa gästerna bordet och ta in matorder 
+                        GenerateObjects._waiters[i].OrderTaken = true;        // Sätta bool ordertaken till true
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].AtKitchen && !GenerateObjects._waiters[i].OrderTaken && Kitchen.Kitchen.OrdersDone.Count > 0)
                     {
-                        GenerateObjects._waiters[i].TakeFoodFromKitchen();        //Ta in order  //gå till rätt bordsnummer
-                        GenerateObjects._waiters[i].PutFoodOnTable(); //lämna maten
+                        GenerateObjects._waiters[i].TakeFoodFromKitchen();        // Ta in order  // Gå till rätt bordsnummer
+                        GenerateObjects._waiters[i].PutFoodOnTable(); // Lämna maten
                         GenerateObjects._waiters[i].Busy = false;
                         GenerateObjects._waiters[i].AtKitchen = false;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken && GenerateObjects._waiters[i].AtKitchen)
                     {
-                        GenerateObjects._waiters[i].LeaveOrderToKitchen();
+                        GenerateObjects._waiters[i].LeaveOrderToKitchen(); // Lämna order till köket
                         GenerateObjects._waiters[i].Busy = false;
                         GenerateObjects._waiters[i].OrderTaken = false;
                         GenerateObjects._waiters[i].AtDoor = false;
                         GenerateObjects._waiters[i].AtKitchen = false;
-                        GenerateObjects._waiters[i].Order.Clear();
-                        GenerateObjects._waiters[i].GoToStandBy();
+                        GenerateObjects._waiters[i].Order.Clear();  // Radera allt innehåll i ordern
+                        GenerateObjects._waiters[i].GoToStandBy();  // gå till standby
 
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].OrderTaken)
                     {
-                        GenerateObjects._waiters[i].GoToTheKitchen();
+                        GenerateObjects._waiters[i].GoToTheKitchen(); // gå till köket med beställning
                         GenerateObjects._waiters[i].AtKitchen = true;
                     }
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].HelpingTable)
@@ -82,9 +82,8 @@ namespace ResturangenGrupp1.GUI
                                 GenerateObjects._tables[i].DrawTable();
                             }
 
-                        }
-                        Window.Draw("Events", 66, 13, Eventhandler._events);
-                        GenerateObjects._waiters[i].GoToTable();
+                        }                        
+                        GenerateObjects._waiters[i].GoToTable(); // rita ut waiter igen för att inte hamna bakom
                     }
 
                     else if (GenerateObjects._waiters[i].Busy && GenerateObjects._waiters[i].CleaningTable)
@@ -93,9 +92,9 @@ namespace ResturangenGrupp1.GUI
                         GenerateObjects._waiters[i].GoToTable();
                         if (GenerateObjects._waiters[i].TimeActivity == 0)
                         {
-                            GenerateObjects._waiters[i].ResetTable();                            
-                            GenerateObjects._waiters[i].Order.Clear();
-                            GenerateObjects._waiters[i].Guests.Clear(); 
+                            GenerateObjects._waiters[i].ResetTable();  // Resetta bordet, tömma allt                  
+                            GenerateObjects._waiters[i].Order.Clear();  // Tömma order
+                            GenerateObjects._waiters[i].Guests.Clear();   // Tömma på gäster
                             GenerateObjects._waiters[i].TimeActivity = 3;
                             GenerateObjects._waiters[i].Busy = false;
                             GenerateObjects._waiters[i].CleaningTable = false;
@@ -106,18 +105,19 @@ namespace ResturangenGrupp1.GUI
                 {
                     if (!GenerateObjects._chefs[i].Busy)
                     {
-                        GenerateObjects._chefs[i].Activity();
+                        GenerateObjects._chefs[i].Activity();  // Kolla om det finns någon order att laga
                     }
-                    else if (GenerateObjects._chefs[i].Busy)
+                    if (GenerateObjects._chefs[i].Busy)
                     {
                         GenerateObjects._chefs[i].TimeActivity--;
                         if (GenerateObjects._chefs[i].TimeActivity == 0)
                         {
-                            GenerateObjects._chefs[i].OrderDone();
+                            GenerateObjects._chefs[i].OrderDone();  // Lägg den färdiga maten för waiters att hämta
                             GenerateObjects._chefs[i].TimeActivity = 10;
                         }
                     }
                 }
+                // Kolla bord som fått mat och se till att gästerna äter
                 for(int i = 0; i < GenerateObjects._tables.Count; i++)
                 {
                     if (GenerateObjects._tables[i].DinnerServerd)
@@ -247,31 +247,7 @@ namespace ResturangenGrupp1.GUI
             sink[0] = "          ";
             sink[1] = "          ";
 
-            string[] waiterActivity = new string[GenerateObjects._waiters.Count];
-            for (int i = 0; i < GenerateObjects._waiters.Count; i++)
-            {
-                if (GenerateObjects._waiters[i].CleaningTable)
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
-                }
-                else if (GenerateObjects._waiters[i].Busy)
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
-                }
-                else
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
-                }
-                
-            }
 
-            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
-            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
-            {
-                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
-                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig.";
-                chefsActivity[i] = first + second;
-            }
             Helper.Eraser(80, 25, 46);
 
             Window.Draw("Resturang", 1, 1, resturangList);
@@ -291,12 +267,16 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
 
-            Window.Draw("Guests waiting", 66, 1, waitingGuests);
-            Window.Draw("Events", 66, 13, Eventhandler._events);
-            Console.SetCursorPosition(66, 25);
-            Console.WriteLine("Dagens dricks = " + Math.Round(Eventhandler.Tips) + "  Kr", 2 );
-            Window.Draw("Chefs", 66, 39, chefsActivity);
-            Window.Draw("Waiters", 66, 30, waiterActivity);
+                        
+            Helper.DisplayThings(waitingGuests);            
+            Helper.DisplayThings(Eventhandler._events);
+            Helper.DisplayThings("Dagens dricks =");
+
+            Eventhandler.ChefsEvent();
+            Eventhandler.WaitersEvent();
+           
+
         }
+
     }
 }

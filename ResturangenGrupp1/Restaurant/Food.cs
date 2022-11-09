@@ -17,57 +17,50 @@ namespace ResturangenGrupp1.Restaurant
         public void AddFoodToGuest(Guest guest)
         {
             Random rnd = new Random();
-            bool tryAgain = true;
-            while (tryAgain)
-            {
-                int randomDish = rnd.Next(1, 10);
+            
+            
+            int randomDish = rnd.Next(1, 10);
 
-                switch (randomDish)
-                {
-                    case 1:
-                        Meat.Beef meat = new Meat.Beef();
-                        guest.PreferedFood.Add(meat);
-                        break;                        
-                    case 2:
-                        Fish.Scallop scallop = new Fish.Scallop();
-                        guest.PreferedFood.Add(scallop);
-                        tryAgain = false;
-                        break;
-                    case 3:
-                        Vegetarian.Haloumi haloumi = new Vegetarian.Haloumi();
-                        guest.PreferedFood.Add(haloumi);
-                        break;                        
-                    case 4:
-                        Meat.Kebab kebab = new Meat.Kebab();
-                        guest.PreferedFood.Add(kebab);
-                        tryAgain = false;
-                        break;
-                    case 5:
-                        Fish.Tuna tuna = new Fish.Tuna();
-                        guest.PreferedFood.Add(tuna);
-                        tryAgain = false;
-                        break;
-                    case 6:
-                        Vegetarian.Falafel falafel = new Vegetarian.Falafel();
-                        guest.PreferedFood.Add(falafel);
-                        break;                        
-                    case 7:
-                        Meat.Steak steak = new Meat.Steak();
-                        guest.PreferedFood.Add(steak);
-                        tryAgain = false;
-                        break;
-                    case 8:
-                        Fish.Moules moules = new Fish.Moules();
-                        guest.PreferedFood.Add(moules);
-                        tryAgain = false;
-                        break;
-                    case 9:
-                        Vegetarian.Risotto risotto = new Vegetarian.Risotto();
-                        guest.PreferedFood.Add(risotto);
-                        tryAgain = false;
-                        break;
-                }
+            switch (randomDish)
+            {
+                case 1:
+                    Meat.Beef meat = new Meat.Beef();
+                    guest.PreferedFood.Add(meat);
+                    break;                        
+                case 2:
+                    Fish.Scallop scallop = new Fish.Scallop();
+                    guest.PreferedFood.Add(scallop);                    
+                    break;
+                case 3:
+                    Vegetarian.Haloumi haloumi = new Vegetarian.Haloumi();
+                    guest.PreferedFood.Add(haloumi);
+                    break;                        
+                case 4:
+                    Meat.Kebab kebab = new Meat.Kebab();
+                    guest.PreferedFood.Add(kebab);
+                    break;
+                case 5:
+                    Fish.Tuna tuna = new Fish.Tuna();
+                    guest.PreferedFood.Add(tuna);
+                    break;
+                case 6:
+                    Vegetarian.Falafel falafel = new Vegetarian.Falafel();
+                    guest.PreferedFood.Add(falafel);
+                    break;                        
+                case 7:
+                    Meat.Steak steak = new Meat.Steak();
+                    guest.PreferedFood.Add(steak);
+                    break;
+                case 8:
+                    Fish.Moules moules = new Fish.Moules();
+                    guest.PreferedFood.Add(moules);
+                    break;
+                case 9:
+                    Vegetarian.Risotto risotto = new Vegetarian.Risotto();
+                    guest.PreferedFood.Add(risotto);
+                    break;
             }
+            
         }
 
         public Food()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using ResturangenGrupp1.Kitchen;
@@ -13,6 +14,9 @@ namespace ResturangenGrupp1.GUI
     {
         public static string[] _events = new string[9];
         public static double Tips { get; set; }
+        //constants för att kontrollera nivåerna från en veriabel
+        public const int SATISFACTION = 2;
+        public const int DISH_LEVEL = 80;
         
         public static void AddEventGuest(List<Guest> guests, int competence, ITable table, int companyCash, int foodCost)
         {
@@ -21,7 +25,7 @@ namespace ResturangenGrupp1.GUI
                 _events[i] = "                                                                                       ";
             }
             
-            _events[0] = "Sällskapet " + guests[0].Name;         
+            _events[0] = "Sällskapet " + guests[0].Name;
             
 
             for(int i = 0; i < guests.Count; i++)
@@ -34,17 +38,17 @@ namespace ResturangenGrupp1.GUI
 
             Random rnd = new Random();
             int checkTip = rnd.Next(0, 100);   
-            
-            if (guests[0].Satisfaction > 2)
+            //Lång metod för vad som ska skrivas ut beroende på olika nöjdheter
+            if (guests[0].Satisfaction > SATISFACTION)
             {
-                if(competence > 2)
+                if(competence > SATISFACTION)
                 {
                     _events[5] = guests[0].Name + "'s var nöjda med servicen, maten" + (table.Quality == true ? " samt bordet" : " men inte med bordet.");
                     _events[6] = guests[0].Name + "'s betalar " + foodCost + " kr för maten";
 
                     if (table.Quality)
                     {                        
-                        if(checkTip > 80)
+                        if(checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -59,7 +63,7 @@ namespace ResturangenGrupp1.GUI
                     }
                     else
                     {                        
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -80,7 +84,7 @@ namespace ResturangenGrupp1.GUI
 
                     if (table.Quality)
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -95,7 +99,7 @@ namespace ResturangenGrupp1.GUI
                     }
                     else
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -112,14 +116,14 @@ namespace ResturangenGrupp1.GUI
             }
             else
             {
-                if(competence > 2)
+                if(competence > SATISFACTION)
                 {
                     _events[5] = guests[0].Name + "'s var nöjda med servicen men inte med maten" + (table.Quality == false ? " och bordet" : " men nöjd med bordet.");
                     _events[6] = guests[0].Name + "'s betalar " + foodCost + " kr för maten";
 
                     if (table.Quality)
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -134,7 +138,7 @@ namespace ResturangenGrupp1.GUI
                     }
                     else
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -156,7 +160,7 @@ namespace ResturangenGrupp1.GUI
 
                     if (table.Quality)
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -171,7 +175,7 @@ namespace ResturangenGrupp1.GUI
                     }
                     else
                     {
-                        if (checkTip > 80)
+                        if (checkTip > DISH_LEVEL)
                         {
                             _events[7] = guests[0].Name + " går till disken istället för att dricksa";
                             table.DrawTable();
@@ -191,6 +195,40 @@ namespace ResturangenGrupp1.GUI
 
         }
         
+        public static void WaitersEvent()
+        {
+            string[] waiterActivity = new string[GenerateObjects._waiters.Count];
+            for (int i = 0; i < GenerateObjects._waiters.Count; i++)
+            {
+                if (GenerateObjects._waiters[i].CleaningTable)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
+                }
+                else if (GenerateObjects._waiters[i].Busy)
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
+                }
+                else
+                {
+                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
+                }
+
+            }
+            Window.Draw("Waiters", 66, 30, waiterActivity);
+        }
+
+        public static void ChefsEvent()
+        {
+            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
+            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
+            {
+                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
+                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig.";
+                chefsActivity[i] = first + second;
+            }
+     
+            Window.Draw("Chefs", 66, 39, chefsActivity);
+        }
 
     }
 }

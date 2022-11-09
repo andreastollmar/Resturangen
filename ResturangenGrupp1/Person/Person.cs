@@ -182,9 +182,9 @@ namespace ResturangenGrupp1.Person
         }
         public void Activity()
         {            
-            bool finnishedGuests = CheckFinnishedWithFood();
-            bool foodToServe = CheckFoodToServe();
-            bool tableFree = FindFreeTable();
+            bool finnishedGuests = CheckFinnishedWithFood();  // Kolla om något bord är klar med maten
+            bool foodToServe = CheckFoodToServe(); // Kolla om det finns mat att servera
+            bool tableFree = FindFreeTable();  // Kolla om det finns ett ledigt bord
             if (finnishedGuests)
             {
                 GoToTable();
@@ -235,7 +235,7 @@ namespace ResturangenGrupp1.Person
                 {
                     for(int i = 0; i < Company._companies.Count; i++)
                     {
-                        if (Company._companies[i].Count < 2)
+                        if (Company._companies[i].Count <= 2)
                         {
                             indexCompany = i;
                             break;
@@ -351,7 +351,7 @@ namespace ResturangenGrupp1.Person
                     for(int j = 0; j < Guests.Count; j++)
                     {
                         GenerateObjects._tables[i].TableSize[j] = Guests[j];
-                        GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence;
+                        GenerateObjects._tables[i].TableSize[j].Satisfaction += Competence; // nöjdhet på waiter
                     }
                     Guests.Clear();
                     GenerateObjects._tables[i].Empty = false;

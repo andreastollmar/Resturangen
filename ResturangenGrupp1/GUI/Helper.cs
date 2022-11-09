@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +12,24 @@ namespace ResturangenGrupp1.GUI
 {
     internal class Helper
     {
-        public int FindFreeWaiter(List<Waiter> waiters)
-        {
-            int index = 5;
-            for (int i = 0; i < waiters.Count; i++)
+        public static void DisplayThings<T>(T value)
+        {            
+            if(value is string)
+            {                
+                Console.SetCursorPosition(66, 25);
+                Console.WriteLine(value + " " + (Math.Round(Eventhandler.Tips)) + " kr");
+            }
+            else if (value is string[])
             {
-                if (!waiters[i].Busy)
+                if((value as Array).Length < 10)
                 {
-                    index = i;
+                    Window.Draw("Events", 66, 13, (value as string[]));
+                }
+                else if((value as Array).Length >= 10)
+                {
+                    Window.Draw("Guests waiting", 66, 1, (value as string[]));
                 }
             }
-            return index;
         }
         public static void Eraser(int fromPosX, int fromPosY, int toPosY)
         {
