@@ -247,31 +247,7 @@ namespace ResturangenGrupp1.GUI
             sink[0] = "          ";
             sink[1] = "          ";
 
-            string[] waiterActivity = new string[GenerateObjects._waiters.Count];
-            for (int i = 0; i < GenerateObjects._waiters.Count; i++)
-            {
-                if (GenerateObjects._waiters[i].CleaningTable)
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " städar bordet. [" + GenerateObjects._waiters[i].TimeActivity + "]";
-                }
-                else if (GenerateObjects._waiters[i].Busy)
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " jobbar hårt.";
-                }
-                else
-                {
-                    waiterActivity[i] = GenerateObjects._waiters[i].Name + " latar sig.";
-                }
-                
-            }
 
-            string[] chefsActivity = new string[GenerateObjects._chefs.Count];
-            for (int i = 0; i < GenerateObjects._chefs.Count; i++)
-            {
-                string first = GenerateObjects._chefs[i].Competence > 3 ? "Stjärnkocken " + GenerateObjects._chefs[i].Name : "Kocken " + GenerateObjects._chefs[i].Name;
-                string second = GenerateObjects._chefs[i].Busy ? " lagar mat. [" + GenerateObjects._chefs[i].TimeActivity + "]" : " latar sig.";
-                chefsActivity[i] = first + second;
-            }
             Helper.Eraser(80, 25, 46);
 
             Window.Draw("Resturang", 1, 1, resturangList);
@@ -290,12 +266,17 @@ namespace ResturangenGrupp1.GUI
             Window.Draw("Table 8 ", 45, 24, GenerateObjects._tables[7].TableNames);
             Window.Draw("Table 9 ", 45, 31, GenerateObjects._tables[8].TableNames);
             Window.Draw("Table 10", 45, 38, GenerateObjects._tables[9].TableNames);
+
                         
             Helper.DisplayThings(waitingGuests);            
             Helper.DisplayThings(Eventhandler._events);
-            Helper.DisplayThings("Dagens dricks =");            
-            Window.Draw("Chefs", 66, 39, chefsActivity);
-            Window.Draw("Waiters", 66, 30, waiterActivity);
+            Helper.DisplayThings("Dagens dricks =");
+
+            Eventhandler.ChefsEvent();
+            Eventhandler.WaitersEvent();
+           
+
         }
+
     }
 }
