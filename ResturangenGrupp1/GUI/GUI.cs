@@ -15,7 +15,6 @@ namespace ResturangenGrupp1.GUI
     {
         public static void StartResturant()
         {
-
             for (int i = 0; i < Eventhandler._events.Length; i++)
             {
                 Eventhandler._events[i] = "                   ";
@@ -93,7 +92,6 @@ namespace ResturangenGrupp1.GUI
                             {
                                 GenerateObjects._tables[i].DrawTable();
                             }
-
                         }                        
                         GenerateObjects._waiters[i].GoToTable(); // rita ut waiter igen för att inte hamna bakom
                     }
@@ -147,8 +145,8 @@ namespace ResturangenGrupp1.GUI
                         }
                     }
                 }
+                //Console.ReadKey();
                 Thread.Sleep(500);
-
             }
         }
     }
@@ -291,8 +289,6 @@ namespace ResturangenGrupp1.GUI
             Console.SetCursorPosition(66, 26);
             Console.WriteLine("Antal rundor: " + Helper.Rounds);
             Helper.Rounds++;
-
         }
-
     }
 }

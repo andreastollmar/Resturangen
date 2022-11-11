@@ -15,8 +15,7 @@ namespace ResturangenGrupp1
     {
         static void Main(string[] args)
         {
-            GUI.GUI.StartResturant();
-            
+            GUI.GUI.StartResturant();          
         }
     }
 }

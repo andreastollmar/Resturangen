@@ -130,7 +130,6 @@ namespace ResturangenGrupp1.Person
                         freeTable = false;
                     }
                 }
-                
             }
             return freeTable;
 
@@ -336,10 +335,6 @@ namespace ResturangenGrupp1.Person
                         
                     }                    
                     Eventhandler.AddEventGuest(Guests, Competence, GenerateObjects._tables[i], companyCash, foodCost);
-                    
-                    
-
-
 
                 }
             }
